@@ -22,16 +22,33 @@ T(N!), O(N)
 #### [139. Word Break](https://leetcode.com/problems/word-break/), [Solution](DFS/Word_Break.py)
 用backtrack往下一个个查，注意要缓存不然会超时。用`@lru_cache`缓存。
 
+
+1235 Maximum Profit in Job Scheduling
+1335 Minimum Difficulty of a Job Schedule
+1216 Valid Palindrome III
+472 Concatenated Words
+403 Frog Jump
+329 Longest Increasing Path in a Matrix
+
+## Heap
+
+#### [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/), [Solution](Heap/Find_Median_from_Data_Stream.py)
+建一个最大堆和一个最小堆，保存他们的大小，每次有新的数进来就让他进最小或最大堆，保持最大堆和最小堆个数相等或者多1。
+
+## DP
+
 #### [72. Edit Distance](https://leetcode.com/problems/edit-distance/), [Solution](DP/Edit_Distance.py)
 
 明明是DP不是DFS啊。如果作change，看看当前位置的character是否一样。如果作delete，在dp[i-1][j]上加1。如果作insert，在dp[i][j-1]上加1。取三个里面最小的。
 
-72 Edit Distance
-377 Combination Sum IV
-1235 Maximum Profit in Job Scheduling
-1335 Minimum Difficulty of a Job Schedule
-1216 Valid Palindrome III
-97 Interleaving String
-472 Concatenated Words
-403 Frog Jump
-329 Longest Increasing Path in a Matrix
+#### [97. Interleaving String](https://leetcode.com/problems/interleaving-string/description/), [Solution](DP/Interleaving_String.py)
+用的算是brute force+cache，但其实可以用DP。dp[i][j]储存能否用s1[:i+1]和s2[:j+1]interleave出s3[:i+j+1]。
+
+#### [Contest 315 No.4 Count Subarrays With Fixed Bounds](https://leetcode.com/contest/weekly-contest-315/problems/count-subarrays-with-fixed-bounds/), [Solution](DP/Count_Subarrays_With_Fixed_Bounds.py)
+先过一遍nums，记录每个坐标前最近的等于minK，等于maxK，超出范围的值的坐标，记为prev[0], prev[1], prev[2]。然后dp。dp[i] = dp[i-1]，如果nums[i]没超出范围，那么dp[i]再加上prev[0], prev[1]里更小的那个到prev[2]的距离。如果是负的就不加。
+
+#### [377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/),[Solution](DP/Combination_Sum_IV.py)
+对target进行dp，以nums里的每个数num作结尾都是不同的组合，然后dp(target-num)。用cache加记忆。
+
+#### [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/), [Solution](DP/Frog_Jump.py)
+不是最优解，差不多是brute force+cache。可以用DP。用一个字典储存key:value, key是每个位置，value是能到这个位置的jump的长度的集合。最后如果最后一个位置在字典里，就说明可以跳到这里，否则不可以。
