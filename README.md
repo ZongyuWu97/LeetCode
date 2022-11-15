@@ -1,19 +1,45 @@
 # LeetCode
 My notes and solution for leetcode problems.
 
+## 目录
+
+<ol>
+  <li> <a href=#常用文档>常用文档</a></li>
+  <li> <a href=#LinkedList>Linked List</a></li> 
+  <li> <a href=Tree>Tree</a></li> 
+  <li> <a href=Heap>Heap</a></li> 
+  <li> <a href=DFS>DFS</a></li> 
+  <li> <a href=DP>DP</a></li> 
+</ol>
+
+<div id='常用文档'></div>
+
 ## 常用文档
 #### Python 包
 [collections](https://docs.python.org/3/library/collections.html#counter-objects), 
 [heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html)
 
+<div id='LinkedList'></div>
+
 ## Linked List
 #### [2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/description/), [Solution](LinkedList/Add_Two_Numbers.py)
 创建一个新链表，如果l1或l2后面还有就继续延长这个链表
+
+<div id='Tree'></div>
 
 ## Tree
 
 #### [2471. Minimum Number of Operations to Sort a Binary Tree by Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/), [Solution](Tree/Minimum_Number_of_Operations_to_Sort_a_Binary_Tree_by_Level.py)
 用两个queue按层bfs遍历树，然后对每层求min swap。重点是min swap。
+
+<div id='Heap'></div>
+
+## Heap
+
+#### [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/), [Solution](Heap/Find_Median_from_Data_Stream.py)
+建一个最大堆和一个最小堆，保存他们的大小，每次有新的数进来就让他进最小或最大堆，保持最大堆和最小堆个数相等或者多1。
+
+<div id='DFS'></div>
 
 ## DFS
 
@@ -29,7 +55,9 @@ T($k*2^N$), O(N)
 
   
   ***
-### 记忆化搜索（DFS + Memoization Search）：算是动态规划的一种，递归每次返回时同时记录下已访问过的节点特征，避免重复访问同一个节点，可以有效的把指数级别的DFS时间复杂度降为多项式级别; 注意这一类的DFS必须在最后有返回值，不可以用排列组合类型的DFS方法写; for循环的dp题目都可以用记忆化搜索的方式写，但是不是所有的记忆化搜索题目都可以用for循环的dp方式写。
+### 记忆化搜索（DFS + Memoization Search）
+
+算是动态规划的一种，递归每次返回时同时记录下已访问过的节点特征，避免重复访问同一个节点，可以有效的把指数级别的DFS时间复杂度降为多项式级别; 注意这一类的DFS必须在最后有返回值，不可以用排列组合类型的DFS方法写; for循环的dp题目都可以用记忆化搜索的方式写，但是不是所有的记忆化搜索题目都可以用for循环的dp方式写。
 
 #### [139. Word Break](https://leetcode.com/problems/word-break/), [Solution](DFS/Word_Break.py)
 用backtrack往下一个个查，注意要缓存不然会超时。用`@lru_cache`缓存。
@@ -39,11 +67,7 @@ dfs返回从当前坐标开始的最长路径长度，用一个path_length来记
 #### [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/), [Solution](DFS/Concatenated_Words.py)
 直接dfs，对每个单词从每个下标分成两半，查找前一半和后一半是否在words里或者能表示成words里词的拼接。把words转换成set，加上memorization来提速。
 
-
-## Heap
-
-#### [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/), [Solution](Heap/Find_Median_from_Data_Stream.py)
-建一个最大堆和一个最小堆，保存他们的大小，每次有新的数进来就让他进最小或最大堆，保持最大堆和最小堆个数相等或者多1。
+<div id='DP'></div>
 
 ## DP
 
