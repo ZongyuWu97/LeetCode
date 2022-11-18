@@ -5,11 +5,13 @@ My notes and solution for leetcode problems.
 
 <ol>
   <li> <a href=#常用文档>常用文档</a></li>
+  <li> <a href=#List>List</a></li> 
   <li> <a href=#LinkedList>Linked List</a></li> 
-  <li> <a href=Tree>Tree</a></li> 
-  <li> <a href=Heap>Heap</a></li> 
-  <li> <a href=DFS>DFS</a></li> 
-  <li> <a href=DP>DP</a></li> 
+  <li> <a href=#Tree>Tree</a></li> 
+  <li> <a href=#Heap>Heap</a></li> 
+  <li> <a href=#Sort>Sort</a></li> 
+  <li> <a href=#DFS>DFS</a></li> 
+  <li> <a href=#DP>DP</a></li> 
 </ol>
 
 <div id='常用文档'></div>
@@ -18,6 +20,14 @@ My notes and solution for leetcode problems.
 #### Python 包
 [collections](https://docs.python.org/3/library/collections.html#counter-objects), 
 [heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html)
+
+<div id='List'></div>
+
+## List
+
+#### [163. Missing Ranges](https://leetcode.com/problems/missing-ranges/description/), [Solution](List/Missing_Ranges.py)
+直接过一遍nums，如果和前一个相差大于一则ans.append一个数或一个区间。注意corner case，比如nums = []，以及lower和upper处的情况。
+
 
 <div id='LinkedList'></div>
 
@@ -38,6 +48,13 @@ My notes and solution for leetcode problems.
 
 #### [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/), [Solution](Heap/Find_Median_from_Data_Stream.py)
 建一个最大堆和一个最小堆，保存他们的大小，每次有新的数进来就让他进最小或最大堆，保持最大堆和最小堆个数相等或者多1。
+
+<div id='Sort'></div>
+
+## Sort
+
+#### [Minimum Swaps 2](https://www.hackerrank.com/challenges/minimum-swaps-2/problem), [Solution](Sort/Minimum_Swaps_2.py)
+把数组看成一个图，每个数字是一个节点，从当前位置到排序好后应该在的位置有一条边，得到一些不交的圈。最后swap数 = sum(每个圈的大小 - 1)。按顺序遍历排序后的数组，用元组保存原始位置，通过访问原始位置来遍历整个圈。用一个list或者set来track是否每个元素都visit了。
 
 <div id='DFS'></div>
 
