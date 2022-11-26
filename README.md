@@ -19,7 +19,7 @@ My notes and solution for leetcode problems.
 ## 常用文档
 #### Python 包
 [collections](https://docs.python.org/3/library/collections.html#counter-objects), 
-[heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html)
+[heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html), [bisect](https://docs.python.org/3/library/bisect.html)
 
 <div id='List'></div>
 
@@ -28,6 +28,8 @@ My notes and solution for leetcode problems.
 #### [163. Missing Ranges](https://leetcode.com/problems/missing-ranges/description/), [Solution](List/Missing_Ranges.py)
 直接过一遍nums，如果和前一个相差大于一则ans.append一个数或一个区间。注意corner case，比如nums = []，以及lower和upper处的情况。
 
+#### [2214. Minimum Health to Beat Game](https://leetcode.com/problems/minimum-health-to-beat-game/description/), [Solution](List/Minimum_Health_to_Beat_Game.py)
+直接求和然后减去armor和max(damage)里的最小值表示抵消一次攻击。完全是easy啊为什么会是medium。
 #### [2357. Make Array Zero by Subtracting Equal Amounts](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/description/), [Solution](List/Make_Array_Zero_by_Subtracting_Equal_Amounts.py)
 先排序，然后依次处理值不一样的元素，被减去的值等于max(nums)的时候就结束。
 
@@ -58,6 +60,18 @@ My notes and solution for leetcode problems.
 
 #### [Minimum Swaps 2](https://www.hackerrank.com/challenges/minimum-swaps-2/problem), [Solution](Sort/Minimum_Swaps_2.py)
 把数组看成一个图，每个数字是一个节点，从当前位置到排序好后应该在的位置有一条边，得到一些不交的圈。最后swap数 = sum(每个圈的大小 - 1)。按顺序遍历排序后的数组，用元组保存原始位置，通过访问原始位置来遍历整个圈。用一个list或者set来track是否每个元素都visit了。
+
+#### [937. Reorder Data in Log Files](https://leetcode.com/problems/reorder-data-in-log-files/description/), [Solution](Sort/Reorder_Data_in_Log_Files.py)
+自定义key排序，先找一遍把数字都找出来，剩下的分别按content和identifier排序。也可以统一一起排序，key为另一个还是，用来生成一个tuple产生顺序。注意str.split()可以定义maxsplit。
+
+#### [1152. Analyze User Website Visit Pattern](https://leetcode.com/problems/analyze-user-website-visit-pattern/description/), [Solution](Sort/Analyze_User_Website_Visit_Pattern.py)
+用一个dict记录每个人的访问顺序，然后用Counter记录每个人访问过的网站的所有combination，然后用max，key=lambda x:pattern[x]取出pattern里面最大且字典序最小的元素那个
+
+
+#### [2055. Plates Between Candles](https://leetcode.com/problems/plates-between-candles/description/), [Solution](Sort/Plates_Between_Candles.py)
+
+记录下所有candle的位置，然后对每个query用二分，找到从左往右和从右往左的第一个candle，然后两个之间的距离减去两个之间的candle数，就是plate数。
+
 
 <div id='DFS'></div>
 
