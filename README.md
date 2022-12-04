@@ -5,11 +5,13 @@ My notes and solution for leetcode problems.
 
 <ol>
   <li> <a href=#常用文档>常用文档</a></li>
+  <li> <a href=#String>String</a></li> 
   <li> <a href=#List>List</a></li> 
   <li> <a href=#LinkedList>Linked List</a></li> 
   <li> <a href=#Tree>Tree</a></li> 
   <li> <a href=#Heap>Heap</a></li> 
   <li> <a href=#Sort>Sort</a></li> 
+  <li> <a href=#SlidingWindow>SlidingWindow</a></li> 
   <li> <a href=#DFS>DFS</a></li> 
   <li> <a href=#DP>DP</a></li> 
 </ol>
@@ -21,6 +23,14 @@ My notes and solution for leetcode problems.
 [collections](https://docs.python.org/3/library/collections.html#counter-objects), 
 [heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html), [bisect](https://docs.python.org/3/library/bisect.html)
 
+<div id='String'></div>
+
+## String
+
+#### [2268. Minimum Number of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/description/), [Solution](String/Minimum_Number_of_Keypresses.py)
+直接过一遍str，让频率高的放在第一个，9个button放完了就放第二个，依次。每放一个字母就count += number of ch in str * 字母在button里的位置。
+
+
 <div id='List'></div>
 
 ## List
@@ -28,8 +38,23 @@ My notes and solution for leetcode problems.
 #### [163. Missing Ranges](https://leetcode.com/problems/missing-ranges/description/), [Solution](List/Missing_Ranges.py)
 直接过一遍nums，如果和前一个相差大于一则ans.append一个数或一个区间。注意corner case，比如nums = []，以及lower和upper处的情况。
 
+#### [453. Minimum Moves to Equal Array Elements](https://leetcode.com/problems/minimum-moves-to-equal-array-elements/description/), [Solution](List/Minimum_Moves_to_Equal_Array_Elements.py)
+其实很简单。要想到增加n-1个数等价于减少1个数。然后算每个数跟最小值的差就行了。
+
+#### [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/description/), [Solution](List/Degree_of_an_Array.py)
+先过一遍，用字典记录每个数字的频率，第一次和最后一次出现的位置。再过一遍字典，更新max_fre和min_len。
+
+#### [2016. Maximum Difference Between Increasing Elements](https://leetcode.com/problems/maximum-difference-between-increasing-elements/description/), [Solution](List/Maximum_Difference_Between_Increasing_Elements.py)
+easy，一个指针过一遍，比较当前元素和之前最小元素，更新当前最小元素。
+
 #### [2214. Minimum Health to Beat Game](https://leetcode.com/problems/minimum-health-to-beat-game/description/), [Solution](List/Minimum_Health_to_Beat_Game.py)
 直接求和然后减去armor和max(damage)里的最小值表示抵消一次攻击。完全是easy啊为什么会是medium。
+
+
+#### [2221. Find Triangular Sum of an Array](https://leetcode.com/problems/find-triangular-sum-of-an-array/description/), [Solution](List/Find_Triangular_Sum_of_an_Array.py)
+用Pascal Triangle即组合数来算每个数在最终答案里用到的次数，然后直接一个个加上去。注意算组合数的时候要用//不要用/，不然后面会小数位有问题。也可以直接recursive做，不过很慢。
+
+
 #### [2357. Make Array Zero by Subtracting Equal Amounts](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/description/), [Solution](List/Make_Array_Zero_by_Subtracting_Equal_Amounts.py)
 先排序，然后依次处理值不一样的元素，被减去的值等于max(nums)的时候就结束。
 
@@ -44,8 +69,11 @@ My notes and solution for leetcode problems.
 
 ## Tree
 
+#### [545. Boundary of Binary Tree](https://leetcode.com/problems/boundary-of-binary-tree/description/), [Solution](Tree/Boundary_of_Binary_Tree.py)
+直接分别取left boundary, leaves, and right boundary。
+
 #### [2471. Minimum Number of Operations to Sort a Binary Tree by Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/), [Solution](Tree/Minimum_Number_of_Operations_to_Sort_a_Binary_Tree_by_Level.py)
-用两个queue按层bfs遍历树，然后对每层求min swap。重点是min swap。
+用两个queue按层bfs遍历树，然后对每层求min swap。重点是min swap。注意iterative traversal的时候就用普通stack就行，然后先后顺序反过来。
 
 <div id='Heap'></div>
 
@@ -61,21 +89,52 @@ My notes and solution for leetcode problems.
 #### [Minimum Swaps 2](https://www.hackerrank.com/challenges/minimum-swaps-2/problem), [Solution](Sort/Minimum_Swaps_2.py)
 把数组看成一个图，每个数字是一个节点，从当前位置到排序好后应该在的位置有一条边，得到一些不交的圈。最后swap数 = sum(每个圈的大小 - 1)。按顺序遍历排序后的数组，用元组保存原始位置，通过访问原始位置来遍历整个圈。用一个list或者set来track是否每个元素都visit了。
 
+
+#### [719. Find K-th Smallest Pair Distance](https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/), [Solution](Sort/Find_K-th_Smallest_Pair_Distance.py)
+比较复杂，对pair distance用binary search，用一个possible表示是否有k或更多个pair的distance小于等于v。用prefix sum来简化对possible的计算。直接抄的，之后重写一遍。
+
+
 #### [937. Reorder Data in Log Files](https://leetcode.com/problems/reorder-data-in-log-files/description/), [Solution](Sort/Reorder_Data_in_Log_Files.py)
 自定义key排序，先找一遍把数字都找出来，剩下的分别按content和identifier排序。也可以统一一起排序，key为另一个还是，用来生成一个tuple产生顺序。注意str.split()可以定义maxsplit。
+
 
 #### [1152. Analyze User Website Visit Pattern](https://leetcode.com/problems/analyze-user-website-visit-pattern/description/), [Solution](Sort/Analyze_User_Website_Visit_Pattern.py)
 用一个dict记录每个人的访问顺序，然后用Counter记录每个人访问过的网站的所有combination，然后用max，key=lambda x:pattern[x]取出pattern里面最大且字典序最小的元素那个
 
+#### [1356. Sort Integers by The Number of 1 Bits](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/), [Solution](Sort/Sort_Integers_by_The_Number_of_1_Bits.py)
+直接做。可以一行解决其实。注意python有bin函数，直接返回一个数的二进制表达。另外count函数直接返回一个数里某个数的个数。
 
 #### [2055. Plates Between Candles](https://leetcode.com/problems/plates-between-candles/description/), [Solution](Sort/Plates_Between_Candles.py)
 
 记录下所有candle的位置，然后对每个query用二分，找到从左往右和从右往左的第一个candle，然后两个之间的距离减去两个之间的candle数，就是plate数。
 
 
+#### [2340. Minimum Adjacent Swaps to Make a Valid Array](https://leetcode.com/problems/minimum-adjacent-swaps-to-make-a-valid-array/description/), [Solution](Sort/Minimum_Adjacent_Swaps_to_Make_a_Valid_Array.py)
+直接找到第一个最小元素和最后一个最大元素，然后算把他们放到正确位置的swap数。
+
+
+<div id='SlidingWindow'></div>
+
+## Sliding Window
+
+#### [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/description/), [Solution](SlidingWindow/Sliding_Window_Maximum.py)
+要想到maintain一个deque，储存当前window里从最大元素开始往右依次减小的下标。这样第一个下标始终是当前window里最大元素的下标。用一个clean函数来维护，clean是O(1)的。首先从左边去掉不在window里的下标，然后从右边开始去掉小于当前元素的下标。因为维护前是从大到小，所以维护后也是从大到小。然后用这个deque遍历nums就行了。
+
+
+#### [1696. Jump Game VI](https://leetcode.com/problems/jump-game-vi/description/), [Solution](SlidingWindow/Jump_Game_VI.py)
+和239一样，用一个mono deque记录每个下标位置的最大score，每一步更新并保持window单调下降，且window里score最大的在第一个。
+
 <div id='DFS'></div>
 
 ## DFS
+
+#### [139. Word Break](https://leetcode.com/problems/word-break/), [Solution](DFS/Word_Break.py)
+用backtrack往下一个个查，注意要缓存不然会超时。用`@lru_cache`缓存。
+#### [329. Longest Increasing Path in a Matrix](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/), [Solution](DFS/Longest_Increasing_Path_in_a_Matrix.py)
+dfs返回从当前坐标开始的最长路径长度，用一个path_length来记录已计算过的格子
+
+#### [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/), [Solution](DFS/Concatenated_Words.py)
+直接dfs，对每个单词从每个下标分成两半，查找前一半和后一半是否在words里或者能表示成words里词的拼接。把words转换成set，加上memorization来提速。
 
 #### [526. Beautiful Arrangement (similar to 46)](https://leetcode.com/problems/beautiful-arrangement/), [Solution](DFS/Beautiful_Arrangement.py)
 T(N!), O(N)
@@ -86,20 +145,9 @@ T($k*2^N$), O(N)
 
 先检测整体和是否能被k整除，可以的话用backtrack。每次往当前和里加一个元素，如果超过target_sum就直接返回，如果等于就count += 1然后当前和清零继续下一次backtrack，如果小于就依次往当前和里加入下一个元素并backtrack。注意就算从当前元素，不从头开始backtrack，且预先排序，依然在python上超时。
 
+#### [1048. Longest String Chain](https://leetcode.com/problems/longest-string-chain/description/), [Solution](DFS/Longest_String_Chain.py)
+从长到短倒着dfs。这样可以不用每个字母每个位置都插入再尝试。
 
-  
-  ***
-### 记忆化搜索（DFS + Memoization Search）
-
-算是动态规划的一种，递归每次返回时同时记录下已访问过的节点特征，避免重复访问同一个节点，可以有效的把指数级别的DFS时间复杂度降为多项式级别; 注意这一类的DFS必须在最后有返回值，不可以用排列组合类型的DFS方法写; for循环的dp题目都可以用记忆化搜索的方式写，但是不是所有的记忆化搜索题目都可以用for循环的dp方式写。
-
-#### [139. Word Break](https://leetcode.com/problems/word-break/), [Solution](DFS/Word_Break.py)
-用backtrack往下一个个查，注意要缓存不然会超时。用`@lru_cache`缓存。
-#### [329. Longest Increasing Path in a Matrix](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/), [Solution](DFS/Longest_Increasing_Path_in_a_Matrix.py)
-dfs返回从当前坐标开始的最长路径长度，用一个path_length来记录已计算过的格子
-
-#### [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/), [Solution](DFS/Concatenated_Words.py)
-直接dfs，对每个单词从每个下标分成两半，查找前一半和后一半是否在words里或者能表示成words里词的拼接。把words转换成set，加上memorization来提速。
 
 <div id='DP'></div>
 
@@ -114,8 +162,12 @@ dfs返回从当前坐标开始的最长路径长度，用一个path_length来记
 
 #### [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/), [Solution](DP/Longest_Increasing_Subsequence.py)
 dp[i] = 以第i个元素结尾的最长递增子序列。di[i] = max(dp[j] + 1) if dp[i] > dp[j] for j < i.
+
 #### [Contest 315 No.4 Count Subarrays With Fixed Bounds](https://leetcode.com/contest/weekly-contest-315/problems/count-subarrays-with-fixed-bounds/), [Solution](DP/Count_Subarrays_With_Fixed_Bounds.py)
 先过一遍nums，记录每个坐标前最近的等于minK，等于maxK，超出范围的值的坐标，记为prev[0], prev[1], prev[2]。然后dp。dp[i] = dp[i-1]，如果nums[i]没超出范围，那么dp[i]再加上prev[0], prev[1]里更小的那个到prev[2]的距离。如果是负的就不加。
+
+#### [322. Coin Change](https://leetcode.com/problems/coin-change/description/), [Solution](DP/Coin_Change.py)
+很标准的dp题，对用到的硬币数量和amount大小进行dp。
 
 #### [377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/),[Solution](DP/Combination_Sum_IV.py)
 对target进行dp，以nums里的每个数num作结尾都是不同的组合，然后dp(target-num)。用cache加记忆。
