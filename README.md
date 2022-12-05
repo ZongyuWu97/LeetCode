@@ -7,6 +7,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#常用文档>常用文档</a></li>
   <li> <a href=#String>String</a></li> 
   <li> <a href=#List>List</a></li> 
+  <li> <a href=#Hashmap>Hashmap</a></li> 
   <li> <a href=#LinkedList>Linked List</a></li> 
   <li> <a href=#Tree>Tree</a></li> 
   <li> <a href=#Heap>Heap</a></li> 
@@ -58,6 +59,12 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2357. Make Array Zero by Subtracting Equal Amounts](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/description/), [Solution](List/Make_Array_Zero_by_Subtracting_Equal_Amounts.py)
 先排序，然后依次处理值不一样的元素，被减去的值等于max(nums)的时候就结束。
 
+<div id='Hashmap'></div>
+
+## Hashmap
+
+#### [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/), [Solution](Hashmap/Subarray_Sum_Equals_K.py)
+用一个hashmap记录到每个下标为止的子串合对应的子串数。对每个新下标，count加上合为 当前子串合 - k 的子串数。
 
 <div id='LinkedList'></div>
 
