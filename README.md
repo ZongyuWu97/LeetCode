@@ -39,6 +39,9 @@ My notes and solution for leetcode problems.
 #### [163. Missing Ranges](https://leetcode.com/problems/missing-ranges/description/), [Solution](List/Missing_Ranges.py)
 直接过一遍nums，如果和前一个相差大于一则ans.append一个数或一个区间。注意corner case，比如nums = []，以及lower和upper处的情况。
 
+#### [252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/description/), [Solution](List/Meeting_Rooms.py)
+直接过一遍，检查每个meeting的开始时间是否早于前一个的结束时间。
+
 #### [453. Minimum Moves to Equal Array Elements](https://leetcode.com/problems/minimum-moves-to-equal-array-elements/description/), [Solution](List/Minimum_Moves_to_Equal_Array_Elements.py)
 其实很简单。要想到增加n-1个数等价于减少1个数。然后算每个数跟最小值的差就行了。
 
@@ -86,8 +89,14 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 ## Heap
 
+#### [253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/description/), [Solution](Heap/Meeting_Rooms_II.py)
+Use a heap to keep the end time of each room. Process meetings by their start time. If the start time is earlier than the earliest endtime, then it means more room is needed. Otherwise just allocate the already finished room to the current meeting.
 #### [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/), [Solution](Heap/Find_Median_from_Data_Stream.py)
 建一个最大堆和一个最小堆，保存他们的大小，每次有新的数进来就让他进最小或最大堆，保持最大堆和最小堆个数相等或者多1。
+
+#### [2402. Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/description/), [Solution](Heap/Meeting_Rooms_III.py)
+用两个min heap，一个保存可以用的房间，一个保存使用中的房间，以结束时间为关健字。每一步先把结束时间小于当前开始时间的都挪到可用房间，如果当前有可用房间则直接用，没有的话则推迟当前meeting到下一个可以用的房间为止。
+
 
 <div id='Sort'></div>
 
@@ -182,6 +191,8 @@ dp[i] = 以第i个元素结尾的最长递增子序列。di[i] = max(dp[j] + 1) 
 #### [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/), [Solution](DP/Frog_Jump.py)
 不是最优解，差不多是brute force+cache。可以用DP。用一个字典储存key:value, key是每个位置，value是能到这个位置的jump的长度的集合。最后如果最后一个位置在字典里，就说明可以跳到这里，否则不可以。
 
+#### [741. Cherry Pickup](https://leetcode.com/problems/cherry-pickup/description/), [Solution](DP/Cherry_Pickup.py)
+第二次不用从n-1, n-1往回走了，直接从0, 0往右下出发两个路径，然后三维dp，dp[r1][c1][r2]，然后让两个点在同一反对角线上，这样c2 = r1 + c1 - r2。
 #### [1216. Valid Palindrome III](https://leetcode.com/problems/valid-palindrome-iii/description/), [Solution](DP/Valid_Palindrome_III.py)
 直接dp，能不能变成palindrome取决于变成palindrome的最小次数是否小于k。dfs(i, j)如果s的i和j相等，则等于dfs(i+1, j-1)。否则说明i或者j之间要去掉一个，就等于1+min(dfs(i+1, j), dfs(i, j-1))。
 
