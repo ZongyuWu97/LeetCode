@@ -15,6 +15,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#SlidingWindow>SlidingWindow</a></li> 
   <li> <a href=#DFS>DFS</a></li> 
   <li> <a href=#DP>DP</a></li> 
+  <li> <a href=#OOD>OOD</a></li> 
 </ol>
 
 <div id='常用文档'></div>
@@ -146,6 +147,10 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 #### [139. Word Break](https://leetcode.com/problems/word-break/), [Solution](DFS/Word_Break.py)
 用backtrack往下一个个查，注意要缓存不然会超时。用`@lru_cache`缓存。
+
+#### [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/), [Solution](DFS/Course_Schedule_II.py)
+一个拓扑排序。对每个点，如果已经标记了则跳过，如果已经临时标记了说明有环return。都没有则给一个临时标记，然后对所有相邻的点dfs。都dfs完了返回之后再去掉当前临时标记，做永久标记，然后放到拓扑序最前面。
+
 #### [329. Longest Increasing Path in a Matrix](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/), [Solution](DFS/Longest_Increasing_Path_in_a_Matrix.py)
 dfs返回从当前坐标开始的最长路径长度，用一个path_length来记录已计算过的格子
 
@@ -202,6 +207,8 @@ dp[i] = 以第i个元素结尾的最长递增子序列。di[i] = max(dp[j] + 1) 
 #### [1335. Minimum Difficulty of a Job Schedule](https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/description/), [Solution](DP/Minimum_Difficulty_of_a_Job_Schedule.py)
 直接dp，dp(i, d)表示从第i个工作开始，还剩下d天。dp(i, d)等于在当天安排从i到j-1的工作，然后剩下的d-1天做j之后的工作，即dp(j, d-1)，对所有j > i里面最小的那一个。用lru_cache减少时间。
 
+#### [1444. Number of Ways of Cutting a Pizza](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/description/), [Solution](DP/Number_of_Ways_of_Cutting_a_Pizza.py)
+3d的DP。能想到3d的话就还好。看起来dp还是专门留一行空的出来比较好，这样就不用初始化了。
 #### [2222. Number of Ways to Select Buildings](https://leetcode.com/problems/number-of-ways-to-select-buildings/description/), [Solution](DP/Number_of_Ways_to_Select_Buildings.py)
 dp[k][j]为在s[:i + 1]中选择长度为k的挑选方法数。同时分别保存其中以'0'和'1'结尾的方法数。dp[k + 1[j]考虑是否以s[j]结尾，不结尾直接用前一个，结尾再加上dp[k][j - 1]里面结尾元素和s[j]不同的方法数。
 #### [2272. Substring With Largest Variance](https://leetcode.com/problems/substring-with-largest-variance/description/), [Solution](DP/Substring_With_Largest_Variance.py)
@@ -209,3 +216,11 @@ dp[k][j]为在s[:i + 1]中选择长度为k的挑选方法数。同时分别保�
 
 #### [2472. Maximum Number of Non-overlapping Palindrome Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description/), [Solution](DP/Maximum_Number_of_Non-overlapping_Palindrome_Substrings.py)
 dp检查到i下标之前的子串，里面长度大于k的回文串的最大长度。注意这里对以i-1结尾的子串，只用检查长度为k和长度k-1的就行，更前面的不用检查。
+
+
+<div id='OOD'></div>
+
+## OOD
+
+#### [1603. Design Parking System](https://leetcode.com/problems/design-parking-system/description/), [Solution](OOD/Design_Parking_System)
+简单
