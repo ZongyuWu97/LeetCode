@@ -25,6 +25,8 @@ My notes and solution for leetcode problems.
 [collections](https://docs.python.org/3/library/collections.html#counter-objects), 
 [heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html), [bisect](https://docs.python.org/3/library/bisect.html)
 
+---
+
 <div id='String'></div>
 
 ## String
@@ -32,6 +34,7 @@ My notes and solution for leetcode problems.
 #### [2268. Minimum Number of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/description/), [Solution](String/Minimum_Number_of_Keypresses.py)
 直接过一遍str，让频率高的放在第一个，9个button放完了就放第二个，依次。每放一个字母就count += number of ch in str * 字母在button里的位置。
 
+---
 
 <div id='List'></div>
 
@@ -49,6 +52,9 @@ My notes and solution for leetcode problems.
 #### [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/description/), [Solution](List/Degree_of_an_Array.py)
 先过一遍，用字典记录每个数字的频率，第一次和最后一次出现的位置。再过一遍字典，更新max_fre和min_len。
 
+#### [1864. Minimum Number of Swaps to Make the Binary String Alternating](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-binary-string-alternating/description/), [Solution](List/Minimum_Number_of_Swaps_to_Make_the_Binary_String_Alternating.py)
+因为只有两个字母，所以只要算其中一个字母不在正确位置上的最小位置数就行了。取两个字母里面这个数更小的那一个。
+
 #### [2016. Maximum Difference Between Increasing Elements](https://leetcode.com/problems/maximum-difference-between-increasing-elements/description/), [Solution](List/Maximum_Difference_Between_Increasing_Elements.py)
 easy，一个指针过一遍，比较当前元素和之前最小元素，更新当前最小元素。
 
@@ -60,8 +66,13 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 用Pascal Triangle即组合数来算每个数在最终答案里用到的次数，然后直接一个个加上去。注意算组合数的时候要用//不要用/，不然后面会小数位有问题。也可以直接recursive做，不过很慢。
 
 
+#### [2294. Partition Array Such That Maximum Difference Is K](https://leetcode.com/problems/partition-array-such-that-maximum-difference-is-k/description/), [Solution](List/Partition%20Array%20Such_That_Maximum_Difference_Is_K.py)
+直接排个序然后从小到大分就行。
+
 #### [2357. Make Array Zero by Subtracting Equal Amounts](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/description/), [Solution](List/Make_Array_Zero_by_Subtracting_Equal_Amounts.py)
 先排序，然后依次处理值不一样的元素，被减去的值等于max(nums)的时候就结束。
+
+---
 
 <div id='Hashmap'></div>
 
@@ -72,9 +83,13 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 <div id='LinkedList'></div>
 
+---
+
 ## Linked List
 #### [2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/description/), [Solution](LinkedList/Add_Two_Numbers.py)
 创建一个新链表，如果l1或l2后面还有就继续延长这个链表
+
+---
 
 <div id='Tree'></div>
 
@@ -85,6 +100,8 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 #### [2471. Minimum Number of Operations to Sort a Binary Tree by Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/), [Solution](Tree/Minimum_Number_of_Operations_to_Sort_a_Binary_Tree_by_Level.py)
 用两个queue按层bfs遍历树，然后对每层求min swap。重点是min swap。注意iterative traversal的时候就用普通stack就行，然后先后顺序反过来。
+
+---
 
 <div id='Heap'></div>
 
@@ -98,6 +115,7 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [2402. Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/description/), [Solution](Heap/Meeting_Rooms_III.py)
 用两个min heap，一个保存可以用的房间，一个保存使用中的房间，以结束时间为关健字。每一步先把结束时间小于当前开始时间的都挪到可用房间，如果当前有可用房间则直接用，没有的话则推迟当前meeting到下一个可以用的房间为止。
 
+---
 
 <div id='Sort'></div>
 
@@ -121,6 +139,10 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [1356. Sort Integers by The Number of 1 Bits](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/), [Solution](Sort/Sort_Integers_by_The_Number_of_1_Bits.py)
 直接做。可以一行解决其实。注意python有bin函数，直接返回一个数的二进制表达。另外count函数直接返回一个数里某个数的个数。
 
+
+#### [1710. Maximum Units on a Truck](https://leetcode.com/problems/maximum-units-on-a-truck/description/), [Solution](List/Maximum_Units_on_a_Truck.py)
+简单的单位容量背包问题，直接按价值从大到小放就行了。
+
 #### [2055. Plates Between Candles](https://leetcode.com/problems/plates-between-candles/description/), [Solution](Sort/Plates_Between_Candles.py)
 
 记录下所有candle的位置，然后对每个query用二分，找到从左往右和从右往左的第一个candle，然后两个之间的距离减去两个之间的candle数，就是plate数。
@@ -129,6 +151,8 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [2340. Minimum Adjacent Swaps to Make a Valid Array](https://leetcode.com/problems/minimum-adjacent-swaps-to-make-a-valid-array/description/), [Solution](Sort/Minimum_Adjacent_Swaps_to_Make_a_Valid_Array.py)
 直接找到第一个最小元素和最后一个最大元素，然后算把他们放到正确位置的swap数。
 
+
+---
 
 <div id='SlidingWindow'></div>
 
@@ -141,12 +165,17 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [1696. Jump Game VI](https://leetcode.com/problems/jump-game-vi/description/), [Solution](SlidingWindow/Jump_Game_VI.py)
 和239一样，用一个mono deque记录每个下标位置的最大score，每一步更新并保持window单调下降，且window里score最大的在第一个。
 
+---
+
 <div id='DFS'></div>
 
 ## DFS
 
 #### [139. Word Break](https://leetcode.com/problems/word-break/), [Solution](DFS/Word_Break.py)
 用backtrack往下一个个查，注意要缓存不然会超时。用`@lru_cache`缓存。
+
+#### [207. Course Schedule](https://leetcode.com/problems/course-schedule/description/), [Solution](DFS/Course_Schedule.py)
+直接检测是否有环。中途传回True / False，方便检测到环的话快速结束。
 
 #### [210. Course Schedule II](https://leetcode.com/problems/course-schedule-ii/description/), [Solution](DFS/Course_Schedule_II.py)
 一个拓扑排序。对每个点，如果已经标记了则跳过，如果已经临时标记了说明有环return。都没有则给一个临时标记，然后对所有相邻的点dfs。都dfs完了返回之后再去掉当前临时标记，做永久标记，然后放到拓扑序最前面。
@@ -159,8 +188,11 @@ dfs返回从当前坐标开始的最长路径长度，用一个path_length来记
 
 #### [526. Beautiful Arrangement (similar to 46)](https://leetcode.com/problems/beautiful-arrangement/), [Solution](DFS/Beautiful_Arrangement.py)
 T(N!), O(N)
-
 直接backtrack，用一个self.count来记录当前有效permutation。每次idx到末尾就更新count。
+
+#### [547. Number of Provinces](https://leetcode.com/problems/number-of-provinces/description/), [Solution](DFS/Number_of_Provinces.py)
+直接dfs。检测连通分量个数。
+
 #### [698. Partition to K Equal Sum Subsets](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/), [Solution](/DFS/Partition_to_K_Equal_Sum_Subsets.py)
 T($k*2^N$), O(N)
 
@@ -169,6 +201,7 @@ T($k*2^N$), O(N)
 #### [1048. Longest String Chain](https://leetcode.com/problems/longest-string-chain/description/), [Solution](DFS/Longest_String_Chain.py)
 从长到短倒着dfs。这样可以不用每个字母每个位置都插入再尝试。
 
+---
 
 <div id='DP'></div>
 
@@ -196,6 +229,9 @@ dp[i] = 以第i个元素结尾的最长递增子序列。di[i] = max(dp[j] + 1) 
 #### [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/), [Solution](DP/Frog_Jump.py)
 不是最优解，差不多是brute force+cache。可以用DP。用一个字典储存key:value, key是每个位置，value是能到这个位置的jump的长度的集合。最后如果最后一个位置在字典里，就说明可以跳到这里，否则不可以。
 
+#### [630. Course Schedule III](https://leetcode.com/problems/course-schedule-iii/description/), [Solution](DP/Course_Schedule_III.py)
+先按结束时间排序，然后依次处理。维护到当前位置的上的最多的课，每个课的时长，和总时长。新的课来了之后，如果在当前时间直接上不超过lastDay，就直接放进heap里；如果超过了，duration大于之前的所有课的最大时长的话，不能放，否则无法维护是上的最多的课；如果小于之前的最大时长，则直接替换，可以维护是上的最多的课。因为是按结束时间排序，所以可以直接放进去替换。因为用了heap，所以总时长和之前上的课的时长也可以快速维护。
+
 #### [741. Cherry Pickup](https://leetcode.com/problems/cherry-pickup/description/), [Solution](DP/Cherry_Pickup.py)
 第二次不用从n-1, n-1往回走了，直接从0, 0往右下出发两个路径，然后三维dp，dp[r1][c1][r2]，然后让两个点在同一反对角线上，这样c2 = r1 + c1 - r2。
 #### [1216. Valid Palindrome III](https://leetcode.com/problems/valid-palindrome-iii/description/), [Solution](DP/Valid_Palindrome_III.py)
@@ -217,10 +253,11 @@ dp[k][j]为在s[:i + 1]中选择长度为k的挑选方法数。同时分别保�
 #### [2472. Maximum Number of Non-overlapping Palindrome Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description/), [Solution](DP/Maximum_Number_of_Non-overlapping_Palindrome_Substrings.py)
 dp检查到i下标之前的子串，里面长度大于k的回文串的最大长度。注意这里对以i-1结尾的子串，只用检查长度为k和长度k-1的就行，更前面的不用检查。
 
+---
 
 <div id='OOD'></div>
 
 ## OOD
 
 #### [1603. Design Parking System](https://leetcode.com/problems/design-parking-system/description/), [Solution](OOD/Design_Parking_System)
-简单
+简单。
