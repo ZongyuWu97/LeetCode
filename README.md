@@ -34,6 +34,9 @@ My notes and solution for leetcode problems.
 #### [2268. Minimum Number of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/description/), [Solution](String/Minimum_Number_of_Keypresses.py)
 直接过一遍str，让频率高的放在第一个，9个button放完了就放第二个，依次。每放一个字母就count += number of ch in str * 字母在button里的位置。
 
+#### [2288. Apply Discount to Prices](https://leetcode.com/problems/apply-discount-to-prices/description/), [Solution](String/Apply_Discount_to_Prices.py)
+简单，不过注意字符串里插入变量的格式：'str%格式'%(插入的东西)
+
 ---
 
 <div id='List'></div>
@@ -54,6 +57,9 @@ My notes and solution for leetcode problems.
 
 #### [1864. Minimum Number of Swaps to Make the Binary String Alternating](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-binary-string-alternating/description/), [Solution](List/Minimum_Number_of_Swaps_to_Make_the_Binary_String_Alternating.py)
 因为只有两个字母，所以只要算其中一个字母不在正确位置上的最小位置数就行了。取两个字母里面这个数更小的那一个。
+
+#### [1344. Angle Between Hands of a Clock](https://leetcode.com/problems/angle-between-hands-of-a-clock/description/), [Solution](List/Angle_Between_Hands_of_a_Clock.py)
+直接算出时针和秒针的角度，然后取差的绝对值，再取跟补角里更小的那个。
 
 #### [2016. Maximum Difference Between Increasing Elements](https://leetcode.com/problems/maximum-difference-between-increasing-elements/description/), [Solution](List/Maximum_Difference_Between_Increasing_Elements.py)
 easy，一个指针过一遍，比较当前元素和之前最小元素，更新当前最小元素。
