@@ -14,6 +14,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#Sort>Sort</a></li> 
   <li> <a href=#SlidingWindow>SlidingWindow</a></li> 
   <li> <a href=#DFS>DFS</a></li> 
+  <li> <a href=#BFS>BFS</a></li> 
   <li> <a href=#DP>DP</a></li> 
   <li> <a href=#OOD>OOD</a></li> 
 </ol>
@@ -83,6 +84,13 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 <div id='Hashmap'></div>
 
 ## Hashmap
+
+#### [1. Two Sum](https://leetcode.com/problems/two-sum/description/), [Solution](Hashmap/Two_Sum.py)
+用hashmap储存与当前值的和为target的值，以及当前值的index。继续查找每一个值，如果在hashmap里就输出储存的index和当前的index。
+
+#### [170. Two Sum III - Data structure design](https://leetcode.com/problems/two-sum-iii-data-structure-design/description/), [Solution](Hashmap/Two_Sum_III_-_Data_structure_design.py)
+跟Two Sum一样，不过把hashmap的值的index换成了count，因为只要找到是否有就行了不要下标。然后用count可以避免重复访问同一个元素。
+
 
 #### [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/), [Solution](Hashmap/Subarray_Sum_Equals_K.py)
 用一个hashmap记录到每个下标为止的子串合对应的子串数。对每个新下标，count加上合为 当前子串合 - k 的子串数。
@@ -206,6 +214,16 @@ T($k*2^N$), O(N)
 
 #### [1048. Longest String Chain](https://leetcode.com/problems/longest-string-chain/description/), [Solution](DFS/Longest_String_Chain.py)
 从长到短倒着dfs。这样可以不用每个字母每个位置都插入再尝试。
+
+---
+
+<div id='BFS'></div>
+
+## BFS
+
+#### [127. Word Ladder](https://leetcode.com/problems/word-ladder/description/), [Solution](BFS/Word_Ladder.py)
+因为只要找到endWord就行，所以可以直接bfs+visited，不管中间是否有路径重叠。注意用一个interWord保存中间态，预处理wordList找到所有中间态，然后每一步转换成中间态之后再查找这个中间态可以到达哪些词。
+
 
 ---
 
