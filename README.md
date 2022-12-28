@@ -11,8 +11,11 @@ My notes and solution for leetcode problems.
   <li> <a href=#LinkedList>Linked List</a></li> 
   <li> <a href=#Tree>Tree</a></li> 
   <li> <a href=#Heap>Heap</a></li> 
+  <li> <a href=#Stack>Stack</a></li> 
   <li> <a href=#Sort>Sort</a></li> 
+  <li> <a href=#BinarySearch>BinarySearch</a></li> 
   <li> <a href=#SlidingWindow>SlidingWindow</a></li> 
+  <li> <a href=#TwoPointer>TwoPointer</a></li> 
   <li> <a href=#DFS>DFS</a></li> 
   <li> <a href=#BFS>BFS</a></li> 
   <li> <a href=#DP>DP</a></li> 
@@ -46,6 +49,9 @@ My notes and solution for leetcode problems.
 
 #### [163. Missing Ranges](https://leetcode.com/problems/missing-ranges/description/), [Solution](List/Missing_Ranges.py)
 直接过一遍nums，如果和前一个相差大于一则ans.append一个数或一个区间。注意corner case，比如nums = []，以及lower和upper处的情况。
+
+#### [168. Excel Sheet Column Title](https://leetcode.com/problems/excel-sheet-column-title/description/), [Solution](String/Excel_Sheet_Column_Title.py)
+这里因为A-Z是用1-26编号的，所以每步都减1，让余数范围变成从0-25。商的部分不变或者只是把余0的部分变成A。注意ord()可以把字符转成ascii码，chr()把ascii码转成字符。
 
 #### [252. Meeting Rooms](https://leetcode.com/problems/meeting-rooms/description/), [Solution](List/Meeting_Rooms.py)
 直接过一遍，检查每个meeting的开始时间是否早于前一个的结束时间。
@@ -88,6 +94,15 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [1. Two Sum](https://leetcode.com/problems/two-sum/description/), [Solution](Hashmap/Two_Sum.py)
 用hashmap储存与当前值的和为target的值，以及当前值的index。继续查找每一个值，如果在hashmap里就输出储存的index和当前的index。
 
+
+#### [15. 3Sum](https://leetcode.com/problems/3sum/description/), [Solution](Hashmap/3Sum.py)
+跟2sum基本一样，先排序，然后对每一个值把他当成2sum里的k，然后对之后的做2sum，依次重复n次。
+
+
+#### [18. 4Sum](https://leetcode.com/problems/4sum/description/), [Solution](Hashmap/4Sum.py)
+和3sum基本一样。另外这里面两个外部循环都有if i == 0 or nums[i - 1] != nums[i]，是用来避免重复计算的。
+
+
 #### [170. Two Sum III - Data structure design](https://leetcode.com/problems/two-sum-iii-data-structure-design/description/), [Solution](Hashmap/Two_Sum_III_-_Data_structure_design.py)
 跟Two Sum一样，不过把hashmap的值的index换成了count，因为只要找到是否有就行了不要下标。然后用count可以避免重复访问同一个元素。
 
@@ -95,9 +110,15 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/), [Solution](Hashmap/Subarray_Sum_Equals_K.py)
 用一个hashmap记录到每个下标为止的子串合对应的子串数。对每个新下标，count加上合为 当前子串合 - k 的子串数。
 
-<div id='LinkedList'></div>
+
+#### [1679. Max Number of K-Sum Pairs](https://leetcode.com/problems/max-number-of-k-sum-pairs/description/), [Solution](Hashmap/Max_Number_of_K-Sum_Pairs.py)
+跟2sum基本一样。不过用count来记录，然后每碰到一个匹配的就count--，res++
+
+
 
 ---
+
+<div id='LinkedList'></div>
 
 ## Linked List
 #### [2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/description/), [Solution](LinkedList/Add_Two_Numbers.py)
@@ -128,6 +149,17 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 #### [2402. Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/description/), [Solution](Heap/Meeting_Rooms_III.py)
 用两个min heap，一个保存可以用的房间，一个保存使用中的房间，以结束时间为关健字。每一步先把结束时间小于当前开始时间的都挪到可用房间，如果当前有可用房间则直接用，没有的话则推迟当前meeting到下一个可以用的房间为止。
+
+---
+
+<div id='Stack'></div>
+
+## Stack
+
+#### [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/description/), [Solution](Stack/Largest_Rectangle_in_Histogram.py)
+可以用stack是因为实际只有n个rectangle要检查。每个height，和这个height往左往右到第一个比他矮的height为止，这个rectangle。假设已经有一个stack，里面放着从低到高排列的height，检测到新的height比stack末尾的height低的时候就开始依次pop。因为是从低到高，所以每pop一个就根据这个的height和他前一个的下标计算面积。到末尾再把剩下的全部pop出来。
+
+
 
 ---
 
@@ -165,6 +197,19 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [2340. Minimum Adjacent Swaps to Make a Valid Array](https://leetcode.com/problems/minimum-adjacent-swaps-to-make-a-valid-array/description/), [Solution](Sort/Minimum_Adjacent_Swaps_to_Make_a_Valid_Array.py)
 直接找到第一个最小元素和最后一个最大元素，然后算把他们放到正确位置的swap数。
 
+---
+
+<div id='BinarySearch'></div>
+
+## Binary Search
+
+
+#### [2517. Maximum Tastiness of Candy Basket](https://leetcode.com/problems/maximum-tastiness-of-candy-basket/description/), [Solution](BinarySearch/Maximum_Tastiness_of_Candy_Basket.py)
+感觉binary sort这种的越来越多了。对tastiness二分，每步检查是否有一组k个candy，tastiness大于等于mid。
+
+
+
+
 
 ---
 
@@ -175,9 +220,32 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/description/), [Solution](SlidingWindow/Sliding_Window_Maximum.py)
 要想到maintain一个deque，储存当前window里从最大元素开始往右依次减小的下标。这样第一个下标始终是当前window里最大元素的下标。用一个clean函数来维护，clean是O(1)的。首先从左边去掉不在window里的下标，然后从右边开始去掉小于当前元素的下标。因为维护前是从大到小，所以维护后也是从大到小。然后用这个deque遍历nums就行了。
 
+#### [1100. Find K-Length Substrings With No Repeated Characters](https://leetcode.com/problems/find-k-length-substrings-with-no-repeated-characters/description/), [Solution](SlidingWindow/Find_K-Length_Substrings_With_No_Repeated_Characters.py)
+用一个set储存当前window里的元素方便快速查找，用一个deque按顺序储存当前window的元素和下标。每一步，如果window已经满了，丢掉最前面的，更新window大小；如果新元素已经在window里，丢掉到重复元素位置并根据最后丢掉的元素的下标更新window大小；最后把新的元素放进来，如果window是满的就substring数加一。
 
 #### [1696. Jump Game VI](https://leetcode.com/problems/jump-game-vi/description/), [Solution](SlidingWindow/Jump_Game_VI.py)
 和239一样，用一个mono deque记录每个下标位置的最大score，每一步更新并保持window单调下降，且window里score最大的在第一个。
+
+
+#### [2516. Take K of Each Character From Left and Right](https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/), [Solution](SlidingWindow/Take_K_of_Each_Character_From_Left_and_Right.py)
+直接sliding window就行了。。。每加进来一个就检测窗口内元素是否过多，过多就一直++左边界，不然就重复加新元素。  
+
+
+---
+
+<div id='TwoPointer'></div>
+
+## Two Pointer
+
+#### [167. Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/), [Solution](TwoPointer/Two_Sum_II_-_Input_Array_Is_Sorted.py)
+Two Sum可以用two pointer做也可以用hashmap做，用two pointer的缺点是要先排序，优点是空间O(1)。这里既然已经排过序了，就可以直接用two pointer。
+
+#### [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/), [Solution](TwoPointer/Two_Sum_IV_-_Input_is_a_BST.py)
+BST的inorder遍历会得到一个nondecreasing的序列。所以用一个inorder+twopointer就行了。
+
+#### [1099. Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/description/), [Solution](TwoPointer/Two_Sum_Less_Than_K.py)
+先排序，然后用two pointer。很简单。还可以利用题目的条件k在1-1000之间，不过这个感觉不够通用，就算了。
+
 
 ---
 
@@ -276,6 +344,12 @@ dp[k][j]为在s[:i + 1]中选择长度为k的挑选方法数。同时分别保�
 
 #### [2472. Maximum Number of Non-overlapping Palindrome Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description/), [Solution](DP/Maximum_Number_of_Non-overlapping_Palindrome_Substrings.py)
 dp检查到i下标之前的子串，里面长度大于k的回文串的最大长度。注意这里对以i-1结尾的子串，只用检查长度为k和长度k-1的就行，更前面的不用检查。
+
+
+#### [2518. Number of Great Partitions](https://leetcode.com/problems/number-of-great-partitions/description/), [Solution](DP/Number_of_Great_Partitions.py)
+dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就是nums中和为0到k - 1的所有子集数。在所有2^n种组合中减去第一组的和及第二组的和小于k的子集数。关键要能想到这么算。
+
+
 
 ---
 

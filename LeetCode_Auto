@@ -11,10 +11,11 @@ def printLeetCodeFormat(name):
     web_part = '(https://leetcode.com/problems/' + \
         name_in_web + '/description/), [Solution]()\n'
 
+    print()
     print('_'.join(name.split(' ')[1:]) + '.py')
     print(name_part + web_part)
 
 
-name = '170. Two Sum III - Data structure design'
+name = '2518. Number of Great Partitions'
 
 printLeetCodeFormat(name)
