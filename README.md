@@ -12,6 +12,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#Tree>Tree</a></li> 
   <li> <a href=#Heap>Heap</a></li> 
   <li> <a href=#Stack>Stack</a></li> 
+  <li> <a href=#Prime>Prime</a></li> 
   <li> <a href=#Sort>Sort</a></li> 
   <li> <a href=#BinarySearch>BinarySearch</a></li> 
   <li> <a href=#SlidingWindow>SlidingWindow</a></li> 
@@ -19,6 +20,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#DFS>DFS</a></li> 
   <li> <a href=#BFS>BFS</a></li> 
   <li> <a href=#DP>DP</a></li> 
+  <li> <a href=#Greedy>Greedy</a></li> 
   <li> <a href=#OOD>OOD</a></li> 
 </ol>
 
@@ -115,6 +117,11 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 跟2sum基本一样。不过用count来记录，然后每碰到一个匹配的就count--，res++
 
 
+#### [2488. Count Subarrays With Median K](https://leetcode.com/problems/count-subarrays-with-median-k/description/), [Solution](Hashmap/Count_Subarrays_With_Median_K.py)
+得到k的下标，计算到k右边每个下标为止大于小于k的数的个数并保存在hashmap里；然后从k往左边一样计算，根据hashmap里的个数，加起来等于0或1的个数，就是从这个下标开始满足条件的subarray个数。
+
+
+
 
 ---
 
@@ -130,8 +137,25 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 ## Tree
 
+
+#### [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Search_Tree.py)
+跟下面一个基本一样，不过利用了BST的结构，直接判断当前节点的值，如果在p，q之间就是找到了，小于更小的或者大于更大的就去另一边找。
+
+
+#### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Tree.py)
+用一个helper判断在当前子树中是否检测到p或q。在root，helper(root.left)，helper(root.right)中如果有两个检测到了就是找到了LCA，修改全局变量self.ans。每一层返回curr or 上面两个，这样就算找到了LCA，后续返回的也是True就是1，之后不会重复修改全局变量。
+
+
 #### [545. Boundary of Binary Tree](https://leetcode.com/problems/boundary-of-binary-tree/description/), [Solution](Tree/Boundary_of_Binary_Tree.py)
 直接分别取left boundary, leaves, and right boundary。
+
+
+#### [1123. Lowest Common Ancestor of Deepest Leaves](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/), [Solution](Tree/Lowest_Common_Ancestor_of_Deepest_Leaves.py)
+bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves开始，回溯parent，直到只剩某一层一个parent。
+
+
+#### [1676. Lowest Common Ancestor of a Binary Tree IV](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iv/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Tree_IV.py)
+和基本情况差不多，不过这次不是检测是否只有两个，而是检测是否所有node都被在当前子树下找到了。
 
 #### [2471. Minimum Number of Operations to Sort a Binary Tree by Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/), [Solution](Tree/Minimum_Number_of_Operations_to_Sort_a_Binary_Tree_by_Level.py)
 用两个queue按层bfs遍历树，然后对每层求min swap。重点是min swap。注意iterative traversal的时候就用普通stack就行，然后先后顺序反过来。
@@ -158,6 +182,17 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 #### [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/description/), [Solution](Stack/Largest_Rectangle_in_Histogram.py)
 可以用stack是因为实际只有n个rectangle要检查。每个height，和这个height往左往右到第一个比他矮的height为止，这个rectangle。假设已经有一个stack，里面放着从低到高排列的height，检测到新的height比stack末尾的height低的时候就开始依次pop。因为是从低到高，所以每pop一个就根据这个的height和他前一个的下标计算面积。到末尾再把剩下的全部pop出来。
+
+---
+
+<div id='Prime'></div>
+
+## Prime
+
+#### [2523. Closest Prime Numbers in Range](https://leetcode.com/problems/closest-prime-numbers-in-range/description/), [Solution](Prime/Closest_Prime_Numbers_in_Range.py)
+主要注意怎么筛素数。对小于x的素数，从2到sqrt(x)为止，如果i是素数就把i的所有倍数都标位合数，依次标记。最后把没被标记为合数的拿出来，就剩下的是素数。
+
+
 
 
 
@@ -202,6 +237,10 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 <div id='BinarySearch'></div>
 
 ## Binary Search
+
+
+#### [2448. Minimum Cost to Make Array Equal](https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/), [Solution](BinarySearch/Minimum_Cost_to_Make_Array_Equal.py)
+cost函数是凸函数，所以可以用二分法来找这个最小值。每一步计算mid和mid + 1的cost，判断最小值点在mid的左边还是右边，然后二分就行了
 
 
 #### [2517. Maximum Tastiness of Candy Basket](https://leetcode.com/problems/maximum-tastiness-of-candy-basket/description/), [Solution](BinarySearch/Maximum_Tastiness_of_Candy_Basket.py)
@@ -348,6 +387,18 @@ dp检查到i下标之前的子串，里面长度大于k的回文串的最大长�
 
 #### [2518. Number of Great Partitions](https://leetcode.com/problems/number-of-great-partitions/description/), [Solution](DP/Number_of_Great_Partitions.py)
 dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就是nums中和为0到k - 1的所有子集数。在所有2^n种组合中减去第一组的和及第二组的和小于k的子集数。关键要能想到这么算。
+
+
+---
+
+<div id='Greedy'></div>
+
+## Greedy
+
+#### [2193. Minimum Number of Moves to Make Palindrome](https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/description/), [Solution](Greedy/Minimum_Number_of_Moves_to_Make_Palindrome.py)
+只用看从末尾开始，把每个对应的字母从原始位置移动到开头的消耗就行。
+
+
 
 
 
