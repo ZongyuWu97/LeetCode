@@ -10,10 +10,13 @@ My notes and solution for leetcode problems.
   <li> <a href=#Hashmap>Hashmap</a></li> 
   <li> <a href=#LinkedList>Linked List</a></li> 
   <li> <a href=#Tree>Tree</a></li> 
+  <li> <a href=#Trie>Trie</a></li> 
   <li> <a href=#Heap>Heap</a></li> 
   <li> <a href=#Stack>Stack</a></li> 
+  <li> <a href=#UnionFind>UnionFind</a></li> 
   <li> <a href=#Prime>Prime</a></li> 
   <li> <a href=#Sort>Sort</a></li> 
+  <li> <a href=#PrefixSum>PrefixSum</a></li> 
   <li> <a href=#BinarySearch>BinarySearch</a></li> 
   <li> <a href=#SlidingWindow>SlidingWindow</a></li> 
   <li> <a href=#TwoPointer>TwoPointer</a></li> 
@@ -160,6 +163,29 @@ bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves�
 #### [2471. Minimum Number of Operations to Sort a Binary Tree by Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/), [Solution](Tree/Minimum_Number_of_Operations_to_Sort_a_Binary_Tree_by_Level.py)
 用两个queue按层bfs遍历树，然后对每层求min swap。重点是min swap。注意iterative traversal的时候就用普通stack就行，然后先后顺序反过来。
 
+
+---
+
+<div id='Trie'></div>
+
+## Trie
+就是nested hashmap。一开始就是一个{}，每一层就加一个key，每到一个终点就在终点的hashmap里加一个'$'的key表示到达终点了。
+
+
+#### [211. Design Add and Search Words Data Structure](https://leetcode.com/problems/design-add-and-search-words-data-structure/description/), [Solution](Trie/Design_Add_and_Search_Words_Data_Structure.py)
+用Trie保存加进去的word，然后每次search检查。
+
+
+#### [212. Word Search II](https://leetcode.com/problems/word-search-ii/description/), [Solution](Trie/Word_Search_II.py)
+先用一个trie记录所有word，然后从board的每个位置开始dfs。如果在trie里找到了，就去掉这个词。如果某个叶节点到底了而且已经找到过了，就去掉这个叶节点。
+
+
+#### [1268. Search Suggestions System](https://leetcode.com/problems/search-suggestions-system/description/), [Solution](Trie/Search_Suggestions_System.py)
+用Trie记录product，并在每一层用suggestion记录三个词，然后对word每个字母到每一层的时候直接访问对应的suggestion。还可以用sort + binary search。
+
+
+
+
 ---
 
 <div id='Heap'></div>
@@ -182,6 +208,35 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 #### [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/description/), [Solution](Stack/Largest_Rectangle_in_Histogram.py)
 可以用stack是因为实际只有n个rectangle要检查。每个height，和这个height往左往右到第一个比他矮的height为止，这个rectangle。假设已经有一个stack，里面放着从低到高排列的height，检测到新的height比stack末尾的height低的时候就开始依次pop。因为是从低到高，所以每pop一个就根据这个的height和他前一个的下标计算面积。到末尾再把剩下的全部pop出来。
+
+
+---
+
+<div id='UnionFind'></div>
+
+## Union Find
+可以用来检查集合连通性。
+
+
+#### [947. Most Stones Removed with Same Row or Column](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/), [Solution](UnionFind/Most_Stones_Removed_with_Same_Row_or_Column.py)
+对每个石头，连接他的row和col。因为row数有限，所以col直接+10001就行。最后检查有多少连通集。
+
+
+#### [1579. Remove Max Number of Edges to Keep Graph Fully Traversable](https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/description/), [Solution](UnionFind/Remove_Max_Number_of_Edges_to_Keep_Graph_Fully_Traversable.py)
+用union find来记录alice和bob的边是否都是连通的。最后检查加进去的边是不是等于n - 1。这里UF用的是一个列表，因为正好node都是从1到n标记的。用dict也可以，就是中间复制的时候要手动写一个deep copy。
+
+
+#### [1627. Graph Connectivity With Threshold](https://leetcode.com/problems/graph-connectivity-with-threshold/description/), [Solution](UnionFind/Graph_Connectivity_With_Threshold.py)
+先预处理，对threshold到n的每个数字用union find建立连通分量，然后每个query判断是否在一个等价类里面。
+
+#### [1697. Checking Existence of Edge Length Limited Paths](https://leetcode.com/problems/checking-existence-of-edge-length-limited-paths/description/), [Solution](UnionFind/Checking_Existence_of_Edge_Length_Limited_Paths.py)
+先对queries和edges分别排序，然后对每个query，把distance小于当前query的limit的那些edge用union连起来，然后用find判断当前query的p和q是否连同。因为只连接了小于当前limit的所有边，所以直接判断就行，不用另外看每个边的distance。
+
+#### [2493. Divide Nodes Into the Maximum Number of Groups](https://leetcode.com/problems/divide-nodes-into-the-maximum-number-of-groups/description/), [Solution](UnionFind/Divide_Nodes_Into_the_Maximum_Number_of_Groups.py)
+
+对每一个node做bfs就可以得到最大group数。用union find来记录连通分量。其实不用union find也可以，只要记录了连通分量就可以。
+
+
 
 ---
 
@@ -234,6 +289,29 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 ---
 
+<div id='PrefixSum'></div>
+
+## Prefix Sum
+
+
+#### [370. Range Addition](https://leetcode.com/problems/range-addition/description/), [Solution](PrefixSum/Range_Addition.py)
+先用cache记录每个query开始的位置和结束的下一个位置，然后过一遍，期间每个位置的currSum加上对应的cache。
+
+#### [1109. Corporate Flight Bookings](https://leetcode.com/problems/corporate-flight-bookings/description/), [Solution](PrefixSum/Corporate_Flight_Bookings.py)
+同370。一模一样只能说。
+
+
+#### [1094. Car Pooling](https://leetcode.com/problems/car-pooling/description/), [Solution](PrefixSum/Car_Pooling.py)
+同370，不过这次用的是dict来当cache。上面一个其实也可以，不过因为上面本来就要返回一个list所以直接用了list。
+
+
+#### [2536. Increment Submatrices by One](https://leetcode.com/problems/increment-submatrices-by-one/description/), [Solution](PrefixSum/Increment_Submatrices_by_One.py)
+对每一行做一次prefix sum。另外也可以用2dcache来做，在每个矩形的左上角、右下角外+1，右上角外、左下角外-1不过还没看懂，之后有兴趣可以看看[这里](https://leetcode.com/problems/increment-submatrices-by-one/solutions/3052675/python3-sweep-line-range-addition-with-visualization-clean-concise/)。
+
+
+
+---
+
 <div id='BinarySearch'></div>
 
 ## Binary Search
@@ -270,6 +348,11 @@ cost函数是凸函数，所以可以用二分法来找这个最小值。每一�
 直接sliding window就行了。。。每加进来一个就检测窗口内元素是否过多，过多就一直++左边界，不然就重复加新元素。  
 
 
+#### [2537. Count the Number of Good Subarrays](https://leetcode.com/problems/count-the-number-of-good-subarrays/description/), [Solution](SlidingWindow/Count_the_Number_of_Good_Subarrays.py)
+用hashmap记录当前window里的good pair。然后right右移hashmap对应增加，left左移直到window里count数小于k。
+
+
+
 ---
 
 <div id='TwoPointer'></div>
@@ -291,6 +374,10 @@ BST的inorder遍历会得到一个nondecreasing的序列。所以用一个inorde
 <div id='DFS'></div>
 
 ## DFS
+
+
+#### [79. Word Search](https://leetcode.com/problems/word-search/description/), [Solution](DFS/Word_Search.py)
+从board的每个位置开始dfs+backtrack搜索word。注意先pre check是否board里包含了word里的所有字母，不然会超时。
 
 #### [139. Word Break](https://leetcode.com/problems/word-break/), [Solution](DFS/Word_Break.py)
 用backtrack往下一个个查，注意要缓存不然会超时。用`@lru_cache`缓存。
@@ -345,6 +432,12 @@ T($k*2^N$), O(N)
 #### [97. Interleaving String](https://leetcode.com/problems/interleaving-string/description/), [Solution](DP/Interleaving_String.py)
 用的算是brute force+cache，但其实可以用DP。dp[i][j]储存能否用s1[:i+1]和s2[:j+1]interleave出s3[:i+j+1]。
 
+#### [198. House Robber](https://leetcode.com/problems/house-robber/description/), [Solution](DP/House_Robber.py)
+最简单的一维dp。
+
+#### [213. House Robber II](https://leetcode.com/problems/house-robber-ii/description/), [Solution](DP/House_Robber_II.py)
+用原版house robber作辅助函数，根据拿不拿nums[-1]分两种情况，分别做两次dp。
+
 #### [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/), [Solution](DP/Longest_Increasing_Subsequence.py)
 dp[i] = 以第i个元素结尾的最长递增子序列。di[i] = max(dp[j] + 1) if dp[i] > dp[j] for j < i.
 
@@ -354,11 +447,19 @@ dp[i] = 以第i个元素结尾的最长递增子序列。di[i] = max(dp[j] + 1) 
 #### [322. Coin Change](https://leetcode.com/problems/coin-change/description/), [Solution](DP/Coin_Change.py)
 很标准的dp题，对用到的硬币数量和amount大小进行dp。
 
+#### [337. House Robber III](https://leetcode.com/problems/house-robber-iii/description/), [Solution](DP/House_Robber_III.py)
+recursion + memorization。根据拿不拿root分类。加上点边界条件就行了。
+
 #### [377. Combination Sum IV](https://leetcode.com/problems/combination-sum-iv/description/),[Solution](DP/Combination_Sum_IV.py)
 对target进行dp，以nums里的每个数num作结尾都是不同的组合，然后dp(target-num)。用cache加记忆。
 
 #### [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/), [Solution](DP/Frog_Jump.py)
 不是最优解，差不多是brute force+cache。可以用DP。用一个字典储存key:value, key是每个位置，value是能到这个位置的jump的长度的集合。最后如果最后一个位置在字典里，就说明可以跳到这里，否则不可以。
+
+
+#### [494. Target Sum](https://leetcode.com/problems/target-sum/description/), [Solution](DP/Target_Sum.py)
+用的recursive dp，加一个字典memorization。还可以优化从传数组变成传下标。
+
 
 #### [630. Course Schedule III](https://leetcode.com/problems/course-schedule-iii/description/), [Solution](DP/Course_Schedule_III.py)
 先按结束时间排序，然后依次处理。维护到当前位置的上的最多的课，每个课的时长，和总时长。新的课来了之后，如果在当前时间直接上不超过lastDay，就直接放进heap里；如果超过了，duration大于之前的所有课的最大时长的话，不能放，否则无法维护是上的最多的课；如果小于之前的最大时长，则直接替换，可以维护是上的最多的课。因为是按结束时间排序，所以可以直接放进去替换。因为用了heap，所以总时长和之前上的课的时长也可以快速维护。
@@ -407,6 +508,11 @@ dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就�
 <div id='OOD'></div>
 
 ## OOD
+
+
+#### [489. Robot Room Cleaner](https://leetcode.com/problems/robot-room-cleaner/description/), [Solution](OOD/Robot_Room_Cleaner.py)
+往前走，碰到墙或者已经visit过的就右转，四个方向都完了就返回上一个cell。需要另外写一个goBack和dfs函数。
+
 
 #### [1603. Design Parking System](https://leetcode.com/problems/design-parking-system/description/), [Solution](OOD/Design_Parking_System)
 简单。
