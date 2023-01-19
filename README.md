@@ -432,6 +432,18 @@ T($k*2^N$), O(N)
 #### [97. Interleaving String](https://leetcode.com/problems/interleaving-string/description/), [Solution](DP/Interleaving_String.py)
 用的算是brute force+cache，但其实可以用DP。dp[i][j]储存能否用s1[:i+1]和s2[:j+1]interleave出s3[:i+j+1]。
 
+#### [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/), [Solution](DP/Best_Time_to_Buy_and_Sell_Stock.py)
+简单，甚至不能称为dp，保存到目前为止的最小值，取当前价格和当前最小值的差并更新当前最大值。
+
+#### [122. Best Time to Buy and Sell Stock II](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/), [Solution](DP/Best_Time_to_Buy_and_Sell_Stock_II.py)
+因为可以卖无限次，所以只要后一天比前一天价格高就可以买进卖出。
+
+#### [123. Best Time to Buy and Sell Stock III](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/), [Solution](DP/Best_Time_to_Buy_and_Sell_Stock_III.py)
+dp[k][i]是最多进行k次交易，最后一次最多在prices[i]卖出，的最高总收益。所以如果最后一次不在prices[i]卖出，就等于dp[k][i - 1]；如果卖出，就等于prices[i] - prices[j] + dp[k][j - 1] for j = 0, ..., i。因为只有j在变，所以等价于求min of prices[j] - dp[k][j - 1]。因为这里只有j在变，所以直接用min(currMin, prices[i] - dp[k][i - 1])就行了，因为比i小的已经在前面算过了，这里只要算当前值会不会更小就行。
+
+#### [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/), [Solution](DP/Best_Time_to_Buy_and_Sell_Stock_IV.py)
+和123一模一样，就是推广到最多进行k次交易。另外注意这里允许在同一天先买进再卖出。
+
 #### [198. House Robber](https://leetcode.com/problems/house-robber/description/), [Solution](DP/House_Robber.py)
 最简单的一维dp。
 
@@ -441,8 +453,8 @@ T($k*2^N$), O(N)
 #### [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/description/), [Solution](DP/Longest_Increasing_Subsequence.py)
 dp[i] = 以第i个元素结尾的最长递增子序列。di[i] = max(dp[j] + 1) if dp[i] > dp[j] for j < i.
 
-#### [Contest 315 No.4 Count Subarrays With Fixed Bounds](https://leetcode.com/contest/weekly-contest-315/problems/count-subarrays-with-fixed-bounds/), [Solution](DP/Count_Subarrays_With_Fixed_Bounds.py)
-先过一遍nums，记录每个坐标前最近的等于minK，等于maxK，超出范围的值的坐标，记为prev[0], prev[1], prev[2]。然后dp。dp[i] = dp[i-1]，如果nums[i]没超出范围，那么dp[i]再加上prev[0], prev[1]里更小的那个到prev[2]的距离。如果是负的就不加。
+#### [309. Best Time to Buy and Sell Stock with Cooldown](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/), [Solution](DP/Best_Time_to_Buy_and_Sell_Stock_with_Cooldown.py)
+建一个两行的dp，第一行表示在当前位置没有卖出，第二行表示在当前位置卖出了。迭代思路和k次交易的一样，用一个currMin来减少运算。最后取两行末尾的最大值。
 
 #### [322. Coin Change](https://leetcode.com/problems/coin-change/description/), [Solution](DP/Coin_Change.py)
 很标准的dp题，对用到的硬币数量和amount大小进行dp。
@@ -477,10 +489,18 @@ recursion + memorization。根据拿不拿root分类。加上点边界条件就�
 
 #### [1444. Number of Ways of Cutting a Pizza](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/description/), [Solution](DP/Number_of_Ways_of_Cutting_a_Pizza.py)
 3d的DP。能想到3d的话就还好。看起来dp还是专门留一行空的出来比较好，这样就不用初始化了。
+
 #### [2222. Number of Ways to Select Buildings](https://leetcode.com/problems/number-of-ways-to-select-buildings/description/), [Solution](DP/Number_of_Ways_to_Select_Buildings.py)
 dp[k][j]为在s[:i + 1]中选择长度为k的挑选方法数。同时分别保存其中以'0'和'1'结尾的方法数。dp[k + 1[j]考虑是否以s[j]结尾，不结尾直接用前一个，结尾再加上dp[k][j - 1]里面结尾元素和s[j]不同的方法数。
+
 #### [2272. Substring With Largest Variance](https://leetcode.com/problems/substring-with-largest-variance/description/), [Solution](DP/Substring_With_Largest_Variance.py)
 用dp，相当于max subarray的一个变体。分别判断所有两个字母的组合，最多25x26种组合，每个组合花O(n)的时间。判断当前字母并增减max_subarray后，根据后续是否无任何字母或两个字母都有还是其他，判断是中断本次循环还是重置窗口还是继续当前循环。
+
+#### [2291. Maximum Profit From Trading Stocks](https://leetcode.com/problems/maximum-profit-from-trading-stocks/description/), [Solution](DP/Maximum_Profit_From_Trading_Stocks.py)
+一个budges * n的dp。有一些edge case，像初始化，在有足够钱且当前收益为正的情况下才进行交易等。
+
+#### [2444 Count Subarrays With Fixed Bounds](https://leetcode.com/contest/weekly-contest-315/problems/count-subarrays-with-fixed-bounds/), [Solution](DP/Count_Subarrays_With_Fixed_Bounds.py)
+先过一遍nums，记录每个坐标前最近的等于minK，等于maxK，超出范围的值的坐标，记为prev[0], prev[1], prev[2]。然后dp。dp[i] = dp[i-1]，如果nums[i]没超出范围，那么dp[i]再加上prev[0], prev[1]里更小的那个到prev[2]的距离。如果是负的就不加。
 
 #### [2472. Maximum Number of Non-overlapping Palindrome Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description/), [Solution](DP/Maximum_Number_of_Non-overlapping_Palindrome_Substrings.py)
 dp检查到i下标之前的子串，里面长度大于k的回文串的最大长度。注意这里对以i-1结尾的子串，只用检查长度为k和长度k-1的就行，更前面的不用检查。
