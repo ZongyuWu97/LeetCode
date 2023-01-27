@@ -67,11 +67,17 @@ My notes and solution for leetcode problems.
 #### [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/description/), [Solution](List/Degree_of_an_Array.py)
 先过一遍，用字典记录每个数字的频率，第一次和最后一次出现的位置。再过一遍字典，更新max_fre和min_len。
 
+#### [915. Partition Array into Disjoint Intervals](https://leetcode.com/problems/partition-array-into-disjoint-intervals/description/), [Solution](List/Partition_Array_into_Disjoint_Intervals.py)
+还有个时间O(N), 空间O(1)的方法。记录currMax, possibleMax, length。如果当前的小于currMax，就说明当前元素必须在左边，所以更新currMax， possibleMax和length。
+
 #### [1864. Minimum Number of Swaps to Make the Binary String Alternating](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-binary-string-alternating/description/), [Solution](List/Minimum_Number_of_Swaps_to_Make_the_Binary_String_Alternating.py)
 因为只有两个字母，所以只要算其中一个字母不在正确位置上的最小位置数就行了。取两个字母里面这个数更小的那一个。
 
 #### [1344. Angle Between Hands of a Clock](https://leetcode.com/problems/angle-between-hands-of-a-clock/description/), [Solution](List/Angle_Between_Hands_of_a_Clock.py)
 直接算出时针和秒针的角度，然后取差的绝对值，再取跟补角里更小的那个。
+
+#### [2012. Sum of Beauty in the Array](https://leetcode.com/problems/sum-of-beauty-in-the-array/description/), [Solution](List/Sum_of_Beauty_in_the_Array.py)
+先从后往前过一遍记录到每个下标为止的最小值，然后从前往后，每步记录到前一个为止的最大值，比较当前与相邻的大小以及和前面所有的最大值、后面所有的最小值的大小。
 
 #### [2016. Maximum Difference Between Increasing Elements](https://leetcode.com/problems/maximum-difference-between-increasing-elements/description/), [Solution](List/Maximum_Difference_Between_Increasing_Elements.py)
 easy，一个指针过一遍，比较当前元素和之前最小元素，更新当前最小元素。
@@ -89,6 +95,14 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 #### [2357. Make Array Zero by Subtracting Equal Amounts](https://leetcode.com/problems/make-array-zero-by-subtracting-equal-amounts/description/), [Solution](List/Make_Array_Zero_by_Subtracting_Equal_Amounts.py)
 先排序，然后依次处理值不一样的元素，被减去的值等于max(nums)的时候就结束。
+
+#### [2405. Optimal Partition of String](https://leetcode.com/problems/optimal-partition-of-string/description/), [Solution](List/Optimal_Partition_of_String.py)
+直接过一遍，用set记录，看到已经存在的就res += 1并重置set。
+
+#### [2546. Apply Bitwise Operations to Make Strings Equal](https://leetcode.com/problems/apply-bitwise-operations-to-make-strings-equal/description/), [Solution](List/Apply_Bitwise_Operations_to_Make_Strings_Equal.py)
+要发现不同组合的规则。(0, 0) -> (0, 0)，(1, 0) -> (1, 1)，(0, 1) -> (1, 1)，(1, 1) -> (1, 0)。所以只有0的情况无法改变，只要有1个1，就可以修改成任何情况。所以只要检查s和target是否同时全为0或者同时都含有1就行了。
+
+
 
 ---
 
@@ -304,6 +318,8 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [1094. Car Pooling](https://leetcode.com/problems/car-pooling/description/), [Solution](PrefixSum/Car_Pooling.py)
 同370，不过这次用的是dict来当cache。上面一个其实也可以，不过因为上面本来就要返回一个list所以直接用了list。
 
+#### [2281. Sum of Total Strength of Wizards](https://leetcode.com/problems/sum-of-total-strength-of-wizards/description/), [Solution](PrefixSum/Sum_of_Total_Strength_of_Wizards.py)
+先算出每个元素右边第一个比他小的下标，左边第一个小于等于他的下标，然后对每个元素，计算所有以他为最小元素的数组的和。这里要用两次prefix sum，并且最后算的时候数组和是这样 racc * ln - lacc * rn 的形式。自己想大概是想不出来的，只能看碰到的话记不记得了。
 
 #### [2536. Increment Submatrices by One](https://leetcode.com/problems/increment-submatrices-by-one/description/), [Solution](PrefixSum/Increment_Submatrices_by_One.py)
 对每一行做一次prefix sum。另外也可以用2dcache来做，在每个矩形的左上角、右下角外+1，右上角外、左下角外-1不过还没看懂，之后有兴趣可以看看[这里](https://leetcode.com/problems/increment-submatrices-by-one/solutions/3052675/python3-sweep-line-range-addition-with-visualization-clean-concise/)。
@@ -320,12 +336,11 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [2448. Minimum Cost to Make Array Equal](https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/), [Solution](BinarySearch/Minimum_Cost_to_Make_Array_Equal.py)
 cost函数是凸函数，所以可以用二分法来找这个最小值。每一步计算mid和mid + 1的cost，判断最小值点在mid的左边还是右边，然后二分就行了
 
-
 #### [2517. Maximum Tastiness of Candy Basket](https://leetcode.com/problems/maximum-tastiness-of-candy-basket/description/), [Solution](BinarySearch/Maximum_Tastiness_of_Candy_Basket.py)
 感觉binary sort这种的越来越多了。对tastiness二分，每步检查是否有一组k个candy，tastiness大于等于mid。
 
-
-
+#### [Snowflake Perfect Pairs](https://leetcode.com/discuss/interview-question/1781247/TuSimple-or-OA-or-Perfect-Pairs)
+条件2总是满足的，而条件1等价于|x| <= |y|, |y| <= 2|x|。所以先取绝对值，排序，然后从前往后对每个下标i，找到i < j, nums[j] <= 2nums[i]的最大的j。从i + 1到j都是满足和i的perfect pair。
 
 
 ---
@@ -358,6 +373,9 @@ cost函数是凸函数，所以可以用二分法来找这个最小值。每一�
 <div id='TwoPointer'></div>
 
 ## Two Pointer
+
+#### [75. Sort Colors](https://leetcode.com/problems/sort-colors/description/), [Solution](TwoPointer/Sort_Colors.py)
+可以直接用quicksort，merge sort之类的。还有一个O(N)的方法，保持三个指针，p0, p2, curr。p0左边全是0，p2右边全是2，curr是当前位置。如果当前是0，交换curr和p0。因为curr在p0右边，所以从p0换过来的是已经检测过的，p0和curr都可以++。如果curr是1则不变。如果curr是2，交换curr和p2，p2--。这里因为从p2交换过来的没有检测过，所以curr不能前移，要保持在原地。
 
 #### [167. Two Sum II - Input Array Is Sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/), [Solution](TwoPointer/Two_Sum_II_-_Input_Array_Is_Sorted.py)
 Two Sum可以用two pointer做也可以用hashmap做，用two pointer的缺点是要先排序，优点是空间O(1)。这里既然已经排过序了，就可以直接用two pointer。
@@ -408,6 +426,11 @@ T($k*2^N$), O(N)
 
 #### [1048. Longest String Chain](https://leetcode.com/problems/longest-string-chain/description/), [Solution](DFS/Longest_String_Chain.py)
 从长到短倒着dfs。这样可以不用每个字母每个位置都插入再尝试。
+
+#### [2538. Difference Between Maximum and Minimum Price Sum](https://leetcode.com/problems/difference-between-maximum-and-minimum-price-sum/description/), [Solution](DFS/Difference_Between_Maximum_and_Minimum_Price_Sum.py)
+用两次dfs，第一次以0为root，算出每个节点的最大和；第二次从0开始，往下dfs的时候传一个parent_contribution，即在每个节点的parent方向的最大路径和。为了计算parent_contribution，在每个节点算出包含他自己的parent_contribution在内的前两大的路径和。这样在所有子节点上，如果碰到了最大路径的节点，就把第二大的作为parent_contribution传入。
+
+
 
 ---
 
@@ -509,6 +532,14 @@ dp检查到i下标之前的子串，里面长度大于k的回文串的最大长�
 #### [2518. Number of Great Partitions](https://leetcode.com/problems/number-of-great-partitions/description/), [Solution](DP/Number_of_Great_Partitions.py)
 dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就是nums中和为0到k - 1的所有子集数。在所有2^n种组合中减去第一组的和及第二组的和小于k的子集数。关键要能想到这么算。
 
+#### [2547. Minimum Cost to Split an Array](https://leetcode.com/problems/minimum-cost-to-split-an-array/description/), [Solution](DP/Minimum_Cost_to_Split_an_Array.py)
+切木条的变种，区别是切木条里面相应长度木条的价格都给出来了，这里要先算一下每个nums[i:j]的cost并记录。
+
+#### [Snowflake String Pattern](https://www.geeksforgeeks.org/number-of-distinct-words-of-size-n-with-at-most-k-contiguous-vowels/), [Solution](DP/String_Pattern)
+dp[i][j]表示长度为i的string，最后j位是元音，的组合数。对每个i，dp[i][0]由i - 1的行和初始化。之后根据j和i的相对大小来判断状态转移方程。可以只保留一行作为dp储存，因为只用到了上一行的dp。
+
+#### [Snowflake String Formattion](https://www.1point3acres.com/bbs/thread-929005-1-1.html)
+dp[i][j] = 到target的第i个字母，使用的字母到所有word到第j个为止。每一个i，j < i为0，j = i等于dp[i - 1][i - 1] * target[i]在第j个位置出现的次数。j > i，等于dp[i - 1][k] * target[i]在第k个位置出现的次数，对k从i - 1到j求和。
 
 ---
 
@@ -516,11 +547,11 @@ dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就�
 
 ## Greedy
 
+#### [280. Wiggle Sort](https://leetcode.com/problems/wiggle-sort/description/), [Solution](Greedy/Wiggle_Sort.py)
+首先可以直接排个序，然后每隔一位交换相邻数。或者可以每一位上根据奇偶看跟下一位的大小关系来决定是否和下一位交换。
+
 #### [2193. Minimum Number of Moves to Make Palindrome](https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/description/), [Solution](Greedy/Minimum_Number_of_Moves_to_Make_Palindrome.py)
 只用看从末尾开始，把每个对应的字母从原始位置移动到开头的消耗就行。
-
-
-
 
 
 ---
