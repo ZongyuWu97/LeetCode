@@ -102,6 +102,8 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2546. Apply Bitwise Operations to Make Strings Equal](https://leetcode.com/problems/apply-bitwise-operations-to-make-strings-equal/description/), [Solution](List/Apply_Bitwise_Operations_to_Make_Strings_Equal.py)
 要发现不同组合的规则。(0, 0) -> (0, 0)，(1, 0) -> (1, 1)，(0, 1) -> (1, 1)，(1, 1) -> (1, 0)。所以只有0的情况无法改变，只要有1个1，就可以修改成任何情况。所以只要检查s和target是否同时全为0或者同时都含有1就行了。
 
+#### [Snowflake Array Reduction](https://leetcode.com/discuss/interview-question/2550995/snowflake-OA), [Solution](List/Array_Reduction)
+首先得到整个array的mex。然后找到第一个使得当前currMex等于mex的位置，同时在count里减去已经用过的元素。然后在更新过的count里找到nextMex，然后重复上一步。
 
 
 ---
@@ -342,6 +344,9 @@ cost函数是凸函数，所以可以用二分法来找这个最小值。每一�
 #### [Snowflake Perfect Pairs](https://leetcode.com/discuss/interview-question/1781247/TuSimple-or-OA-or-Perfect-Pairs)
 条件2总是满足的，而条件1等价于|x| <= |y|, |y| <= 2|x|。所以先取绝对值，排序，然后从前往后对每个下标i，找到i < j, nums[j] <= 2nums[i]的最大的j。从i + 1到j都是满足和i的perfect pair。
 
+#### [Snowflake Cross the Threshold](https://www.1point3acres.com/bbs/thread-931627-1-1.html)
+可以用二分查找答案范围，也可以先排序然后递增barrier来逐步减小sum。都是nlogn。
+
 
 ---
 
@@ -528,7 +533,6 @@ dp[k][j]为在s[:i + 1]中选择长度为k的挑选方法数。同时分别保�
 #### [2472. Maximum Number of Non-overlapping Palindrome Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description/), [Solution](DP/Maximum_Number_of_Non-overlapping_Palindrome_Substrings.py)
 dp检查到i下标之前的子串，里面长度大于k的回文串的最大长度。注意这里对以i-1结尾的子串，只用检查长度为k和长度k-1的就行，更前面的不用检查。
 
-
 #### [2518. Number of Great Partitions](https://leetcode.com/problems/number-of-great-partitions/description/), [Solution](DP/Number_of_Great_Partitions.py)
 dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就是nums中和为0到k - 1的所有子集数。在所有2^n种组合中减去第一组的和及第二组的和小于k的子集数。关键要能想到这么算。
 
@@ -540,6 +544,13 @@ dp[i][j]表示长度为i的string，最后j位是元音，的组合数。对每�
 
 #### [Snowflake String Formattion](https://www.1point3acres.com/bbs/thread-929005-1-1.html)
 dp[i][j] = 到target的第i个字母，使用的字母到所有word到第j个为止。每一个i，j < i为0，j = i等于dp[i - 1][i - 1] * target[i]在第j个位置出现的次数。j > i，等于dp[i - 1][k] * target[i]在第k个位置出现的次数，对k从i - 1到j求和。
+
+#### [Snowflake Palindrome Sequence](https://leetcode.com/discuss/interview-question/algorithms/202924/ascend-online-assessment-product-of-palindromes#:~:text=Palindromic%20subsequences), [Solution](https://stackoverflow.com/questions/53663721/find-the-maximum-product-of-two-non-overlapping-palindromic-subsequences)
+先dp，找出从i到j中间的最长palindrome的长度。注意dp是在每个对角线上dp。然后以每个下标为分界点，求分界点左右乘积的最大值。
+
+#### [Snowflake Task Scheduling](https://leetcode.com/discuss/interview-question/2775415/SnowFlake-OA)
+dp(i, j)表示第i个task时，还剩j个free time的min cost。每次考虑task i放paid还是free server，paid就cost += c[i]，j += time[i]，free就j -= 1最后i = n的时候如果j < 0就说明这一列不可行，直接返回inf。
+
 
 ---
 
