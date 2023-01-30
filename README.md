@@ -347,6 +347,15 @@ cost函数是凸函数，所以可以用二分法来找这个最小值。每一�
 #### [Snowflake Cross the Threshold](https://www.1point3acres.com/bbs/thread-931627-1-1.html)
 可以用二分查找答案范围，也可以先排序然后递增barrier来逐步减小sum。都是nlogn。
 
+#### [Snowflake Maximize Array Value](https://leetcode.com/discuss/interview-question/2140142/Snowflake-OA-or-Maximize-Array-Value), [Solution](https://maplezoo.notion.site/Maximize-Array-Value-4c8551f092e94daf8b7aca3228e9c81a)
+从0到最大值二分查找。每轮验证当前的max是否可以达到。i从后往前，diff = Math.max(nums[i] + diff - max, 0);这里如果nums[i] <= max就没问题，否则作为diff传到下一个数，这个diff需要在之后被抹平。如果到0都没被抹平就说明当前的max无法达到；diff最后为0则说明可以达到。
+
+#### [Snowflake Largest Sub-grid](https://leetcode.com/discuss/interview-question/1215695/Microsoft-OA-Largest-Sub-grid), [Solution](https://maplezoo.notion.site/Largest-subgrid-c0b3d259c7d84bd58a93866497b2a3db)
+在最小max，1x1，和最大max，nxn里面二分，求满足条件的最大kxk。
+
+#### [Snowflake Server Selection](https://leetcode.com/discuss/interview-question/2594968/Snowflake-or-OA-or-Server-Selection), [Solution](https://leetcode.com/discuss/interview-question/2594968/Snowflake-or-OA-or-Server-Selection)
+对答案二分。二分的每一步中假设现在是x，首先过一遍vulnerability，把大于等于x的元素标位1，其他是0。然后再过一遍，记录每一行1的个数。这个和前面可以合成一步。再对每一列，记录第一个为1的行的index。如果有一列找不到说明不管怎么取这一列的min都小于x，往左二分。都找到之后如果行index的数量小于M说明可以，向右二分，包含当前x。如果index数等于M但是其中存在一行，1的count数大于1，说明有一行可以覆盖多列，一样可以，向右二分。否则向左二分。
+
 
 ---
 
@@ -442,6 +451,10 @@ T($k*2^N$), O(N)
 <div id='BFS'></div>
 
 ## BFS
+
+
+#### [126. Word Ladder II](https://leetcode.com/problems/word-ladder-ii/description/), [Solution](BFS/Word_Ladder_II.py)
+首先建一个interword的字典，保存这些interword可以通向哪些word。然后从begin word开始bfs。TLE了。
 
 #### [127. Word Ladder](https://leetcode.com/problems/word-ladder/description/), [Solution](BFS/Word_Ladder.py)
 因为只要找到endWord就行，所以可以直接bfs+visited，不管中间是否有路径重叠。注意用一个interWord保存中间态，预处理wordList找到所有中间态，然后每一步转换成中间态之后再查找这个中间态可以到达哪些词。
