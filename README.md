@@ -225,6 +225,12 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/description/), [Solution](Stack/Largest_Rectangle_in_Histogram.py)
 可以用stack是因为实际只有n个rectangle要检查。每个height，和这个height往左往右到第一个比他矮的height为止，这个rectangle。假设已经有一个stack，里面放着从低到高排列的height，检测到新的height比stack末尾的height低的时候就开始依次pop。因为是从低到高，所以每pop一个就根据这个的height和他前一个的下标计算面积。到末尾再把剩下的全部pop出来。
 
+#### [496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/description/), [Solution](Stack/Next_Greater_Element_I.py)
+首先预处理一个monostack，找到每个数的nextGreater。每步从末尾pop出stack里比当前元素小的元素的下标。用字典记录那个元素:当前元素。然后过nums1，在字典里找相应的元素。
+
+#### [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/description/), [Solution](Stack/Next_Greater_Element_II.py)
+过一遍monostack，每次pop出比当前小的元素的下标并更新那些元素的nextGreater。更新完之后把当前下标放进stack。再过第二遍，这样之前nextGreater在左边的也可以被更新了。
+
 
 ---
 
@@ -563,6 +569,9 @@ dp[i][j] = 到target的第i个字母，使用的字母到所有word到第j个为
 
 #### [Snowflake Task Scheduling](https://leetcode.com/discuss/interview-question/2775415/SnowFlake-OA)
 dp(i, j)表示第i个task时，还剩j个free time的min cost。每次考虑task i放paid还是free server，paid就cost += c[i]，j += time[i]，free就j -= 1最后i = n的时候如果j < 0就说明这一列不可行，直接返回inf。
+
+#### [Snowflake Paths to a goal](https://zany-fluorine-852.notion.site/snowflakes-oa-f32a12c872344de98837ac986abc850e), [Solution](DP/Paths_to_a_Goal)
+dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步减去上一个和当前相同方向的方法数，即dp[pre_same[i]][j +- 1]。
 
 
 ---
