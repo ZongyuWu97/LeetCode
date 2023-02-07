@@ -16,6 +16,6 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '503. Next Greater Element II'
+name = '1996. The Number of Weak Characters in the Game'
 
 printLeetCodeFormat(name)

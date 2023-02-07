@@ -46,6 +46,7 @@ My notes and solution for leetcode problems.
 #### [2288. Apply Discount to Prices](https://leetcode.com/problems/apply-discount-to-prices/description/), [Solution](String/Apply_Discount_to_Prices.py)
 简单，不过注意字符串里插入变量的格式：'str%格式'%(插入的东西)
 
+
 ---
 
 <div id='List'></div>
@@ -63,6 +64,9 @@ My notes and solution for leetcode problems.
 
 #### [453. Minimum Moves to Equal Array Elements](https://leetcode.com/problems/minimum-moves-to-equal-array-elements/description/), [Solution](List/Minimum_Moves_to_Equal_Array_Elements.py)
 其实很简单。要想到增加n-1个数等价于减少1个数。然后算每个数跟最小值的差就行了。
+
+#### [556. Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/description/), [Solution](List/Next_Greater_Element_III.py)
+因为从左往右递减的序列没有比他更大的，所以对这个数从右往左找，找到第一个左边比右边小的数，左边是i。从这个digit再往右走，找到最右边的比他大的digit，j，交换这两个digit。然后reverse从i + 1开始到最右边的digits。
 
 #### [697. Degree of an Array](https://leetcode.com/problems/degree-of-an-array/description/), [Solution](List/Degree_of_an_Array.py)
 先过一遍，用字典记录每个数字的频率，第一次和最后一次出现的位置。再过一遍字典，更新max_fre和min_len。
@@ -230,6 +234,17 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 #### [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/description/), [Solution](Stack/Next_Greater_Element_II.py)
 过一遍monostack，每次pop出比当前小的元素的下标并更新那些元素的nextGreater。更新完之后把当前下标放进stack。再过第二遍，这样之前nextGreater在左边的也可以被更新了。
+
+#### [907. Sum of Subarray Minimums](https://leetcode.com/problems/sum-of-subarray-minimums/description/), [Solution](Stack/Sum_of_Subarray_Minimums.py)
+过两遍数组，找到每个元素右边第一个比他小的元素的下标，以及左边第一个小于等于他的元素的下标。在这两个之间，所有数组都以他为最小值。所以再过一遍数组，求这两个下标之间，包含这个元素的总数组数就行了。
+
+#### [1996. The Number of Weak Characters in the Game](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/description/), [Solution](Stack/The_Number_of_Weak_Characters_in_the_Game.py)
+排序，atack从小到大，defence从大到小，然后从后往前遍历，保存目前见过的最大defence。因为atack从小到大，所以往前走的时候atack一直变小。因为defence从大到小，所以不会出现倒挂的情况。
+还可以用greedy，就是先过一遍，找出对每个atack，比他大的那些atack里面，可能的最大defence。然后再过一遍，对每个atack，查找比他大的atack里面的最大defence是否比他自己的defence大。
+
+#### [2104. Sum of Subarray Ranges](https://leetcode.com/problems/sum-of-subarray-ranges/description/), [Solution](Stack/Sum_of_Subarray_Ranges.py)
+和907基本一样，不过这次要对每个元素，同时找出以他为最大值的数组数和以他为最小值的数组数。每次这两个相减就行了。
+
 
 
 ---
