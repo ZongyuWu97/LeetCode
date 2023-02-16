@@ -229,11 +229,26 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/description/), [Solution](Stack/Largest_Rectangle_in_Histogram.py)
 可以用stack是因为实际只有n个rectangle要检查。每个height，和这个height往左往右到第一个比他矮的height为止，这个rectangle。假设已经有一个stack，里面放着从低到高排列的height，检测到新的height比stack末尾的height低的时候就开始依次pop。因为是从低到高，所以每pop一个就根据这个的height和他前一个的下标计算面积。到末尾再把剩下的全部pop出来。
 
+#### [85. Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/description/), [Solution](Stack/Maximal_Rectangle.py)
+对每一行，保存到当前位置为止的连续1的个数。然后叠起来，从列来看，每一列就是一个histgram，就转化成了上一题84。所以预处理出n个hist之后，只用再对每一列做一次largest rectangle就可以了。
+
 #### [496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/description/), [Solution](Stack/Next_Greater_Element_I.py)
 首先预处理一个monostack，找到每个数的nextGreater。每步从末尾pop出stack里比当前元素小的元素的下标。用字典记录那个元素:当前元素。然后过nums1，在字典里找相应的元素。
 
 #### [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/description/), [Solution](Stack/Next_Greater_Element_II.py)
 过一遍monostack，每次pop出比当前小的元素的下标并更新那些元素的nextGreater。更新完之后把当前下标放进stack。再过第二遍，这样之前nextGreater在左边的也可以被更新了。
+
+#### [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/description/), [Solution](Stack/Daily_Temperatures.py)
+简单，每次pop出比当前低的temperature的下标就行。
+
+#### [768. Max Chunks To Make Sorted II](https://leetcode.com/problems/max-chunks-to-make-sorted-ii/description/), [Solution](Stack/Max_Chunks_To_Make_Sorted_II.py)
+和769完全没区别啊。
+
+#### [769. Max Chunks To Make Sorted](https://leetcode.com/problems/max-chunks-to-make-sorted/description/), [Solution](Stack/Max_Chunks_To_Make_Sorted.py)
+保存一个递增stack，里面每个数就是一个chunk的最大元素。每次把大于当前元素的都pop出来。当前元素前面比当前大的元素都必须和当前元素在同一个chunk里。
+
+#### [901. Online Stock Span](https://leetcode.com/problems/online-stock-span/description/), [Solution](Stack/Online_Stock_Span.py)
+保存每个price和他前面小于等于他的price的个数。每次把stack末尾小于等于当前price的pop出来就行。
 
 #### [907. Sum of Subarray Minimums](https://leetcode.com/problems/sum-of-subarray-minimums/description/), [Solution](Stack/Sum_of_Subarray_Minimums.py)
 过两遍数组，找到每个元素右边第一个比他小的元素的下标，以及左边第一个小于等于他的元素的下标。在这两个之间，所有数组都以他为最小值。所以再过一遍数组，求这两个下标之间，包含这个元素的总数组数就行了。
@@ -241,6 +256,9 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [1996. The Number of Weak Characters in the Game](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/description/), [Solution](Stack/The_Number_of_Weak_Characters_in_the_Game.py)
 排序，atack从小到大，defence从大到小，然后从后往前遍历，保存目前见过的最大defence。因为atack从小到大，所以往前走的时候atack一直变小。因为defence从大到小，所以不会出现倒挂的情况。
 还可以用greedy，就是先过一遍，找出对每个atack，比他大的那些atack里面，可能的最大defence。然后再过一遍，对每个atack，查找比他大的atack里面的最大defence是否比他自己的defence大。
+
+#### [1762. Buildings With an Ocean View](https://leetcode.com/problems/buildings-with-an-ocean-view/description/), [Solution](Stack/Buildings_With_an_Ocean_View.py)
+维护一个decreasing stack。每次从stack末尾开始把高度小于等于当前高度的idx都pop掉。
 
 #### [2104. Sum of Subarray Ranges](https://leetcode.com/problems/sum-of-subarray-ranges/description/), [Solution](Stack/Sum_of_Subarray_Ranges.py)
 和907基本一样，不过这次要对每个元素，同时找出以他为最大值的数组数和以他为最小值的数组数。每次这两个相减就行了。

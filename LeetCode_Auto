@@ -16,6 +16,6 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '1996. The Number of Weak Characters in the Game'
+name = '1762. Buildings With an Ocean View'
 
 printLeetCodeFormat(name)
