@@ -16,6 +16,6 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '1762. Buildings With an Ocean View'
+name = '460. LFU Cache'
 
 printLeetCodeFormat(name)

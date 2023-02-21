@@ -131,6 +131,8 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [170. Two Sum III - Data structure design](https://leetcode.com/problems/two-sum-iii-data-structure-design/description/), [Solution](Hashmap/Two_Sum_III_-_Data_structure_design.py)
 跟Two Sum一样，不过把hashmap的值的index换成了count，因为只要找到是否有就行了不要下标。然后用count可以避免重复访问同一个元素。
 
+#### [460. LFU Cache](https://leetcode.com/problems/lfu-cache/description/), [Solution](HashMap/LFU_Cache.py)
+两个map。一个保存key, (frequency, value)对，一个保存frequency, keys对。key是OrderedDict。根据key查找frequency，更新两个map。同时维护当前有key的最小频率。
 
 #### [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/), [Solution](Hashmap/Subarray_Sum_Equals_K.py)
 用一个hashmap记录到每个下标为止的子串合对应的子串数。对每个新下标，count加上合为 当前子串合 - k 的子串数。
@@ -302,7 +304,8 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [2523. Closest Prime Numbers in Range](https://leetcode.com/problems/closest-prime-numbers-in-range/description/), [Solution](Prime/Closest_Prime_Numbers_in_Range.py)
 主要注意怎么筛素数。对小于x的素数，从2到sqrt(x)为止，如果i是素数就把i的所有倍数都标位合数，依次标记。最后把没被标记为合数的拿出来，就剩下的是素数。
 
-
+#### [2572. Count the Number of Square-Free Subsets](https://leetcode.com/problems/count-the-number-of-square-free-subsets/description/), [Solution](Prime/Count_the_Number_of_Square-Free_Subsets.py)
+其实算是dp了。注意空集的时候返回的是1，因为要和其他情况组合，其他子集里可能有元素，所以不返回0。最后再只减去一个1，就是所有子集都为空集的情况。
 
 
 
@@ -618,6 +621,10 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 
 #### [2193. Minimum Number of Moves to Make Palindrome](https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/description/), [Solution](Greedy/Minimum_Number_of_Moves_to_Make_Palindrome.py)
 只用看从末尾开始，把每个对应的字母从原始位置移动到开头的消耗就行。
+
+#### [2573. Find the String with LCP](https://leetcode.com/problems/find-the-string-with-lcp/description/), [Solution](Greedy/Find_the_String_with_LCP.py)
+greedy的根据lcp依次填满res列表，如果用到的字符数超过26就返回''，如果遇到已经填过的就跳过。然后再循环一次检查生成的res是否符合lcp。一个个位置对应检查太慢了，所以用lcp[i][j]和lcp[i + 1][j + 1]之间的关系来检查。如果res[i] == res[j]那么lcp[i][j] = lcp[i + 1][j + 1] + 1。最后根据res拼接出答案。
+
 
 
 ---
