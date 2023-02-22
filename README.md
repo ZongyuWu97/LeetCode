@@ -389,7 +389,7 @@ cost函数是凸函数，所以可以用二分法来找这个最小值。每一�
 #### [Snowflake Cross the Threshold](https://www.1point3acres.com/bbs/thread-931627-1-1.html)
 可以用二分查找答案范围，也可以先排序然后递增barrier来逐步减小sum。都是nlogn。
 
-#### [Snowflake Maximize Array Value](https://leetcode.com/discuss/interview-question/2140142/Snowflake-OA-or-Maximize-Array-Value), [Solution](https://maplezoo.notion.site/Maximize-Array-Value-4c8551f092e94daf8b7aca3228e9c81a)
+#### [Snowflake Maximize Array Value](https://leetcode.com/discuss/interview-question/2140142/Snowflake-OA-or-Maximize-Array-Value), [Solution](https://maplezoo.notion.site/Maximize-Array-Value-4c8551f092e94daf8b7aca3228e9c81a), [Solution](BinarySearch/Maximize_Array_Value.java)
 从0到最大值二分查找。每轮验证当前的max是否可以达到。i从后往前，diff = Math.max(nums[i] + diff - max, 0);这里如果nums[i] <= max就没问题，否则作为diff传到下一个数，这个diff需要在之后被抹平。如果到0都没被抹平就说明当前的max无法达到；diff最后为0则说明可以达到。
 
 #### [Snowflake Largest Sub-grid](https://leetcode.com/discuss/interview-question/1215695/Microsoft-OA-Largest-Sub-grid), [Solution](https://maplezoo.notion.site/Largest-subgrid-c0b3d259c7d84bd58a93866497b2a3db)
@@ -600,10 +600,10 @@ dp[i][j]表示长度为i的string，最后j位是元音，的组合数。对每�
 #### [Snowflake String Formattion](https://www.1point3acres.com/bbs/thread-929005-1-1.html)
 dp[i][j] = 到target的第i个字母，使用的字母到所有word到第j个为止。每一个i，j < i为0，j = i等于dp[i - 1][i - 1] * target[i]在第j个位置出现的次数。j > i，等于dp[i - 1][k] * target[i]在第k个位置出现的次数，对k从i - 1到j求和。
 
-#### [Snowflake Palindrome Sequence](https://leetcode.com/discuss/interview-question/algorithms/202924/ascend-online-assessment-product-of-palindromes#:~:text=Palindromic%20subsequences), [Solution](https://stackoverflow.com/questions/53663721/find-the-maximum-product-of-two-non-overlapping-palindromic-subsequences)
+#### [Snowflake Palindrome Sequence](https://leetcode.com/discuss/interview-question/algorithms/202924/ascend-online-assessment-product-of-palindromes#:~:text=Palindromic%20subsequences), [Solution](https://stackoverflow.com/questions/53663721/find-the-maximum-product-of-two-non-overlapping-palindromic-subsequences), [Solution](DP/Palindrome_Sequnce.java)
 先dp，找出从i到j中间的最长palindrome的长度。注意dp是在每个对角线上dp。然后以每个下标为分界点，求分界点左右乘积的最大值。
 
-#### [Snowflake Task Scheduling](https://leetcode.com/discuss/interview-question/2775415/SnowFlake-OA)
+#### [Snowflake Task Scheduling](https://leetcode.com/discuss/interview-question/2775415/SnowFlake-OA), [Solution](DP/Task_Scheduling.java)
 dp(i, j)表示第i个task时，还剩j个free time的min cost。每次考虑task i放paid还是free server，paid就cost += c[i]，j += time[i]，free就j -= 1最后i = n的时候如果j < 0就说明这一列不可行，直接返回inf。
 
 #### [Snowflake Paths to a goal](https://zany-fluorine-852.notion.site/snowflakes-oa-f32a12c872344de98837ac986abc850e), [Solution](DP/Paths_to_a_Goal)
