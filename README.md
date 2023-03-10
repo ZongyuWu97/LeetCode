@@ -234,6 +234,9 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [85. Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/description/), [Solution](Stack/Maximal_Rectangle.py)
 对每一行，保存到当前位置为止的连续1的个数。然后叠起来，从列来看，每一列就是一个histgram，就转化成了上一题84。所以预处理出n个hist之后，只用再对每一列做一次largest rectangle就可以了。
 
+#### [316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/description/), [Solution](Stack/Remove_Duplicate_Letters.py)
+让stack里保存到当前位置为止的最小substring。如果当前元素不在里面就放进来。每次新元素进来，把前面stack里比这个大的且后面还有的pop出去。
+
 #### [496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/description/), [Solution](Stack/Next_Greater_Element_I.py)
 首先预处理一个monostack，找到每个数的nextGreater。每步从末尾pop出stack里比当前元素小的元素的下标。用字典记录那个元素:当前元素。然后过nums1，在字典里找相应的元素。
 
@@ -442,6 +445,10 @@ BST的inorder遍历会得到一个nondecreasing的序列。所以用一个inorde
 #### [1099. Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/description/), [Solution](TwoPointer/Two_Sum_Less_Than_K.py)
 先排序，然后用two pointer。很简单。还可以利用题目的条件k在1-1000之间，不过这个感觉不够通用，就算了。
 
+#### [2576. Find the Maximum Number of Marked Indices](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/), [Solution](TwoPointer/Find_the_Maximum_Number_of_Marked_Indices.py)
+先排序。因为最多有n//2对，所以j从(n + 1) // 2开始。之后i从0开始，满足条件就i++，否则不变。最后i * 2就行。
+
+
 
 ---
 
@@ -500,6 +507,13 @@ T($k*2^N$), O(N)
 
 #### [127. Word Ladder](https://leetcode.com/problems/word-ladder/description/), [Solution](BFS/Word_Ladder.py)
 因为只要找到endWord就行，所以可以直接bfs+visited，不管中间是否有路径重叠。注意用一个interWord保存中间态，预处理wordList找到所有中间态，然后每一步转换成中间态之后再查找这个中间态可以到达哪些词。
+
+#### [317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/description/), [Solution](BFS/Shortest_Distance_from_All_Buildings.py)
+可以从每个空地开始bfs到每个building，或者从building开始bfs到空地。从building开始还可以每一步只bfs之前能bfs到的那些空格，可以更快。从空地开始的会超市。
+
+#### [2577. Minimum Time to Visit a Cell In a Grid](https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/description/), [Solution](BFS/Minimum_Time_to_Visit_a_Cell_In_a_Grid.py)
+bfs + heap。依次把没去过的点放到heap里面，注意四周的点的到达时间取max(time + 1, grid[nrow][ncol] + wait)。
+
 
 
 ---

@@ -16,6 +16,6 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '460. LFU Cache'
+name = '317. Shortest Distance from All Buildings'
 
 printLeetCodeFormat(name)
