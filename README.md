@@ -24,6 +24,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#BFS>BFS</a></li> 
   <li> <a href=#DP>DP</a></li> 
   <li> <a href=#Greedy>Greedy</a></li> 
+  <li> <a href=#SQL>SQL</a></li>   
   <li> <a href=#OOD>OOD</a></li> 
 </ol>
 
@@ -145,7 +146,8 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2488. Count Subarrays With Median K](https://leetcode.com/problems/count-subarrays-with-median-k/description/), [Solution](Hashmap/Count_Subarrays_With_Median_K.py)
 得到k的下标，计算到k右边每个下标为止大于小于k的数的个数并保存在hashmap里；然后从k往左边一样计算，根据hashmap里的个数，加起来等于0或1的个数，就是从这个下标开始满足条件的subarray个数。
 
-
+#### [2588. Count the Number of Beautiful Subarrays](https://leetcode.com/problems/count-the-number-of-beautiful-subarrays/description/), [Solution](Hashmap/Count_the_Number_of_Beautiful_Subarrays.py)
+要想到beautiful subarray就是subarray的依次xor等于0的意思。然后就是跟560一样了，用字典储存到每个位置的xor总和，然后每个新位置查一下字典里等于当前xor的个数，加到count上就行。这样从之前到当前位置的xor就为0了。
 
 
 ---
@@ -321,6 +323,8 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [Minimum Swaps 2](https://www.hackerrank.com/challenges/minimum-swaps-2/problem), [Solution](Sort/Minimum_Swaps_2.py)
 把数组看成一个图，每个数字是一个节点，从当前位置到排序好后应该在的位置有一条边，得到一些不交的圈。最后swap数 = sum(每个圈的大小 - 1)。按顺序遍历排序后的数组，用元组保存原始位置，通过访问原始位置来遍历整个圈。用一个list或者set来track是否每个元素都visit了。
 
+#### [215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/description/), [Solution](Sort/Kth_Largest_Element_in_an_Array.py)
+最简单的是用heap。然后可以用快速选择，每一步选一个pivot然后partition，返回partition后的pivot下标。如果下标等于k smallest就返回，否则根据相对大小在pivot左边或者右边继续找。可以iterative来做，就是给一个start一个end，每一步把start或end重新定位到partition之后的pivot，直到start等于end。
 
 #### [719. Find K-th Smallest Pair Distance](https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/), [Solution](Sort/Find_K-th_Smallest_Pair_Distance.py)
 比较复杂，对pair distance用binary search，用一个possible表示是否有k或更多个pair的distance小于等于v。用prefix sum来简化对possible的计算。直接抄的，之后重写一遍。
@@ -638,6 +642,26 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 
 #### [2573. Find the String with LCP](https://leetcode.com/problems/find-the-string-with-lcp/description/), [Solution](Greedy/Find_the_String_with_LCP.py)
 greedy的根据lcp依次填满res列表，如果用到的字符数超过26就返回''，如果遇到已经填过的就跳过。然后再循环一次检查生成的res是否符合lcp。一个个位置对应检查太慢了，所以用lcp[i][j]和lcp[i + 1][j + 1]之间的关系来检查。如果res[i] == res[j]那么lcp[i][j] = lcp[i + 1][j + 1] + 1。最后根据res拼接出答案。
+
+#### [2589. Minimum Time to Complete All Tasks](https://leetcode.com/problems/minimum-time-to-complete-all-tasks/description/), [Solution](Greedy/Minimum_Time_to_Complete_All_Tasks.py)
+按结束时间排序。这样从结束时间开始往前安排task，可以让后面的task最大化利用前面的时间。然后后面每次过一遍start到end，去掉已经安排过的时间点，然后再从后往前把剩下的时间安排完。
+
+
+
+---
+
+<div id='SQL'></div>
+
+## SQL
+
+#### [175. Combine Two Tables](https://leetcode.com/problems/combine-two-tables/description/), [Solution](SQL/Combine_Two_Tables.py)
+基本sql语法，select join。
+
+#### [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/description/), [Solution](SQL/Second_Highest_Salary.py)
+先找到最大值，然后以这个为条件，在小于他的值里面再找最大值。
+
+#### [177. Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/description/), [Solution](SQL/Nth_Highest_Salary.py)
+创建函数的语法，create function 函数名（变量名 变量类型） return 返回类型，begin end，中间return（），括号里写查询语句。limit x，y表示从下标x开始取y个。
 
 
 

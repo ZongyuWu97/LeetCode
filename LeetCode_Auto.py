@@ -16,6 +16,6 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '317. Shortest Distance from All Buildings'
+name = '215. Kth Largest Element in an Array'
 
 printLeetCodeFormat(name)
