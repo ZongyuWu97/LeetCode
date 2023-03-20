@@ -149,6 +149,10 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2588. Count the Number of Beautiful Subarrays](https://leetcode.com/problems/count-the-number-of-beautiful-subarrays/description/), [Solution](Hashmap/Count_the_Number_of_Beautiful_Subarrays.py)
 要想到beautiful subarray就是subarray的依次xor等于0的意思。然后就是跟560一样了，用字典储存到每个位置的xor总和，然后每个新位置查一下字典里等于当前xor的个数，加到count上就行。这样从之前到当前位置的xor就为0了。
 
+#### [2598. Smallest Missing Non-negative Integer After Operations](https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/description/), [Solution](Hashmap/Smallest_Missing_Non-negative_Integer_After_Operations.py)
+按余数分类，同时记录当前余数个数。然后q从0开始，再r从0到value - 1，遍历余数集，直到余数集里找不到下一个，就是不存在的，然后返回q * value + r
+
+
 
 ---
 
@@ -221,6 +225,9 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/), [Solution](Heap/Find_Median_from_Data_Stream.py)
 建一个最大堆和一个最小堆，保存他们的大小，每次有新的数进来就让他进最小或最大堆，保持最大堆和最小堆个数相等或者多1。
 
+#### [2386. Find the K-Sum of an Array](https://leetcode.com/problems/find-the-k-sum-of-an-array/description/), [Solution](Heap/Find_the_K-Sum_of_an_Array.py)
+先得到所有正数的和，这是可能得最大和。然后开始去掉和里的正数，或者加上剩下的负数，这两个都等价于从最大和里减去nums里的绝对值。因为是从最大和往下，所以把nums按绝对值排序之后依次减去每个值，并且每一步考虑加上nextSum - absNum[idx + 1]和nextSum + absNum[idx] - absNum[idx + 1]两种情况，即是否减去下标idx的值。每一步的结果都放到一个最大堆里，下一步再从最大堆里取，保证了是从maxSum依次往下递减。absNum排序过，也是用来保证maxSum依次递减。
+
 #### [2402. Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/description/), [Solution](Heap/Meeting_Rooms_III.py)
 用两个min heap，一个保存可以用的房间，一个保存使用中的房间，以结束时间为关健字。每一步先把结束时间小于当前开始时间的都挪到可用房间，如果当前有可用房间则直接用，没有的话则推迟当前meeting到下一个可以用的房间为止。
 
@@ -283,6 +290,8 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [947. Most Stones Removed with Same Row or Column](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/), [Solution](UnionFind/Most_Stones_Removed_with_Same_Row_or_Column.py)
 对每个石头，连接他的row和col。因为row数有限，所以col直接+10001就行。最后检查有多少连通集。
 
+#### [959. Regions Cut By Slashes](https://leetcode.com/problems/regions-cut-by-slashes/description/), [Solution](UnionFind/Regions_Cut_By_Slashes.py)
+把每个格子分成四个三角形，根据每一个位置是\或/或者空格，连接格子里的三角形。然后连接相邻格子的三角形。最后统计有多少三角形的root是他自己，即连同集个数。
 
 #### [1579. Remove Max Number of Edges to Keep Graph Fully Traversable](https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/description/), [Solution](UnionFind/Remove_Max_Number_of_Edges_to_Keep_Graph_Fully_Traversable.py)
 用union find来记录alice和bob的边是否都是连通的。最后检查加进去的边是不是等于n - 1。这里UF用的是一个列表，因为正好node都是从1到n标记的。用dict也可以，就是中间复制的时候要手动写一个deep copy。
@@ -452,6 +461,8 @@ BST的inorder遍历会得到一个nondecreasing的序列。所以用一个inorde
 #### [2576. Find the Maximum Number of Marked Indices](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/), [Solution](TwoPointer/Find_the_Maximum_Number_of_Marked_Indices.py)
 先排序。因为最多有n//2对，所以j从(n + 1) // 2开始。之后i从0开始，满足条件就i++，否则不变。最后i * 2就行。
 
+#### [2597. The Number of Beautiful Subsets](https://leetcode.com/problems/the-number-of-beautiful-subsets/description/), [Solution](DP/The_Number_of_Beautiful_Subsets.py)
+按除k的余数分类，然后在每个子集里讨论。每个子集里如果和前一个恰好差k就不能取，就是house robber问题。中间每一步乘的是v - 1，因为考虑的是取当前元素的情况，所以减去全部不取的那个情况。同样，最后返回res - 1也是这样。
 
 
 ---
@@ -662,6 +673,42 @@ greedy的根据lcp依次填满res列表，如果用到的字符数超过26就返
 
 #### [177. Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/description/), [Solution](SQL/Nth_Highest_Salary.py)
 创建函数的语法，create function 函数名（变量名 变量类型） return 返回类型，begin end，中间return（），括号里写查询语句。limit x，y表示从下标x开始取y个。
+
+#### [178. Rank Scores](https://leetcode.com/problems/rank-scores/description/), [Solution](SQL/Rank_Scores.py)
+重命名一个叫S1，从里面选两列，一个score，另一个是rank。rank是另一个distinct copy，S2里面每个行大于等于S1的个数。
+
+#### [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/description/), [Solution](SQL/Consecutive_Numbers.py)
+做三个copy，选择里面id依次加一且num相等的distinct的num的个数。
+
+#### [181. Employees Earning More Than Their Managers](https://leetcode.com/problems/employees-earning-more-than-their-managers/description/), [Solution](SQL/Employees_Earning_More_Than_Their_Managers.py)
+建两个copy，然后比较他们的salary，且e1的manageID等于e2的id。
+
+#### [182. Duplicate Emails](https://leetcode.com/problems/duplicate-emails/description/), [Solution](SQL/Duplicate_Emails.py)
+where用在输出结果之前，用来约束结果；having用在输出结果之后，用来筛选结果。having通常在group by之后。
+
+#### [183. Customers Who Never Order](https://leetcode.com/problems/customers-who-never-order/description/), [Solution](SQL/Customers_Who_Never_Order.py)
+注意用选出来的表来看in。
+
+#### [184. Department Highest Salary](https://leetcode.com/problems/department-highest-salary/description/), [Solution](SQL/Department_Highest_Salary.py)
+从按department id拼起来的表里取department name，employee name，employee salary。取的行要满足department id和salary的组合是department的最大salary。
+
+#### [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/description/), [Solution](SQL/Department_Top_Three_Salaries.py)
+从拼起来的表里面，选出那些在同样的id里面，大于该项的不超过三个的那些项。
+
+#### [196. Delete Duplicate Emails](https://leetcode.com/problems/delete-duplicate-emails/description/), [Solution](SQL/Delete_Duplicate_Emails.py)
+选两个copy，删掉第一个里面的所有列，如果email相同且id大于第二个里的。
+
+#### [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/description/), [Solution](SQL/Rising_Temperature.py)
+也可以用join。另外比较日期大小应该用DATEDIFF。
+
+#### [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/), [Solution](SQL/Managers_with_at_Least_5_Direct_Reports)
+注意别名要在括号外面。
+
+#### [574. Winning Candidate](https://leetcode.com/problems/winning-candidate/description/), [Solution](SQL/Winning_Candidate.py)
+取第几大的用order by之后limit来取。
+
+#### [577. Employee Bonus](https://leetcode.com/problems/employee-bonus/description/), [Solution](SQL/Employee_Bonus.py)
+直接用outer join会报错，必须left或者right。
 
 
 
