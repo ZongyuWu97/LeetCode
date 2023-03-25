@@ -16,6 +16,6 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '2598. Smallest Missing Non-negative Integer After Operations'
+name = '5. Longest Palindromic Substring'
 
 printLeetCodeFormat(name)

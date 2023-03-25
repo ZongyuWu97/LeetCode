@@ -41,6 +41,9 @@ My notes and solution for leetcode problems.
 
 ## String
 
+#### [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/), [Solution](String/Longest_Palindromic_Substring.py)
+从每一个下标出发，以他为中心，检查奇数长度和偶数长度发的substring是否为palindrome。还可以用dp，dp[i][j]表示s[i:j]是否是palindrome。
+
 #### [2268. Minimum Number of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/description/), [Solution](String/Minimum_Number_of_Keypresses.py)
 直接过一遍str，让频率高的放在第一个，9个button放完了就放第二个，依次。每放一个字母就count += number of ch in str * 字母在button里的位置。
 
@@ -293,9 +296,11 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [959. Regions Cut By Slashes](https://leetcode.com/problems/regions-cut-by-slashes/description/), [Solution](UnionFind/Regions_Cut_By_Slashes.py)
 把每个格子分成四个三角形，根据每一个位置是\或/或者空格，连接格子里的三角形。然后连接相邻格子的三角形。最后统计有多少三角形的root是他自己，即连同集个数。
 
+#### [1319. Number of Operations to Make Network Connected](https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/), [Solution](UnionFind/Number_of_Operations_to_Make_Network_Connected.py)
+找出不联通集的个数，返回个数减一。
+
 #### [1579. Remove Max Number of Edges to Keep Graph Fully Traversable](https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/description/), [Solution](UnionFind/Remove_Max_Number_of_Edges_to_Keep_Graph_Fully_Traversable.py)
 用union find来记录alice和bob的边是否都是连通的。最后检查加进去的边是不是等于n - 1。这里UF用的是一个列表，因为正好node都是从1到n标记的。用dict也可以，就是中间复制的时候要手动写一个deep copy。
-
 
 #### [1627. Graph Connectivity With Threshold](https://leetcode.com/problems/graph-connectivity-with-threshold/description/), [Solution](UnionFind/Graph_Connectivity_With_Threshold.py)
 先预处理，对threshold到n的每个数字用union find建立连通分量，然后每个query判断是否在一个等价类里面。
@@ -420,6 +425,9 @@ cost函数是凸函数，所以可以用二分法来找这个最小值。每一�
 <div id='SlidingWindow'></div>
 
 ## Sliding Window
+
+#### [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/), [Solution](SlidingWindow/Longest_Substring_Without_Repeating_Characters.py)
+记录之前每一个数的下标，以及left。每一步如果以前记录过且在window内，则更新left到记录过的下标+1，否则不用管。然后把当前元素的下标也记录进去。最后更新res到当前下标 - left + 1.
 
 #### [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/description/), [Solution](SlidingWindow/Sliding_Window_Maximum.py)
 要想到maintain一个deque，储存当前window里从最大元素开始往右依次减小的下标。这样第一个下标始终是当前window里最大元素的下标。用一个clean函数来维护，clean是O(1)的。首先从左边去掉不在window里的下标，然后从右边开始去掉小于当前元素的下标。因为维护前是从大到小，所以维护后也是从大到小。然后用这个deque遍历nums就行了。
@@ -710,6 +718,20 @@ where用在输出结果之前，用来约束结果；having用在输出结果之
 #### [577. Employee Bonus](https://leetcode.com/problems/employee-bonus/description/), [Solution](SQL/Employee_Bonus.py)
 直接用outer join会报错，必须left或者right。
 
+#### [584. Find Customer Referee](https://leetcode.com/problems/find-customer-referee/description/), [Solution](SQL/Find_Customer_Referee.py)
+mySQL有三个逻辑值，TRUE, FALSE, UNKNOWN。只有TRUE会被where返回。所有和null比较的都是UNKNOWN，不会被返回。所以要额外加一个判断IS NULL。
+
+#### [595. Big Countries](https://leetcode.com/problems/big-countries/description/), [Solution](SQL/Big_Countries.py)
+直接选。
+
+#### [627. Swap Salary](https://leetcode.com/problems/swap-salary/description/), [Solution](SQL/Swap_Salary.py)
+条件语句，case when condition then result 可以多个when then，最后end结束。
+
+#### [1757. Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/description/), [Solution](SQL/Recyclable_and_Low_Fat_Products.py)
+easy，直接select。
+
+#### [1873. Calculate Special Bonus](https://leetcode.com/problems/calculate-special-bonus/description/), [Solution](SQL/Calculate_Special_Bonus.py)
+用IF(conditaion, if true, else)的函数可以直接选出一列
 
 
 ---
