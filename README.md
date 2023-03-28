@@ -598,6 +598,10 @@ recursion + memorization。根据拿不拿root分类。加上点边界条件就�
 
 #### [741. Cherry Pickup](https://leetcode.com/problems/cherry-pickup/description/), [Solution](DP/Cherry_Pickup.py)
 第二次不用从n-1, n-1往回走了，直接从0, 0往右下出发两个路径，然后三维dp，dp[r1][c1][r2]，然后让两个点在同一反对角线上，这样c2 = r1 + c1 - r2。
+
+#### [983. Minimum Cost For Tickets](https://leetcode.com/problems/minimum-cost-for-tickets/description/), [Solution](DP/Minimum_Cost_For_Tickets.py)
+基本dp，根据在第i天用1/7/30pass来分类，取里面的最小的。另外注意bisect.bisect_left和bisect.bisect，第一个是使找a[:i] < x，a[i:] >= x的下标i，第二个是a[:i] <= x，a[i:] > x的下标i。
+
 #### [1216. Valid Palindrome III](https://leetcode.com/problems/valid-palindrome-iii/description/), [Solution](DP/Valid_Palindrome_III.py)
 直接dp，能不能变成palindrome取决于变成palindrome的最小次数是否小于k。dfs(i, j)如果s的i和j相等，则等于dfs(i+1, j-1)。否则说明i或者j之间要去掉一个，就等于1+min(dfs(i+1, j), dfs(i, j-1))。
 
@@ -726,6 +730,15 @@ mySQL有三个逻辑值，TRUE, FALSE, UNKNOWN。只有TRUE会被where返回。�
 
 #### [627. Swap Salary](https://leetcode.com/problems/swap-salary/description/), [Solution](SQL/Swap_Salary.py)
 条件语句，case when condition then result 可以多个when then，最后end结束。
+
+#### [1484. Group Sold Products By The Date](https://leetcode.com/problems/group-sold-products-by-the-date/description/), [Solution](SQL/Group_Sold_Products_By_The_Date.py)
+GROUP_CONCAT可以返回用逗号连接的字符串。
+
+#### [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition/description/), [Solution](SQL/Patients_With_a_Condition.py)
+用LIKE进行字符串匹配。sql里字符串用单引号，%表示任意字符。
+
+#### [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/description/), [Solution](SQL/Fix_Names_in_a_Table.py)
+CONCAT函数连接字符串，SUBSTRING(string, startIndex, length of substring)取子串。注意startindex从1开始。
 
 #### [1757. Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/description/), [Solution](SQL/Recyclable_and_Low_Fat_Products.py)
 easy，直接select。

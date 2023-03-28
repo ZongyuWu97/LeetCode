@@ -16,6 +16,6 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '5. Longest Palindromic Substring'
+name = '1527. Patients With a Condition'
 
 printLeetCodeFormat(name)
