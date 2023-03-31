@@ -16,6 +16,6 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '1527. Patients With a Condition'
+name = '1729. Find Followers Count'
 
 printLeetCodeFormat(name)

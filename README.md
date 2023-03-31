@@ -546,8 +546,10 @@ bfs + heap。依次把没去过的点放到heap里面，注意四周的点的到
 ## DP
 
 #### [72. Edit Distance](https://leetcode.com/problems/edit-distance/), [Solution](DP/Edit_Distance.py)
-
 明明是DP不是DFS啊。如果作change，看看当前位置的character是否一样。如果作delete，在dp[i-1][j]上加1。如果作insert，在dp[i][j-1]上加1。取三个里面最小的。
+
+#### [87. Scramble String](https://leetcode.com/problems/scramble-string/description/), [Solution](DP/Scramble_String.py)
+可以用recursion，很简单，不过要加cache。也可以手动加。另外也可以三维bottom to top dp，dp[length][i][j]表示从s1第i位开始，s2第j位开始，长为length的子串是否scramble。
 
 #### [97. Interleaving String](https://leetcode.com/problems/interleaving-string/description/), [Solution](DP/Interleaving_String.py)
 用的算是brute force+cache，但其实可以用DP。dp[i][j]储存能否用s1[:i+1]和s2[:j+1]interleave出s3[:i+j+1]。
@@ -660,6 +662,9 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 #### [280. Wiggle Sort](https://leetcode.com/problems/wiggle-sort/description/), [Solution](Greedy/Wiggle_Sort.py)
 首先可以直接排个序，然后每隔一位交换相邻数。或者可以每一位上根据奇偶看跟下一位的大小关系来决定是否和下一位交换。
 
+#### [1402. Reducing Dishes](https://leetcode.com/problems/reducing-dishes/description/), [Solution](Greedy/Reducing_Dishes.py)
+排序。0和正数肯定要选，这之后每加一个负数，相当于增加前面所有正数的和，并减去到目前为止加进来的所有负数以及当前这个负数。所以从绝对值小到大开始对负数求和，直到减去的量大于等于正数的增量为止。记录下标，并计算从这个下标开始取的结果。
+
 #### [2193. Minimum Number of Moves to Make Palindrome](https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/description/), [Solution](Greedy/Minimum_Number_of_Moves_to_Make_Palindrome.py)
 只用看从末尾开始，把每个对应的字母从原始位置移动到开头的消耗就行。
 
@@ -728,8 +733,20 @@ mySQL有三个逻辑值，TRUE, FALSE, UNKNOWN。只有TRUE会被where返回。�
 #### [595. Big Countries](https://leetcode.com/problems/big-countries/description/), [Solution](SQL/Big_Countries.py)
 直接选。
 
+#### [607. Sales Person](https://leetcode.com/problems/sales-person/description/), [Solution](SQL/Sales_Person.py)
+join选出order里面company为RED的那些的sales_id，然后在salesperson里面找不在这些id里面的人。
+
+#### [608. Tree Node](https://leetcode.com/problems/tree-node/description/), [Solution](SQL/Tree_Node.py)
+可以用union把三个情况拼起来，也可以用case when then来作为选出来的那个column。
+
 #### [627. Swap Salary](https://leetcode.com/problems/swap-salary/description/), [Solution](SQL/Swap_Salary.py)
 条件语句，case when condition then result 可以多个when then，最后end结束。
+
+#### [1141. User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/description/), [Solution](SQL/User_Activity_for_the_Past_30_Days_I.py)
+注意判断大小不能用连续不等号。日期函数是DATEDIFF。
+
+#### [1148. Article Views I](https://leetcode.com/problems/article-views-i/description/), [Solution](SQL/Article_Views_I.py)
+基本select。
 
 #### [1484. Group Sold Products By The Date](https://leetcode.com/problems/group-sold-products-by-the-date/description/), [Solution](SQL/Group_Sold_Products_By_The_Date.py)
 GROUP_CONCAT可以返回用逗号连接的字符串。
@@ -737,14 +754,30 @@ GROUP_CONCAT可以返回用逗号连接的字符串。
 #### [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition/description/), [Solution](SQL/Patients_With_a_Condition.py)
 用LIKE进行字符串匹配。sql里字符串用单引号，%表示任意字符。
 
+#### [1581. Customer Who Visited but Did Not Make Any Transactions](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/description/), [Solution](SQL/Customer_Who_Visited_but_Did_Not_Make_Any_Transactions.py)
+选出在visit但不在transactions里面的那些visit id，然后取对应的customer id，count，group by customer id。
+
 #### [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/description/), [Solution](SQL/Fix_Names_in_a_Table.py)
 CONCAT函数连接字符串，SUBSTRING(string, startIndex, length of substring)取子串。注意startindex从1开始。
+
+#### [1693. Daily Leads and Partners](https://leetcode.com/problems/daily-leads-and-partners/description/), [Solution](SQL/Daily_Leads_and_Partners.py)
+group by可以按多个关键字group。
+
+#### [1729. Find Followers Count](https://leetcode.com/problems/find-followers-count/description/), [Solution](SQL/Find_Followers_Count.py)
+简单。
 
 #### [1757. Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/description/), [Solution](SQL/Recyclable_and_Low_Fat_Products.py)
 easy，直接select。
 
+#### [1795. Rearrange Products Table](https://leetcode.com/problems/rearrange-products-table/description/), [Solution](SQL/Rearrange_Products_Table.py)
+用字符串建立新column。然后把三个表UNION起来。
+
 #### [1873. Calculate Special Bonus](https://leetcode.com/problems/calculate-special-bonus/description/), [Solution](SQL/Calculate_Special_Bonus.py)
 用IF(conditaion, if true, else)的函数可以直接选出一列
+
+#### [1965. Employees With Missing Information](https://leetcode.com/problems/employees-with-missing-information/description/), [Solution](SQL/Employees_With_Missing_Information.py)
+left join之后用where筛选里面没有的employee_id。
+
 
 
 ---
