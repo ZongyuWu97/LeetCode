@@ -16,6 +16,9 @@ def printLeetCodeFormat(name):
     print(name_part + web_part)
 
 
-name = '1729. Find Followers Count'
+def main():
+    name = '1741. Find Total Time Spent by Each Employee'
+    printLeetCodeFormat(name)
 
-printLeetCodeFormat(name)
+if __name__ == '__main__':
+    main()

@@ -397,6 +397,8 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 ## Binary Search
 
+#### [704. Binary Search](https://leetcode.com/problems/binary-search/description/), [Solution](BinarySearch/Binary_Search.py)
+简单。可以把相等情况放在第一个判断，这样可以不用每次都运行到最底端，而且可以避免中间out of range。
 
 #### [2448. Minimum Cost to Make Array Equal](https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/), [Solution](BinarySearch/Minimum_Cost_to_Make_Array_Equal.py)
 cost函数是凸函数，所以可以用二分法来找这个最小值。每一步计算mid和mid + 1的cost，判断最小值点在mid的左边还是右边，然后二分就行了
@@ -718,6 +720,9 @@ where用在输出结果之前，用来约束结果；having用在输出结果之
 #### [197. Rising Temperature](https://leetcode.com/problems/rising-temperature/description/), [Solution](SQL/Rising_Temperature.py)
 也可以用join。另外比较日期大小应该用DATEDIFF。
 
+#### [511. Game Play Analysis I](https://leetcode.com/problems/game-play-analysis-i/description/), [Solution](SQL/Game_Play_Analysis_I.py)
+简单，用MIN函数。
+
 #### [570. Managers with at Least 5 Direct Reports](https://leetcode.com/problems/managers-with-at-least-5-direct-reports/description/), [Solution](SQL/Managers_with_at_Least_5_Direct_Reports)
 注意别名要在括号外面。
 
@@ -729,6 +734,9 @@ where用在输出结果之前，用来约束结果；having用在输出结果之
 
 #### [584. Find Customer Referee](https://leetcode.com/problems/find-customer-referee/description/), [Solution](SQL/Find_Customer_Referee.py)
 mySQL有三个逻辑值，TRUE, FALSE, UNKNOWN。只有TRUE会被where返回。所有和null比较的都是UNKNOWN，不会被返回。所以要额外加一个判断IS NULL。
+
+#### [586. Customer Placing the Largest Number of Orders](https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/description/), [Solution](SQL/Customer_Placing_the_Largest_Number_of_Orders.py)
+先group了再order。
 
 #### [595. Big Countries](https://leetcode.com/problems/big-countries/description/), [Solution](SQL/Big_Countries.py)
 直接选。
@@ -766,6 +774,9 @@ group by可以按多个关键字group。
 #### [1729. Find Followers Count](https://leetcode.com/problems/find-followers-count/description/), [Solution](SQL/Find_Followers_Count.py)
 简单。
 
+#### [1741. Find Total Time Spent by Each Employee](https://leetcode.com/problems/find-total-time-spent-by-each-employee/description/), [Solution](SQL/Find_Total_Time_Spent_by_Each_Employee.py)
+select列的时候可以直接做计算。然后求sum。
+
 #### [1757. Recyclable and Low Fat Products](https://leetcode.com/problems/recyclable-and-low-fat-products/description/), [Solution](SQL/Recyclable_and_Low_Fat_Products.py)
 easy，直接select。
 
@@ -774,6 +785,9 @@ easy，直接select。
 
 #### [1873. Calculate Special Bonus](https://leetcode.com/problems/calculate-special-bonus/description/), [Solution](SQL/Calculate_Special_Bonus.py)
 用IF(conditaion, if true, else)的函数可以直接选出一列
+
+#### [1890. The Latest Login in 2020](https://leetcode.com/problems/the-latest-login-in-2020/description/), [Solution](SQL/The_Latest_Login_in_2020.py)
+用MAX。YEAR可以取出date里的年份。
 
 #### [1965. Employees With Missing Information](https://leetcode.com/problems/employees-with-missing-information/description/), [Solution](SQL/Employees_With_Missing_Information.py)
 left join之后用where筛选里面没有的employee_id。
