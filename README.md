@@ -50,6 +50,9 @@ My notes and solution for leetcode problems.
 #### [2288. Apply Discount to Prices](https://leetcode.com/problems/apply-discount-to-prices/description/), [Solution](String/Apply_Discount_to_Prices.py)
 简单，不过注意字符串里插入变量的格式：'str%格式'%(插入的东西)
 
+#### [2609. Find the Longest Balanced Substring of a Binary String](https://leetcode.com/problems/find-the-longest-balanced-substring-of-a-binary-string/description/), [Solution](String/Find_the_Longest_Balanced_Substring_of_a_Binary_String.py)
+先过一遍找到每个连续0,1的开始下标和连续长度，然后对所有连续0找对应的下一个相邻连续1，取res = max(res, min(连续0长度，连续1长度) * 2)。
+
 
 ---
 
@@ -400,11 +403,17 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [704. Binary Search](https://leetcode.com/problems/binary-search/description/), [Solution](BinarySearch/Binary_Search.py)
 简单。可以把相等情况放在第一个判断，这样可以不用每次都运行到最底端，而且可以避免中间out of range。
 
+#### [2300. Successful Pairs of Spells and Potions](https://leetcode.com/problems/successful-pairs-of-spells-and-potions/description/), [Solution](BinarySearch/Successful_Pairs_of_Spells_and_Potions.py)
+对potions排序，然后在里面找对应每个success/spell的下标，有了下标就可以直接得到个数了。
+
 #### [2448. Minimum Cost to Make Array Equal](https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/), [Solution](BinarySearch/Minimum_Cost_to_Make_Array_Equal.py)
 cost函数是凸函数，所以可以用二分法来找这个最小值。每一步计算mid和mid + 1的cost，判断最小值点在mid的左边还是右边，然后二分就行了
 
 #### [2517. Maximum Tastiness of Candy Basket](https://leetcode.com/problems/maximum-tastiness-of-candy-basket/description/), [Solution](BinarySearch/Maximum_Tastiness_of_Candy_Basket.py)
 感觉binary sort这种的越来越多了。对tastiness二分，每步检查是否有一组k个candy，tastiness大于等于mid。
+
+#### [2610. Convert an Array Into a 2D Array With Conditions](https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/description/), [Solution](Hashmap/Convert_an_Array_Into_a_2D_Array_With_Conditions.py)
+counter看一下每个数出现次数，然后依次往里面放就行了。
 
 #### [Snowflake Perfect Pairs](https://leetcode.com/discuss/interview-question/1781247/TuSimple-or-OA-or-Perfect-Pairs)
 条件2总是满足的，而条件1等价于|x| <= |y|, |y| <= 2|x|。所以先取绝对值，排序，然后从前往后对每个下标i，找到i < j, nums[j] <= 2nums[i]的最大的j。从i + 1到j都是满足和i的perfect pair。
@@ -464,6 +473,9 @@ Two Sum可以用two pointer做也可以用hashmap做，用two pointer的缺点�
 
 #### [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/), [Solution](TwoPointer/Two_Sum_IV_-_Input_is_a_BST.py)
 BST的inorder遍历会得到一个nondecreasing的序列。所以用一个inorder+twopointer就行了。
+
+#### [881. Boats to Save People](https://leetcode.com/problems/boats-to-save-people/description/), [Solution](TwoPointer/Boats_to_Save_People.py)
+排序之后依次匹配最小的和最大的，小于等于limit就一起放进去，否则只把大的放进去。
 
 #### [1099. Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/description/), [Solution](TwoPointer/Two_Sum_Less_Than_K.py)
 先排序，然后用two pointer。很简单。还可以利用题目的条件k在1-1000之间，不过这个感觉不够通用，就算了。
@@ -676,6 +688,8 @@ greedy的根据lcp依次填满res列表，如果用到的字符数超过26就返
 #### [2589. Minimum Time to Complete All Tasks](https://leetcode.com/problems/minimum-time-to-complete-all-tasks/description/), [Solution](Greedy/Minimum_Time_to_Complete_All_Tasks.py)
 按结束时间排序。这样从结束时间开始往前安排task，可以让后面的task最大化利用前面的时间。然后后面每次过一遍start到end，去掉已经安排过的时间点，然后再从后往前把剩下的时间安排完。
 
+#### [2611. Mice and Cheese](https://leetcode.com/problems/mice-and-cheese/description/), [Solution](Greedy/Mice_and_Cheese.py)
+总和 = sum ai + sum bj 其中I大小为k = sum ai - sum bi + sum b这里sum b是直接求和，所以是固定值，只需要最大化 sum ai - sum bi，就是算一下差值，取最大的k个就行了。
 
 
 ---

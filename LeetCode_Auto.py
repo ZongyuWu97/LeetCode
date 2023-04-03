@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '1741. Find Total Time Spent by Each Employee'
+    name = '881. Boats to Save People'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
