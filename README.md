@@ -299,6 +299,9 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [959. Regions Cut By Slashes](https://leetcode.com/problems/regions-cut-by-slashes/description/), [Solution](UnionFind/Regions_Cut_By_Slashes.py)
 把每个格子分成四个三角形，根据每一个位置是\或/或者空格，连接格子里的三角形。然后连接相邻格子的三角形。最后统计有多少三角形的root是他自己，即连同集个数。
 
+#### [1254. Number of Closed Islands](https://leetcode.com/problems/number-of-closed-islands/description/), [Solution](UnionFind/Number_of_Closed_Islands.py)
+用unionfind做的，但里面废操作太多了。可以用bfs，每次开始bfs的时候设置一个boolean isclosed = True，之后如果碰到边界就改成False。这样依次bfs就可以了。
+
 #### [1319. Number of Operations to Make Network Connected](https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/), [Solution](UnionFind/Number_of_Operations_to_Make_Network_Connected.py)
 找出不联通集的个数，返回个数减一。
 
@@ -405,6 +408,9 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 #### [2300. Successful Pairs of Spells and Potions](https://leetcode.com/problems/successful-pairs-of-spells-and-potions/description/), [Solution](BinarySearch/Successful_Pairs_of_Spells_and_Potions.py)
 对potions排序，然后在里面找对应每个success/spell的下标，有了下标就可以直接得到个数了。
+
+#### [2439. Minimize Maximum of Array](https://leetcode.com/problems/minimize-maximum-of-array/description/), [Solution](BinarySearch/Minimize_Maximum_of_Array.py)
+就是snowflake的oa。不过有O(n)解法，greedy，明天再看看。
 
 #### [2448. Minimum Cost to Make Array Equal](https://leetcode.com/problems/minimum-cost-to-make-array-equal/description/), [Solution](BinarySearch/Minimum_Cost_to_Make_Array_Equal.py)
 cost函数是凸函数，所以可以用二分法来找这个最小值。每一步计算mid和mid + 1的cost，判断最小值点在mid的左边还是右边，然后二分就行了
@@ -547,6 +553,9 @@ T($k*2^N$), O(N)
 
 #### [317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/description/), [Solution](BFS/Shortest_Distance_from_All_Buildings.py)
 可以从每个空地开始bfs到每个building，或者从building开始bfs到空地。从building开始还可以每一步只bfs之前能bfs到的那些空格，可以更快。从空地开始的会超市。
+
+#### [1020. Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/description/), [Solution](BFS/Number_of_Enclaves.py)
+和昨天的一样，不过可以从边界开始bfs，然后统计没有被bfs到的1的个数。
 
 #### [2577. Minimum Time to Visit a Cell In a Grid](https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/description/), [Solution](BFS/Minimum_Time_to_Visit_a_Cell_In_a_Grid.py)
 bfs + heap。依次把没去过的点放到heap里面，注意四周的点的到达时间取max(time + 1, grid[nrow][ncol] + wait)。

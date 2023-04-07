@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '881. Boats to Save People'
+    name = '1020. Number of Enclaves'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
