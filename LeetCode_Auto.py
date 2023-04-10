@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '1020. Number of Enclaves'
+    name = '20. Valid Parentheses'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
