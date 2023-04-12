@@ -246,6 +246,9 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/), [Solution](Stack/Valid_Parentheses.py)
 stack记录正括号，对每个反括号用字典取正括号看是不是在stack末尾，且stack不空。最后检查stack是否空。
 
+#### [71. Simplify Path](https://leetcode.com/problems/simplify-path/description/), [Solution](Stack/Simplify_Path.py)
+按/分割，然后根据.和..决定pop还是不管还是加入stack，最后用/连接。
+
 #### [84. Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/description/), [Solution](Stack/Largest_Rectangle_in_Histogram.py)
 可以用stack是因为实际只有n个rectangle要检查。每个height，和这个height往左往右到第一个比他矮的height为止，这个rectangle。假设已经有一个stack，里面放着从低到高排列的height，检测到新的height比stack末尾的height低的时候就开始依次pop。因为是从低到高，所以每pop一个就根据这个的height和他前一个的下标计算面积。到末尾再把剩下的全部pop出来。
 
@@ -286,6 +289,8 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 #### [2104. Sum of Subarray Ranges](https://leetcode.com/problems/sum-of-subarray-ranges/description/), [Solution](Stack/Sum_of_Subarray_Ranges.py)
 和907基本一样，不过这次要对每个元素，同时找出以他为最大值的数组数和以他为最小值的数组数。每次这两个相减就行了。
 
+#### [2390. Removing Stars From a String](https://leetcode.com/problems/removing-stars-from-a-string/description/), [Solution](Stack/Removing_Stars_From_a_String.py)
+直接一个stack往前走，碰到*就pop就行了。
 
 
 ---

@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '20. Valid Parentheses'
+    name = '71. Simplify Path'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
