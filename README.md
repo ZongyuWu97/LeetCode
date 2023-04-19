@@ -35,6 +35,12 @@ My notes and solution for leetcode problems.
 [collections](https://docs.python.org/3/library/collections.html#counter-objects), 
 [heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html), [bisect](https://docs.python.org/3/library/bisect.html)
 
+#### 算法-时间复杂度
+
+O(n): Greedy, stack, bfs, dfs
+O(n logn): sort, binary, tree like, heap
+O(n^2): dp, Dijkstra
+
 ---
 
 <div id='String'></div>
@@ -81,11 +87,17 @@ My notes and solution for leetcode problems.
 #### [915. Partition Array into Disjoint Intervals](https://leetcode.com/problems/partition-array-into-disjoint-intervals/description/), [Solution](List/Partition_Array_into_Disjoint_Intervals.py)
 还有个时间O(N), 空间O(1)的方法。记录currMax, possibleMax, length。如果当前的小于currMax，就说明当前元素必须在左边，所以更新currMax， possibleMax和length。
 
+#### [1431. Kids With the Greatest Number of Candies](https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/), [Solution](List/Kids_With_the_Greatest_Number_of_Candies.py)
+简单，easy题。
+
 #### [1864. Minimum Number of Swaps to Make the Binary String Alternating](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-binary-string-alternating/description/), [Solution](List/Minimum_Number_of_Swaps_to_Make_the_Binary_String_Alternating.py)
 因为只有两个字母，所以只要算其中一个字母不在正确位置上的最小位置数就行了。取两个字母里面这个数更小的那一个。
 
 #### [1344. Angle Between Hands of a Clock](https://leetcode.com/problems/angle-between-hands-of-a-clock/description/), [Solution](List/Angle_Between_Hands_of_a_Clock.py)
 直接算出时针和秒针的角度，然后取差的绝对值，再取跟补角里更小的那个。
+
+#### [1768. Merge Strings Alternately](https://leetcode.com/problems/merge-strings-alternately/description/), [Solution](List/Merge_Strings_Alternately.py)
+交替append list。
 
 #### [2012. Sum of Beauty in the Array](https://leetcode.com/problems/sum-of-beauty-in-the-array/description/), [Solution](List/Sum_of_Beauty_in_the_Array.py)
 先从后往前过一遍记录到每个下标为止的最小值，然后从前往后，每步记录到前一个为止的最大值，比较当前与相邻的大小以及和前面所有的最大值、后面所有的最小值的大小。
@@ -96,10 +108,8 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2214. Minimum Health to Beat Game](https://leetcode.com/problems/minimum-health-to-beat-game/description/), [Solution](List/Minimum_Health_to_Beat_Game.py)
 直接求和然后减去armor和max(damage)里的最小值表示抵消一次攻击。完全是easy啊为什么会是medium。
 
-
 #### [2221. Find Triangular Sum of an Array](https://leetcode.com/problems/find-triangular-sum-of-an-array/description/), [Solution](List/Find_Triangular_Sum_of_an_Array.py)
 用Pascal Triangle即组合数来算每个数在最终答案里用到的次数，然后直接一个个加上去。注意算组合数的时候要用//不要用/，不然后面会小数位有问题。也可以直接recursive做，不过很慢。
-
 
 #### [2294. Partition Array Such That Maximum Difference Is K](https://leetcode.com/problems/partition-array-such-that-maximum-difference-is-k/description/), [Solution](List/Partition%20Array%20Such_That_Maximum_Difference_Is_K.py)
 直接排个序然后从小到大分就行。
@@ -112,6 +122,12 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 #### [2546. Apply Bitwise Operations to Make Strings Equal](https://leetcode.com/problems/apply-bitwise-operations-to-make-strings-equal/description/), [Solution](List/Apply_Bitwise_Operations_to_Make_Strings_Equal.py)
 要发现不同组合的规则。(0, 0) -> (0, 0)，(1, 0) -> (1, 1)，(0, 1) -> (1, 1)，(1, 1) -> (1, 0)。所以只有0的情况无法改变，只要有1个1，就可以修改成任何情况。所以只要检查s和target是否同时全为0或者同时都含有1就行了。
+
+#### [2643. Row With Maximum Ones](https://leetcode.com/problems/row-with-maximum-ones/description/), [Solution](List/Row_With_Maximum_Ones.py)
+简单，每行过一遍就行了。
+
+#### [2644. Find the Maximum Divisibility Score](https://leetcode.com/problems/find-the-maximum-divisibility-score/description/), [Solution](List/Find_the_Maximum_Divisibility_Score.py)
+和前一题基本一样。
 
 #### [Snowflake Array Reduction](https://leetcode.com/discuss/interview-question/2550995/snowflake-OA), [Solution](List/Array_Reduction)
 首先得到整个array的mex。然后找到第一个使得当前currMex等于mex的位置，同时在count里减去已经用过的元素。然后在更新过的count里找到nextMex，然后重复上一步。
@@ -291,6 +307,10 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 #### [2390. Removing Stars From a String](https://leetcode.com/problems/removing-stars-from-a-string/description/), [Solution](Stack/Removing_Stars_From_a_String.py)
 直接一个stack往前走，碰到*就pop就行了。
+
+#### [2645. Minimum Additions to Make Valid String](https://leetcode.com/problems/minimum-additions-to-make-valid-string/description/), [Solution](Stack/Minimum_Additions_to_Make_Valid_String.py)
+写的是dp，不过其实是stack，因为只有一维。对每个字符，根据他前面的字符分类讨论就行了。
+
 
 
 ---
@@ -494,6 +514,9 @@ BST的inorder遍历会得到一个nondecreasing的序列。所以用一个inorde
 #### [1099. Two Sum Less Than K](https://leetcode.com/problems/two-sum-less-than-k/description/), [Solution](TwoPointer/Two_Sum_Less_Than_K.py)
 先排序，然后用two pointer。很简单。还可以利用题目的条件k在1-1000之间，不过这个感觉不够通用，就算了。
 
+#### [1372. Longest ZigZag Path in a Binary Tree](https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/description/), [Solution](DFS/Longest_ZigZag_Path_in_a_Binary_Tree.py)
+从root开始DFS，可以用一个self全局变量记录。另外其实可以不用memo，因为每条路只计算了一次。
+
 #### [2576. Find the Maximum Number of Marked Indices](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/), [Solution](TwoPointer/Find_the_Maximum_Number_of_Marked_Indices.py)
 先排序。因为最多有n//2对，所以j从(n + 1) // 2开始。之后i从0开始，满足条件就i++，否则不变。最后i * 2就行。
 
@@ -628,6 +651,8 @@ recursion + memorization。根据拿不拿root分类。加上点边界条件就�
 #### [494. Target Sum](https://leetcode.com/problems/target-sum/description/), [Solution](DP/Target_Sum.py)
 用的recursive dp，加一个字典memorization。还可以优化从传数组变成传下标。
 
+#### [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/), [Solution](DP/Longest_Palindromic_Subsequence.py)
+dp，每次比较i，j和i + 1， j - 1加上头尾是否相等、i + 1， j、i， j - 1之间的最大值。
 
 #### [630. Course Schedule III](https://leetcode.com/problems/course-schedule-iii/description/), [Solution](DP/Course_Schedule_III.py)
 先按结束时间排序，然后依次处理。维护到当前位置的上的最多的课，每个课的时长，和总时长。新的课来了之后，如果在当前时间直接上不超过lastDay，就直接放进heap里；如果超过了，duration大于之前的所有课的最大时长的话，不能放，否则无法维护是上的最多的课；如果小于之前的最大时长，则直接替换，可以维护是上的最多的课。因为是按结束时间排序，所以可以直接放进去替换。因为用了heap，所以总时长和之前上的课的时长也可以快速维护。
@@ -649,6 +674,9 @@ recursion + memorization。根据拿不拿root分类。加上点边界条件就�
 
 #### [1444. Number of Ways of Cutting a Pizza](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/description/), [Solution](DP/Number_of_Ways_of_Cutting_a_Pizza.py)
 3d的DP。能想到3d的话就还好。看起来dp还是专门留一行空的出来比较好，这样就不用初始化了。
+
+#### [1639. Number of Ways to Form a Target String Given a Dictionary](https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/description/), [Solution](DP/Number_of_Ways_to_Form_a_Target_String_Given_a_Dictionary.py)
+先找出每个下标上每个字母出现的次数，然后dp。dp(t, n)对应用word[:n]拼出target[:t]的方法数。
 
 #### [2222. Number of Ways to Select Buildings](https://leetcode.com/problems/number-of-ways-to-select-buildings/description/), [Solution](DP/Number_of_Ways_to_Select_Buildings.py)
 dp[k][j]为在s[:i + 1]中选择长度为k的挑选方法数。同时分别保存其中以'0'和'1'结尾的方法数。dp[k + 1[j]考虑是否以s[j]结尾，不结尾直接用前一个，结尾再加上dp[k][j - 1]里面结尾元素和s[j]不同的方法数。
@@ -695,6 +723,9 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 
 #### [280. Wiggle Sort](https://leetcode.com/problems/wiggle-sort/description/), [Solution](Greedy/Wiggle_Sort.py)
 首先可以直接排个序，然后每隔一位交换相邻数。或者可以每一位上根据奇偶看跟下一位的大小关系来决定是否和下一位交换。
+
+#### [946. Validate Stack Sequences](https://leetcode.com/problems/validate-stack-sequences/description/), [Solution](Greedy/Validate_Stack_Sequences.py)
+依次push，只要stack末尾和pop匹配上就pop，直到不匹配，然后push下一个。最后检测stack是否为空。
 
 #### [1402. Reducing Dishes](https://leetcode.com/problems/reducing-dishes/description/), [Solution](Greedy/Reducing_Dishes.py)
 排序。0和正数肯定要选，这之后每加一个负数，相当于增加前面所有正数的和，并减去到目前为止加进来的所有负数以及当前这个负数。所以从绝对值小到大开始对负数求和，直到减去的量大于等于正数的增量为止。记录下标，并计算从这个下标开始取的结果。
