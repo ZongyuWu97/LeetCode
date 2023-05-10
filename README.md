@@ -14,6 +14,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#Heap>Heap</a></li> 
   <li> <a href=#Stack>Stack</a></li> 
   <li> <a href=#UnionFind>UnionFind</a></li> 
+  ----
   <li> <a href=#Prime>Prime</a></li> 
   <li> <a href=#Sort>Sort</a></li> 
   <li> <a href=#PrefixSum>PrefixSum</a></li> 
@@ -58,6 +59,9 @@ O(n^2): dp, Dijkstra
 
 #### [2609. Find the Longest Balanced Substring of a Binary String](https://leetcode.com/problems/find-the-longest-balanced-substring-of-a-binary-string/description/), [Solution](String/Find_the_Longest_Balanced_Substring_of_a_Binary_String.py)
 先过一遍找到每个连续0,1的开始下标和连续长度，然后对所有连续0找对应的下一个相邻连续1，取res = max(res, min(连续0长度，连续1长度) * 2)。
+
+#### [2663. Lexicographically Smallest Beautiful String](https://leetcode.com/problems/lexicographically-smallest-beautiful-string/description/), [Solution](String/Lexicographically_Smallest_Beautiful_String.py)
+不能有palindrome，就是不能有任何偶数及奇数长度的palindrome，就是不能有任意长为2或3的palindrome，就是任意连续两个或三个字符不能相同。先把字符都转成ascii码，方便递增。因为是下一个最小的，所以从后往前递增。如果一个字符递增到了k，说明要进位，就看前一个字符，当前字符先不管。如果不进位，且当前字符和前两个字符都不同，就把后面的依次放上0， 1， 2里面最小的且和前两个不同的字符。最后把数字转成字母。也算greedy吧。
 
 
 ---
@@ -129,8 +133,15 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2644. Find the Maximum Divisibility Score](https://leetcode.com/problems/find-the-maximum-divisibility-score/description/), [Solution](List/Find_the_Maximum_Divisibility_Score.py)
 和前一题基本一样。
 
+#### [2660. Determine the Winner of a Bowling Game](https://leetcode.com/problems/determine-the-winner-of-a-bowling-game/description/), [Solution](List/Determine_the_Winner_of_a_Bowling_Game.py)
+简单，brute force就行了。
+
+#### [2672. Number of Adjacent Elements With the Same Color](https://leetcode.com/problems/number-of-adjacent-elements-with-the-same-color/description/), [Solution](List/Number_of_Adjacent_Elements_With_the_Same_Color.py)
+每改一个数只会影响当前位置和前一个位置的adjacent element。所以就依次过一遍query，每个query只看两个位置的变化就行了。
+
 #### [Snowflake Array Reduction](https://leetcode.com/discuss/interview-question/2550995/snowflake-OA), [Solution](List/Array_Reduction)
 首先得到整个array的mex。然后找到第一个使得当前currMex等于mex的位置，同时在count里减去已经用过的元素。然后在更新过的count里找到nextMex，然后重复上一步。
+
 
 
 ---
@@ -174,6 +185,12 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2598. Smallest Missing Non-negative Integer After Operations](https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operations/description/), [Solution](Hashmap/Smallest_Missing_Non-negative_Integer_After_Operations.py)
 按余数分类，同时记录当前余数个数。然后q从0开始，再r从0到value - 1，遍历余数集，直到余数集里找不到下一个，就是不存在的，然后返回q * value + r
 
+#### [2661. First Completely Painted Row or Column](https://leetcode.com/problems/first-completely-painted-row-or-column/description/), [Solution](HashMap/First_Completely_Painted_Row_or_Column.py)
+先过一遍，统计每个元素的行列。然后根据array，在每个位置对应的行列count+1。然后如果有达到填满某一行或者某一列的就返回这个位置的index。
+
+#### [2671. Frequency Tracker](https://leetcode.com/problems/frequency-tracker/description/), [Solution](Hashmap/Frequency_Tracker.py)
+两个hashmap，分别记录每个数的频率和每个频率对应的数。每次增减都更新这两个hashmap。
+
 
 
 ---
@@ -202,16 +219,19 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [545. Boundary of Binary Tree](https://leetcode.com/problems/boundary-of-binary-tree/description/), [Solution](Tree/Boundary_of_Binary_Tree.py)
 直接分别取left boundary, leaves, and right boundary。
 
-
 #### [1123. Lowest Common Ancestor of Deepest Leaves](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/), [Solution](Tree/Lowest_Common_Ancestor_of_Deepest_Leaves.py)
 bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves开始，回溯parent，直到只剩某一层一个parent。
-
 
 #### [1676. Lowest Common Ancestor of a Binary Tree IV](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iv/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Tree_IV.py)
 和基本情况差不多，不过这次不是检测是否只有两个，而是检测是否所有node都被在当前子树下找到了。
 
 #### [2471. Minimum Number of Operations to Sort a Binary Tree by Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/), [Solution](Tree/Minimum_Number_of_Operations_to_Sort_a_Binary_Tree_by_Level.py)
 用两个queue按层bfs遍历树，然后对每层求min swap。重点是min swap。注意iterative traversal的时候就用普通stack就行，然后先后顺序反过来。
+
+#### [2673. Make Costs of Paths Equal in a Binary Tree](https://leetcode.com/problems/make-costs-of-paths-equal-in-a-binary-tree/description/), [Solution](Tree/Make_Costs_of_Paths_Equal_in_a_Binary_Tree.py)
+在每个点让他的左右子路径相等。res加上左右子路径的差，然后更新这个点的cost到本来的cost加上子路径的cost。
+
+
 
 
 ---
@@ -252,6 +272,11 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 #### [2402. Meeting Rooms III](https://leetcode.com/problems/meeting-rooms-iii/description/), [Solution](Heap/Meeting_Rooms_III.py)
 用两个min heap，一个保存可以用的房间，一个保存使用中的房间，以结束时间为关健字。每一步先把结束时间小于当前开始时间的都挪到可用房间，如果当前有可用房间则直接用，没有的话则推迟当前meeting到下一个可以用的房间为止。
+
+#### [2662. Minimum Cost of a Path With Special Roads](https://leetcode.com/problems/minimum-cost-of-a-path-with-special-roads/description/), [Solution](Heap/Minimum_Cost_of_a_Path_With_Special_Roads.py)
+Dijrastra的想法，因为所有special road的终点从任何起点都是可达的，所以里面每一步都要更新到所有重点的距离。每次取出最小距离，然后更新先到这个点，然后走到其他road的起点，然后再走special road到相应终点的距离。最后res返回先到每一个终点，再正常走到target的距离，这些的最小距离。
+
+
 
 ---
 
@@ -354,11 +379,19 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 ## Prime
 
+- 筛法
+- all primes are either 2， 3， 或者6n - 1/6n + 1 for some n
+范围不大可以用筛法，这样筛一次就行了。但是空间需求很大。如果数字范围很大就用prune，只有用到了才会算空间。
+
 #### [2523. Closest Prime Numbers in Range](https://leetcode.com/problems/closest-prime-numbers-in-range/description/), [Solution](Prime/Closest_Prime_Numbers_in_Range.py)
 主要注意怎么筛素数。对小于x的素数，从2到sqrt(x)为止，如果i是素数就把i的所有倍数都标位合数，依次标记。最后把没被标记为合数的拿出来，就剩下的是素数。
 
 #### [2572. Count the Number of Square-Free Subsets](https://leetcode.com/problems/count-the-number-of-square-free-subsets/description/), [Solution](Prime/Count_the_Number_of_Square-Free_Subsets.py)
 其实算是dp了。注意空集的时候返回的是1，因为要和其他情况组合，其他子集里可能有元素，所以不返回0。最后再只减去一个1，就是所有子集都为空集的情况。
+
+#### [2614. Prime In Diagonal](https://leetcode.com/problems/prime-in-diagonal/description/), [Solution](Prime/Prime_In_Diagonal.py)
+用prune，然后对每个对角线上的元素，用sqrt之后再prune了的子集来判断是否是素数。用到了lambda函数，filter，all，集合的并｜，sorted。
+
 
 
 
@@ -422,6 +455,12 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 #### [2536. Increment Submatrices by One](https://leetcode.com/problems/increment-submatrices-by-one/description/), [Solution](PrefixSum/Increment_Submatrices_by_One.py)
 对每一行做一次prefix sum。另外也可以用2dcache来做，在每个矩形的左上角、右下角外+1，右上角外、左下角外-1不过还没看懂，之后有兴趣可以看看[这里](https://leetcode.com/problems/increment-submatrices-by-one/solutions/3052675/python3-sweep-line-range-addition-with-visualization-clean-concise/)。
+
+#### [2615. Sum of Distances](https://leetcode.com/problems/sum-of-distances/description/), [Solution](PrefixSum/Sum_of_Distances.py)
+用dict存数和对应的下标。距离里面把每个绝对值号拆开，然后就可以有公式了。对每个数，先算一个prefix sum，然后每个下标里面套公式和prefix sum就行了。
+
+#### [2670. Find the Distinct Difference Array](https://leetcode.com/problems/find-the-distinct-difference-array/description/), [Solution](PrefixSum/Find_the_Distinct_Difference_Array.py)
+先过一遍，保存prefix和sufix sum，然后直接算结果。
 
 
 
@@ -587,6 +626,9 @@ T($k*2^N$), O(N)
 
 #### [317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/description/), [Solution](BFS/Shortest_Distance_from_All_Buildings.py)
 可以从每个空地开始bfs到每个building，或者从building开始bfs到空地。从building开始还可以每一步只bfs之前能bfs到的那些空格，可以更快。从空地开始的会超市。
+
+#### [662. Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/description/), [Solution](BFS/Maximum_Width_of_Binary_Tree.py)
+bfs，每一层计算每个点的index，这一层过完之后更新最大index差，即宽度。
 
 #### [1020. Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/description/), [Solution](BFS/Number_of_Enclaves.py)
 和昨天的一样，不过可以从边界开始bfs，然后统计没有被bfs到的1的个数。

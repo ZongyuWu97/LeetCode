@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '1372. Longest ZigZag Path in a Binary Tree'
+    name = '2673. Make Costs of Paths Equal in a Binary Tree'
 
     printLeetCodeFormat(name)
 
