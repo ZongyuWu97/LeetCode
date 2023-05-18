@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2673. Make Costs of Paths Equal in a Binary Tree'
+    name = '2685. Count the Number of Complete Components'
 
     printLeetCodeFormat(name)
 

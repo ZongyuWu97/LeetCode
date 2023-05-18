@@ -139,6 +139,12 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2672. Number of Adjacent Elements With the Same Color](https://leetcode.com/problems/number-of-adjacent-elements-with-the-same-color/description/), [Solution](List/Number_of_Adjacent_Elements_With_the_Same_Color.py)
 每改一个数只会影响当前位置和前一个位置的adjacent element。所以就依次过一遍query，每个query只看两个位置的变化就行了。
 
+#### [2682. Find the Losers of the Circular Game](https://leetcode.com/problems/find-the-losers-of-the-circular-game/description/), [Solution](List/Find_the_Losers_of_the_Circular_Game.py)
+简单题，直接取余数就行。
+
+#### [2683. Neighboring Bitwise XOR](https://leetcode.com/problems/neighboring-bitwise-xor/description/), [Solution](List/Neighboring_Bitwise_XOR.py)
+标得medium不过实际easy。依次根据derived判断当前位置是否取反就行了。
+
 #### [Snowflake Array Reduction](https://leetcode.com/discuss/interview-question/2550995/snowflake-OA), [Solution](List/Array_Reduction)
 首先得到整个array的mex。然后找到第一个使得当前currMex等于mex的位置，同时在count里减去已经用过的元素。然后在更新过的count里找到nextMex，然后重复上一步。
 
@@ -368,8 +374,10 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 先对queries和edges分别排序，然后对每个query，把distance小于当前query的limit的那些edge用union连起来，然后用find判断当前query的p和q是否连同。因为只连接了小于当前limit的所有边，所以直接判断就行，不用另外看每个边的distance。
 
 #### [2493. Divide Nodes Into the Maximum Number of Groups](https://leetcode.com/problems/divide-nodes-into-the-maximum-number-of-groups/description/), [Solution](UnionFind/Divide_Nodes_Into_the_Maximum_Number_of_Groups.py)
-
 对每一个node做bfs就可以得到最大group数。用union find来记录连通分量。其实不用union find也可以，只要记录了连通分量就可以。
+
+#### [2685. Count the Number of Complete Components](https://leetcode.com/problems/count-the-number-of-complete-components/description/), [Solution](UnionFind/Count_the_Number_of_Complete_Components.py)
+先找到连通集，然后看每个连通集是否是complete的。
 
 
 
@@ -740,6 +748,9 @@ dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就�
 
 #### [2547. Minimum Cost to Split an Array](https://leetcode.com/problems/minimum-cost-to-split-an-array/description/), [Solution](DP/Minimum_Cost_to_Split_an_Array.py)
 切木条的变种，区别是切木条里面相应长度木条的价格都给出来了，这里要先算一下每个nums[i:j]的cost并记录。
+
+#### [2684. Maximum Number of Moves in a Grid](https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/), [Solution](DP/Maximum_Number_of_Moves_in_a_Grid.py)
+基本dp，从后往前dp。每次看前一列的上下三行。
 
 #### [Snowflake String Pattern](https://www.geeksforgeeks.org/number-of-distinct-words-of-size-n-with-at-most-k-contiguous-vowels/), [Solution](DP/String_Pattern)
 dp[i][j]表示长度为i的string，最后j位是元音，的组合数。对每个i，dp[i][0]由i - 1的行和初始化。之后根据j和i的相对大小来判断状态转移方程。可以只保留一行作为dp储存，因为只用到了上一行的dp。
