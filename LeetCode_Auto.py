@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2685. Count the Number of Complete Components'
+    name = '2712. Minimum Cost to Make All Characters Equal'
 
     printLeetCodeFormat(name)
 

@@ -145,6 +145,15 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2683. Neighboring Bitwise XOR](https://leetcode.com/problems/neighboring-bitwise-xor/description/), [Solution](List/Neighboring_Bitwise_XOR.py)
 标得medium不过实际easy。依次根据derived判断当前位置是否取反就行了。
 
+#### [2697. Lexicographically Smallest Palindrome](https://leetcode.com/problems/lexicographically-smallest-palindrome/description/), [Solution](List/Lexicographically_Smallest_Palindrome.py)
+从中间往两边出发，每次保存对称位置上更小的那个元素，最后再把保存了的都拼起来。
+
+#### [2698. Find the Punishment Number of an Integer](https://leetcode.com/problems/find-the-punishment-number-of-an-integer/description/), [Solution](List/Find_the_Punishment_Number_of_an_Integer.py)
+直接暴力解，每个数都算一遍所有组合看满不满足punishment条件。
+
+#### [2712. Minimum Cost to Make All Characters Equal](https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/description/), [Solution](List/Minimum_Cost_to_Make_All_Characters_Equal.py)
+分别让左半边和右半边一样，然后根据奇偶还有中间元素和中间元素两边是否相同判断最后的和。
+
 #### [Snowflake Array Reduction](https://leetcode.com/discuss/interview-question/2550995/snowflake-OA), [Solution](List/Array_Reduction)
 首先得到整个array的mex。然后找到第一个使得当前currMex等于mex的位置，同时在count里减去已经用过的元素。然后在更新过的count里找到nextMex，然后重复上一步。
 
@@ -342,6 +351,8 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 #### [2645. Minimum Additions to Make Valid String](https://leetcode.com/problems/minimum-additions-to-make-valid-string/description/), [Solution](Stack/Minimum_Additions_to_Make_Valid_String.py)
 写的是dp，不过其实是stack，因为只有一维。对每个字符，根据他前面的字符分类讨论就行了。
 
+#### [2696. Minimum String Length After Removing Substrings](https://leetcode.com/problems/minimum-string-length-after-removing-substrings/description/), [Solution](Stack/Minimum_String_Length_After_Removing_Substrings.py)
+用stack，从头往后，监测到AB或者CD就pop。
 
 
 ---
@@ -350,7 +361,6 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 ## Union Find
 可以用来检查集合连通性。
-
 
 #### [947. Most Stones Removed with Same Row or Column](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/), [Solution](UnionFind/Most_Stones_Removed_with_Same_Row_or_Column.py)
 对每个石头，连接他的row和col。因为row数有限，所以col直接+10001就行。最后检查有多少连通集。
@@ -495,6 +505,9 @@ cost函数是凸函数，所以可以用二分法来找这个最小值。每一�
 
 #### [2610. Convert an Array Into a 2D Array With Conditions](https://leetcode.com/problems/convert-an-array-into-a-2d-array-with-conditions/description/), [Solution](Hashmap/Convert_an_Array_Into_a_2D_Array_With_Conditions.py)
 counter看一下每个数出现次数，然后依次往里面放就行了。
+
+#### [2616. Minimize the Maximum Difference of Pairs](https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/), [Solution](BinarySearch/Minimize_the_Maximum_Difference_of_Pairs.py)
+mini max问题用二分法。这里每次检测mid这个最大difference可不可以达到。因为排序后的所有最小difference肯定出现在相邻元素之间，所以每次检测的时候只用检测那些相邻的元素就行了。
 
 #### [Snowflake Perfect Pairs](https://leetcode.com/discuss/interview-question/1781247/TuSimple-or-OA-or-Perfect-Pairs)
 条件2总是满足的，而条件1等价于|x| <= |y|, |y| <= 2|x|。所以先取绝对值，排序，然后从前往后对每个下标i，找到i < j, nums[j] <= 2nums[i]的最大的j。从i + 1到j都是满足和i的perfect pair。
