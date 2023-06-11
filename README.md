@@ -63,6 +63,9 @@ O(n^2): dp, Dijkstra
 #### [2663. Lexicographically Smallest Beautiful String](https://leetcode.com/problems/lexicographically-smallest-beautiful-string/description/), [Solution](String/Lexicographically_Smallest_Beautiful_String.py)
 不能有palindrome，就是不能有任何偶数及奇数长度的palindrome，就是不能有任意长为2或3的palindrome，就是任意连续两个或三个字符不能相同。先把字符都转成ascii码，方便递增。因为是下一个最小的，所以从后往前递增。如果一个字符递增到了k，说明要进位，就看前一个字符，当前字符先不管。如果不进位，且当前字符和前两个字符都不同，就把后面的依次放上0， 1， 2里面最小的且和前两个不同的字符。最后把数字转成字母。也算greedy吧。
 
+#### [2734. Lexicographically Smallest String After Substring Operation](https://leetcode.com/problems/lexicographically-smallest-string-after-substring-operation/description/), [Solution](String/Lexicographically_Smallest_String_After_Substring_Operation.py)
+用数字记录字母，然后从第一个非0开始到他后面的第一个0为止，所有减1，然后再转成字母。注意这个window的边界条件。
+
 
 ---
 
@@ -153,6 +156,18 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 #### [2712. Minimum Cost to Make All Characters Equal](https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/description/), [Solution](List/Minimum_Cost_to_Make_All_Characters_Equal.py)
 分别让左半边和右半边一样，然后根据奇偶还有中间元素和中间元素两边是否相同判断最后的和。
+
+#### [2716. Minimize String Length](https://leetcode.com/problems/minimize-string-length/description/), [Solution](List/Minimize_String_Length.py)
+简单。
+
+#### [2717. Semi-Ordered Permutation](https://leetcode.com/problems/semi-ordered-permutation/description/), [Solution](List/Semi-Ordered_Permutation.py)
+简单。
+
+#### [2735. Collecting Chocolates](https://leetcode.com/problems/collecting-chocolates/description/), [Solution](List/Collecting_Chocolates.py)
+转n圈，每次更新每个位置上的最低cost加上转到这一圈需要的转圈cost，每一圈都保存当前最低总cost，最后输出。
+
+#### [2733. Neither Minimum nor Maximum](https://leetcode.com/problems/neither-minimum-nor-maximum/description/), [Solution](List/Neither_Minimum_nor_Maximum.py)
+简单，找不是最小最大值的。
 
 #### [Snowflake Array Reduction](https://leetcode.com/discuss/interview-question/2550995/snowflake-OA), [Solution](List/Array_Reduction)
 首先得到整个array的mex。然后找到第一个使得当前currMex等于mex的位置，同时在count里减去已经用过的元素。然后在更新过的count里找到nextMex，然后重复上一步。
@@ -508,6 +523,9 @@ counter看一下每个数出现次数，然后依次往里面放就行了。
 
 #### [2616. Minimize the Maximum Difference of Pairs](https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/), [Solution](BinarySearch/Minimize_the_Maximum_Difference_of_Pairs.py)
 mini max问题用二分法。这里每次检测mid这个最大difference可不可以达到。因为排序后的所有最小difference肯定出现在相邻元素之间，所以每次检测的时候只用检测那些相邻的元素就行了。
+
+#### [2718. Sum of Matrix After Queries](https://leetcode.com/problems/sum-of-matrix-after-queries/description/), [Solution](BinarySearch/Sum_of_Matrix_After_Queries.py)
+先想到用list来储存每一列每一行最后更新的数和更新顺序，然后每一列二分找这一列里在当前列顺序之前更新的行数，然后这些行被列覆盖，剩下的保持行的数。
 
 #### [Snowflake Perfect Pairs](https://leetcode.com/discuss/interview-question/1781247/TuSimple-or-OA-or-Perfect-Pairs)
 条件2总是满足的，而条件1等价于|x| <= |y|, |y| <= 2|x|。所以先取绝对值，排序，然后从前往后对每个下标i，找到i < j, nums[j] <= 2nums[i]的最大的j。从i + 1到j都是满足和i的perfect pair。

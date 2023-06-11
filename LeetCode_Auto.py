@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2712. Minimum Cost to Make All Characters Equal'
+    name = '2734. Lexicographically Smallest String After Substring Operation'
 
     printLeetCodeFormat(name)
 
