@@ -169,6 +169,9 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2733. Neither Minimum nor Maximum](https://leetcode.com/problems/neither-minimum-nor-maximum/description/), [Solution](List/Neither_Minimum_nor_Maximum.py)
 简单，找不是最小最大值的。
 
+#### [2749. Minimum Operations to Make the Integer Zero](https://leetcode.com/problems/minimum-operations-to-make-the-integer-zero/description/), [Solution](List/Minimum_Operations_to_Make_the_Integer_Zero.py)
+根据操作次数k减去k * num2，剩下的就是由2**i组成的部分。bit_count()可以看int的二进制表示里面有几个2**i。k最小要大于等于这个bit_count()，因为这样才能组合出来；最大要小于等于num1 - k * num2，因为每次操作最少会减去1，所以最大不能超过剩下的数。从小到大遍历k，检测到一个符合条件的k就输出，没有的话就return -1。
+
 #### [Snowflake Array Reduction](https://leetcode.com/discuss/interview-question/2550995/snowflake-OA), [Solution](List/Array_Reduction)
 首先得到整个array的mex。然后找到第一个使得当前currMex等于mex的位置，同时在count里减去已经用过的元素。然后在更新过的count里找到nextMex，然后重复上一步。
 
@@ -368,6 +371,10 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 #### [2696. Minimum String Length After Removing Substrings](https://leetcode.com/problems/minimum-string-length-after-removing-substrings/description/), [Solution](Stack/Minimum_String_Length_After_Removing_Substrings.py)
 用stack，从头往后，监测到AB或者CD就pop。
+
+#### [2751. Robot Collisions](https://leetcode.com/problems/robot-collisions/description/), [Solution](Stack/Robot_Collisions.py)
+先排序，然后按照position顺序从左到右，用stack记录已有的robot，如果新加进来的是往左的就一直和stack末尾往右的robot碰撞，直到末尾不往右或者其中一个消失。一开始排序的时候记得把原来在position里的顺序也记录一下，最后按这个再排一次序，然后输出每个robot的health。
+
 
 
 ---
@@ -728,7 +735,6 @@ recursion + memorization。根据拿不拿root分类。加上点边界条件就�
 #### [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/), [Solution](DP/Frog_Jump.py)
 不是最优解，差不多是brute force+cache。可以用DP。用一个字典储存key:value, key是每个位置，value是能到这个位置的jump的长度的集合。最后如果最后一个位置在字典里，就说明可以跳到这里，否则不可以。
 
-
 #### [494. Target Sum](https://leetcode.com/problems/target-sum/description/), [Solution](DP/Target_Sum.py)
 用的recursive dp，加一个字典memorization。还可以优化从传数组变成传下标。
 
@@ -782,6 +788,12 @@ dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就�
 
 #### [2684. Maximum Number of Moves in a Grid](https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/), [Solution](DP/Maximum_Number_of_Moves_in_a_Grid.py)
 基本dp，从后往前dp。每次看前一列的上下三行。
+
+#### [2742. Painting the Walls](https://leetcode.com/problems/painting-the-walls/description/), [Solution](DP/Painting_the_Walls.py)
+dp，dp[i][j]表示第i个wall用paid来做的情况下，完成j个wall的最低cost。可以只用一维来记录。每个dp[j] = min(dp[j], dp[max(j - time[i] - 1, 0)] + cost[i])，这里等号右边的dp[j]表示上一步的结果。取这个和使用第i个paid的情况下，也就是用cost[i]。用了cost[i]会占用time[i]的时间，所以可以完成当前的wall以及另外time[i]个用free完成的wall。去掉这么多wall，剩下的最低cost再加上cost[i]，和上一步的取更低的那一个，更新下一步。
+
+#### [2750. Ways to Split Array Into Good Subarrays](https://leetcode.com/problems/ways-to-split-array-into-good-subarrays/description/), [Solution](DP/Ways_to_Split_Array_Into_Good_Subarrays.py)
+dp题有思路就好做。dp[i]如果是0就没有新的split方法，直接和前一个一样；如果是1那就可以有新的从前一个一后面的那个0开始一直到这个1前面的那个0那么多种方法数，这些加起来。比如10000后面来一个1，那么就有00001，0001,001,01,1这些新的split。
 
 #### [Snowflake String Pattern](https://www.geeksforgeeks.org/number-of-distinct-words-of-size-n-with-at-most-k-contiguous-vowels/), [Solution](DP/String_Pattern)
 dp[i][j]表示长度为i的string，最后j位是元音，的组合数。对每个i，dp[i][0]由i - 1的行和初始化。之后根据j和i的相对大小来判断状态转移方程。可以只保留一行作为dp储存，因为只用到了上一行的dp。
