@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2749. Minimum Operations to Make the Integer Zero'
+    name = '1466. Reorder Routes to Make All Paths Lead to the City Zero'
 
     printLeetCodeFormat(name)
 

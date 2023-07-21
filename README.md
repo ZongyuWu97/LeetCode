@@ -234,6 +234,10 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/description/), [Solution](LinkedList/Add_Two_Numbers.py)
 创建一个新链表，如果l1或l2后面还有就继续延长这个链表
 
+#### [146. LRU Cache](https://leetcode.com/problems/lru-cache/description/), [Solution](LinkedList/LRU_Cache.py)
+用双链表做。保存head和tail，然后自己写一个addNode和deleteNode函数。另外用一个dict保存key和对应node的指针。get的时候删掉对应node并再次加到头部；put的时候如果已经在里面就删掉，然后如果dict还是满的就说明put的是新元素，删掉tail前的node，然后再把新node的加到头部。
+
+
 ---
 
 <div id='Tree'></div>
@@ -337,6 +341,9 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 #### [503. Next Greater Element II](https://leetcode.com/problems/next-greater-element-ii/description/), [Solution](Stack/Next_Greater_Element_II.py)
 过一遍monostack，每次pop出比当前小的元素的下标并更新那些元素的nextGreater。更新完之后把当前下标放进stack。再过第二遍，这样之前nextGreater在左边的也可以被更新了。
+
+#### [735. Asteroid Collision](https://leetcode.com/problems/asteroid-collision/description/), [Solution](Stack/Asteroid_Collision.py)
+用stack记录asteroid， 每个新的如果往右那么不会和stack里已有的碰撞，直接加进去；如果往左就一直碰撞到自己消失或者没有可以碰撞的为止。
 
 #### [739. Daily Temperatures](https://leetcode.com/problems/daily-temperatures/description/), [Solution](Stack/Daily_Temperatures.py)
 简单，每次pop出比当前低的temperature的下标就行。
@@ -679,6 +686,9 @@ bfs，每一层计算每个点的index，这一层过完之后更新最大index�
 #### [1020. Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/description/), [Solution](BFS/Number_of_Enclaves.py)
 和昨天的一样，不过可以从边界开始bfs，然后统计没有被bfs到的1的个数。
 
+#### [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/), [Solution](BFS/Reorder_Routes_to_Make_All_Paths_Lead_to_the_City_Zero.py)
+简单bfs。先记录所有单向边并同时保存双向边。然后从0出发bfs延双向边走，每走一步判断当前对应的单向边是否指向0，不指向的话就count + 1。
+
 #### [2577. Minimum Time to Visit a Cell In a Grid](https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/description/), [Solution](BFS/Minimum_Time_to_Visit_a_Cell_In_a_Grid.py)
 bfs + heap。依次把没去过的点放到heap里面，注意四周的点的到达时间取max(time + 1, grid[nrow][ncol] + wait)。
 
@@ -774,6 +784,9 @@ dp[k][j]为在s[:i + 1]中选择长度为k的挑选方法数。同时分别保�
 #### [2291. Maximum Profit From Trading Stocks](https://leetcode.com/problems/maximum-profit-from-trading-stocks/description/), [Solution](DP/Maximum_Profit_From_Trading_Stocks.py)
 一个budges * n的dp。有一些edge case，像初始化，在有足够钱且当前收益为正的情况下才进行交易等。
 
+#### [2305. Fair Distribution of Cookies](https://leetcode.com/problems/fair-distribution-of-cookies/description/), [Solution](DP/Fair_Distribution_of_Cookies.py)
+DP+bitmask。几个操作1 << n是bit往左移n位。a & b，a ^ b。用整数表示一个组合，他的bit表示1的位置说明取到这个位置的元素。对mask求和里面mask & (1 << i)表示mask里第i个位置是否为1.然后从bagMask开始往下取mask = (mask - 1) & bagMask。因为&操作只会把数变小，所以是从大往小取。每轮里面取res = min(res, max(sum1, sum2))，因为是要取最小的最大值。sum1 = sumMask(mask)是这个mask单独分给一个人的和，sum2 = unfairness(k - 1, bagMask ^ mask)是bagMask去掉mask后剩下的cookie分给其他人的最大值。
+
 #### [2444 Count Subarrays With Fixed Bounds](https://leetcode.com/contest/weekly-contest-315/problems/count-subarrays-with-fixed-bounds/), [Solution](DP/Count_Subarrays_With_Fixed_Bounds.py)
 先过一遍nums，记录每个坐标前最近的等于minK，等于maxK，超出范围的值的坐标，记为prev[0], prev[1], prev[2]。然后dp。dp[i] = dp[i-1]，如果nums[i]没超出范围，那么dp[i]再加上prev[0], prev[1]里更小的那个到prev[2]的距离。如果是负的就不加。
 
@@ -819,6 +832,9 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 
 #### [280. Wiggle Sort](https://leetcode.com/problems/wiggle-sort/description/), [Solution](Greedy/Wiggle_Sort.py)
 首先可以直接排个序，然后每隔一位交换相邻数。或者可以每一位上根据奇偶看跟下一位的大小关系来决定是否和下一位交换。
+
+#### [435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/description/), [Solution](Greedy/Non-overlapping_Intervals.py)
+先按结束时间排序，然后依次检测，如果下一个的开始时间大于等于前一个的结束时间，就不去掉，否则去掉这一个。这样相当于在两个重叠的里面保留了结束时间更早的那个，这样就给后面的留了更多空间。
 
 #### [946. Validate Stack Sequences](https://leetcode.com/problems/validate-stack-sequences/description/), [Solution](Greedy/Validate_Stack_Sequences.py)
 依次push，只要stack末尾和pop匹配上就pop，直到不匹配，然后push下一个。最后检测stack是否为空。
