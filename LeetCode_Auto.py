@@ -17,8 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '1466. Reorder Routes to Make All Paths Lead to the City Zero'
-
+    name = '2811. Check if it is Possible to Split Array'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':

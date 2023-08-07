@@ -15,6 +15,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#Stack>Stack</a></li> 
   <li> <a href=#UnionFind>UnionFind</a></li> 
   ----
+  <li> <a href=#Math>Math</a></li> 
   <li> <a href=#Prime>Prime</a></li> 
   <li> <a href=#Sort>Sort</a></li> 
   <li> <a href=#PrefixSum>PrefixSum</a></li> 
@@ -50,6 +51,9 @@ O(n^2): dp, Dijkstra
 
 #### [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/), [Solution](String/Longest_Palindromic_Substring.py)
 从每一个下标出发，以他为中心，检查奇数长度和偶数长度发的substring是否为palindrome。还可以用dp，dp[i][j]表示s[i:j]是否是palindrome。
+
+#### [7. Reverse Integer](https://leetcode.com/problems/reverse-integer/description/), [Solution](String/Reverse_Integer.py)
+先转成str然后reverse再拼起来。用到rjust来限制不会超出64位。用到 * (1 - 2 * (x < 0))来判断正负。
 
 #### [2268. Minimum Number of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/description/), [Solution](String/Minimum_Number_of_Keypresses.py)
 直接过一遍str，让频率高的放在第一个，9个button放完了就放第二个，依次。每放一个字母就count += number of ch in str * 字母在button里的位置。
@@ -237,6 +241,9 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [146. LRU Cache](https://leetcode.com/problems/lru-cache/description/), [Solution](LinkedList/LRU_Cache.py)
 用双链表做。保存head和tail，然后自己写一个addNode和deleteNode函数。另外用一个dict保存key和对应node的指针。get的时候删掉对应node并再次加到头部；put的时候如果已经在里面就删掉，然后如果dict还是满的就说明put的是新元素，删掉tail前的node，然后再把新node的加到头部。
 
+#### [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/description/), [Solution](LinkedList/Add_Two_Numbers_II.py)
+过两遍linkedlist乘10相加，然后加起来再除10取余从尾到头建个新linkedlist。
+
 
 ---
 
@@ -245,16 +252,20 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 ## Tree
 
 
+#### [95. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/description/), [Solution](Tree/Unique_Binary_Search_Trees_II.py)
+写一个helper生成两个数之间的所有二叉树，然后以每个数为root，递归他的左右子树，然后组合起来以这个数为root的树。
+
 #### [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Search_Tree.py)
 跟下面一个基本一样，不过利用了BST的结构，直接判断当前节点的值，如果在p，q之间就是找到了，小于更小的或者大于更大的就去另一边找。
-
 
 #### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Tree.py)
 用一个helper判断在当前子树中是否检测到p或q。在root，helper(root.left)，helper(root.right)中如果有两个检测到了就是找到了LCA，修改全局变量self.ans。每一层返回curr or 上面两个，这样就算找到了LCA，后续返回的也是True就是1，之后不会重复修改全局变量。
 
-
 #### [545. Boundary of Binary Tree](https://leetcode.com/problems/boundary-of-binary-tree/description/), [Solution](Tree/Boundary_of_Binary_Tree.py)
 直接分别取left boundary, leaves, and right boundary。
+
+#### [894. All Possible Full Binary Trees](https://leetcode.com/problems/all-possible-full-binary-trees/description/), [Solution](Tree/All_Possible_Full_Binary_Trees.py)
+recursion做，对n个node的树递归左右子树从0到n - 1。同时用一个字典记录n个node的树的所有组合方式，之后递归到的时候就不用重复计算。
 
 #### [1123. Lowest Common Ancestor of Deepest Leaves](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/), [Solution](Tree/Lowest_Common_Ancestor_of_Deepest_Leaves.py)
 bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves开始，回溯parent，直到只剩某一层一个parent。
@@ -419,6 +430,15 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 先找到连通集，然后看每个连通集是否是complete的。
 
 
+---
+
+<div id='Math'></div>
+
+## Math
+
+#### [50. Pow(x, n)](https://leetcode.com/problems/pow(x,-n)/description/), [Solution](Math/Pow(x,_n).py)
+暴力会超时，所以根据n的二进制表示来考虑结果里有哪些x的二次power。可以用bitmask或者recursion。从小到大可能会超出float范围，所以可以限制将超出范围的时候返回0（因为答案不会超出范围，中间的power超出范围就说明是负幂就是除）。也可以从大到小做，不会超出范围。
+
 
 ---
 
@@ -517,8 +537,17 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 ## Binary Search
 
+#### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/), [Solution](BinarySearch/Search_a_2D_Matrix.py)
+bisect_left返回下标i，这之前的所有元素严格小于搜索的元素x，i及i之后的元素大于等于x。先搜索所有行的第一个元素。如果返回的下标元素等于target则结束。否则说明target在下标对应的那一行（可能超出）。然后在下标对应的行再次搜索，判断搜索出来的元素是否等于target。
+
 #### [704. Binary Search](https://leetcode.com/problems/binary-search/description/), [Solution](BinarySearch/Binary_Search.py)
 简单。可以把相等情况放在第一个判断，这样可以不用每次都运行到最底端，而且可以避免中间out of range。
+
+#### [852. Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array/description/), [Solution](BinarySearch/Peak_Index_in_a_Mountain_Array.py)
+每次判断mid和他左右元素的大小，如果不是mid - 1 < mid > mid + 1就说明不是peak，根据落在peak左边或右边决定下一步binary的方向。
+
+#### [1870. Minimum Speed to Arrive on Time](https://leetcode.com/problems/minimum-speed-to-arrive-on-time/description/), [Solution](BinarySearch/Minimum_Speed_to_Arrive_on_Time.py)
+从最小速度到最大速度之间二分搜索。另外用一个函数来验证每个速度是否能达到。
 
 #### [2300. Successful Pairs of Spells and Potions](https://leetcode.com/problems/successful-pairs-of-spells-and-potions/description/), [Solution](BinarySearch/Successful_Pairs_of_Spells_and_Potions.py)
 对potions排序，然后在里面找对应每个success/spell的下标，有了下标就可以直接得到个数了。
@@ -575,13 +604,17 @@ mini max问题用二分法。这里每次检测mid这个最大difference可不�
 #### [1696. Jump Game VI](https://leetcode.com/problems/jump-game-vi/description/), [Solution](SlidingWindow/Jump_Game_VI.py)
 和239一样，用一个mono deque记录每个下标位置的最大score，每一步更新并保持window单调下降，且window里score最大的在第一个。
 
+#### [1852. Distinct Numbers in Each Subarray](https://leetcode.com/problems/distinct-numbers-in-each-subarray/description/), [Solution](SlidingWindow/Distinct_Numbers_in_Each_Subarray.py)
+滑动窗口，用字典统计窗口的的数字和个数。
 
 #### [2516. Take K of Each Character From Left and Right](https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/), [Solution](SlidingWindow/Take_K_of_Each_Character_From_Left_and_Right.py)
 直接sliding window就行了。。。每加进来一个就检测窗口内元素是否过多，过多就一直++左边界，不然就重复加新元素。  
 
-
 #### [2537. Count the Number of Good Subarrays](https://leetcode.com/problems/count-the-number-of-good-subarrays/description/), [Solution](SlidingWindow/Count_the_Number_of_Good_Subarrays.py)
 用hashmap记录当前window里的good pair。然后right右移hashmap对应增加，left左移直到window里count数小于k。
+
+#### [2799. Count Complete Subarrays in an Array](https://leetcode.com/problems/count-complete-subarrays-in-an-array/description/), [Solution](SlidingWindow/Count_Complete_Subarrays_in_an_Array.py)
+统计以每个下标作为左边界的所有complete subarray。窗口往右滑，如果当前窗口是一个complete subarray那么从当前窗口往右的所有subarray都是complete的。然后窗口左边右移一位，如果当前窗口不complete了就右移右边界直到complete，如果直接complete就直接统计。
 
 
 
@@ -622,6 +655,11 @@ BST的inorder遍历会得到一个nondecreasing的序列。所以用一个inorde
 
 ## DFS
 
+#### [17. Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/), [Solution](DFS/Letter_Combinations_of_a_Phone_Number.py)
+简单，recursive遍历，对前一步生成的所有组合加上这一步的数字对应的所有字母。
+
+#### [77. Combinations](https://leetcode.com/problems/combinations/description/), [Solution](DFS/Combinations.py)
+简单。下一个长度的combination由上一个长度加上所有可能得没用到的数组成。也可以用recursion。
 
 #### [79. Word Search](https://leetcode.com/problems/word-search/description/), [Solution](DFS/Word_Search.py)
 从board的每个位置开始dfs+backtrack搜索word。注意先pre check是否board里包含了word里的所有字母，不然会超时。
@@ -644,6 +682,9 @@ dfs返回从当前坐标开始的最长路径长度，用一个path_length来记
 #### [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/), [Solution](DFS/Concatenated_Words.py)
 直接dfs，对每个单词从每个下标分成两半，查找前一半和后一半是否在words里或者能表示成words里词的拼接。把words转换成set，加上memorization来提速。
 
+#### [486. Predict the Winner](https://leetcode.com/problems/predict-the-winner/description/), [Solution](DFS/Predict_the_Winner.py)
+maxDiff记录从这个player开始，他能达到的最大difference。A可以从左边或右边拿，A拿了之后B拿，B依然要从B开始最大化他的difference。那么A的difference就是A拿左边或右边之后减去B的maxDiff，两个里面更大的那一个。
+
 #### [526. Beautiful Arrangement (similar to 46)](https://leetcode.com/problems/beautiful-arrangement/), [Solution](DFS/Beautiful_Arrangement.py)
 T(N!), O(N)
 直接backtrack，用一个self.count来记录当前有效permutation。每次idx到末尾就更新count。
@@ -662,6 +703,9 @@ T($k*2^N$), O(N)
 #### [2538. Difference Between Maximum and Minimum Price Sum](https://leetcode.com/problems/difference-between-maximum-and-minimum-price-sum/description/), [Solution](DFS/Difference_Between_Maximum_and_Minimum_Price_Sum.py)
 用两次dfs，第一次以0为root，算出每个节点的最大和；第二次从0开始，往下dfs的时候传一个parent_contribution，即在每个节点的parent方向的最大路径和。为了计算parent_contribution，在每个节点算出包含他自己的parent_contribution在内的前两大的路径和。这样在所有子节点上，如果碰到了最大路径的节点，就把第二大的作为parent_contribution传入。
 
+#### [2811. Check if it is Possible to Split Array](https://leetcode.com/problems/check-if-it-is-possible-to-split-array/description/), [Solution](DP/Check_if_it_is_Possible_to_Split_Array.py)
+dp，对每个子列[i:j]检查[i:j - 1]或[i + 1:j]是否满足当前条件且本身可以被split。
+
 
 
 ---
@@ -670,6 +714,9 @@ T($k*2^N$), O(N)
 
 ## BFS
 
+
+#### [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/), [Solution](BFS/Binary_Tree_Level_Order_Traversal.py)
+简单，用两个q交替记录当前层和下一层的node，然后每层的val依次append到一个list里。
 
 #### [126. Word Ladder II](https://leetcode.com/problems/word-ladder-ii/description/), [Solution](BFS/Word_Ladder_II.py)
 首先建一个interword的字典，保存这些interword可以通向哪些word。然后从begin word开始bfs。TLE了。
@@ -754,8 +801,20 @@ dp，每次比较i，j和i + 1， j - 1加上头尾是否相等、i + 1， j、i
 #### [630. Course Schedule III](https://leetcode.com/problems/course-schedule-iii/description/), [Solution](DP/Course_Schedule_III.py)
 先按结束时间排序，然后依次处理。维护到当前位置的上的最多的课，每个课的时长，和总时长。新的课来了之后，如果在当前时间直接上不超过lastDay，就直接放进heap里；如果超过了，duration大于之前的所有课的最大时长的话，不能放，否则无法维护是上的最多的课；如果小于之前的最大时长，则直接替换，可以维护是上的最多的课。因为是按结束时间排序，所以可以直接放进去替换。因为用了heap，所以总时长和之前上的课的时长也可以快速维护。
 
+#### [664. Strange Printer](https://leetcode.com/problems/strange-printer/description/), [Solution](DP/Strange_Printer.py)
+dp[i][j]表示从s第i个到第j个的substring的最少print数。每有一个新的进来，如果和前一个一样dp就也一样。如果不一样那就有两种方法。一个直接在dp[i][j - 1]基础上多print一次，一个从前一个相同字符开始覆盖到这里，然后重新print中间的部分。每一步对前面的所有元素都判断一次。
+
+#### [673. Number of Longest Increasing Subsequence](https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/), [Solution](DP/Number_of_Longest_Increasing_Subsequence.py)
+简单dp，不过edge case弄了一会。用dp记录数组(l, s)，l是以当前元素为结尾的最长递增序列的长度，s是以当前元素为结尾的最长递增序列数。每个新元素过一遍前面的所有元素，如果前面的比当前的小那就是递增序列，根据前面的长度决定是否是最长递增序列以及是否加到现在的计数里去。
+
+#### [688. Knight Probability in Chessboard](https://leetcode.com/problems/knight-probability-in-chessboard/description/), [Solution](DP/Knight_Probability_in_Chessboard.py)
+用棋盘记录每一步在每个格子上的概率。每一步更新整个棋盘所有格子的概率。最后对最后一步之后的整个棋盘上的概率求和。
+
 #### [741. Cherry Pickup](https://leetcode.com/problems/cherry-pickup/description/), [Solution](DP/Cherry_Pickup.py)
 第二次不用从n-1, n-1往回走了，直接从0, 0往右下出发两个路径，然后三维dp，dp[r1][c1][r2]，然后让两个点在同一反对角线上，这样c2 = r1 + c1 - r2。
+
+#### [808. Soup Servings](https://leetcode.com/problems/soup-servings/description/), [Solution](DP/Soup_Servings.py)
+dp用一个helper function分别返回A先empty的概率和同时empty的概率。注意n过大时因为serve的方式不对称所以A先empty的概率接近1。所以n过大时直接返回1就行了。
 
 #### [983. Minimum Cost For Tickets](https://leetcode.com/problems/minimum-cost-for-tickets/description/), [Solution](DP/Minimum_Cost_For_Tickets.py)
 基本dp，根据在第i天用1/7/30pass来分类，取里面的最小的。另外注意bisect.bisect_left和bisect.bisect，第一个是使找a[:i] < x，a[i:] >= x的下标i，第二个是a[:i] <= x，a[i:] > x的下标i。
@@ -842,6 +901,9 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 #### [1402. Reducing Dishes](https://leetcode.com/problems/reducing-dishes/description/), [Solution](Greedy/Reducing_Dishes.py)
 排序。0和正数肯定要选，这之后每加一个负数，相当于增加前面所有正数的和，并减去到目前为止加进来的所有负数以及当前这个负数。所以从绝对值小到大开始对负数求和，直到减去的量大于等于正数的增量为止。记录下标，并计算从这个下标开始取的结果。
 
+#### [2141. Maximum Running Time of N Computers](https://leetcode.com/problems/maximum-running-time-of-n-computers/description/), [Solution](Greedy/Maximum_Running_Time_of_N_Computers.py)
+先排序，然后把最大的n个电池分配出去。把剩下的加起来，然后对使用中的那n个电池从小到大，依次用剩余的电池把第0到第i个电池的容量补到第i + 1个那么多。这样电脑就可以运行i+1那么长时间。如果一直到最后还有剩余或者中间停住不能补到下一个，就把剩余的所有电量平均分配到所有电池或者前i个电池上。
+
 #### [2193. Minimum Number of Moves to Make Palindrome](https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/description/), [Solution](Greedy/Minimum_Number_of_Moves_to_Make_Palindrome.py)
 只用看从末尾开始，把每个对应的字母从原始位置移动到开头的消耗就行。
 
@@ -853,6 +915,10 @@ greedy的根据lcp依次填满res列表，如果用到的字符数超过26就返
 
 #### [2611. Mice and Cheese](https://leetcode.com/problems/mice-and-cheese/description/), [Solution](Greedy/Mice_and_Cheese.py)
 总和 = sum ai + sum bj 其中I大小为k = sum ai - sum bi + sum b这里sum b是直接求和，所以是固定值，只需要最大化 sum ai - sum bi，就是算一下差值，取最大的k个就行了。
+
+#### [2800. Shortest String That Contains Three Strings](https://leetcode.com/problems/shortest-string-that-contains-three-strings/description/), [Solution](Greedy/Shortest_String_That_Contains_Three_Strings.py)
+枚举所有string的组合，然后写一个helper找出两个string能重叠的最小super string。然后求super(a, b)，返回的string再和c求一次super。返回所有这些33super里最小的那个。
+
 
 
 ---
