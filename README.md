@@ -537,8 +537,14 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 ## Binary Search
 
+#### [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/description/), [Solution](BinarySearch/Search_in_Rotated_Sorted_Array.py)
+先通过left和mid的大小关系判断转折点在左边还是右边，然后再通过target和递增那一边的两端的大小关系判断target在哪边。
+
 #### [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/), [Solution](BinarySearch/Search_a_2D_Matrix.py)
 bisect_left返回下标i，这之前的所有元素严格小于搜索的元素x，i及i之后的元素大于等于x。先搜索所有行的第一个元素。如果返回的下标元素等于target则结束。否则说明target在下标对应的那一行（可能超出）。然后在下标对应的行再次搜索，判断搜索出来的元素是否等于target。
+
+#### [81. Search in Rotated Sorted Array II](https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/), [Solution](BinarySearch/Search_in_Rotated_Sorted_Array_II.py)
+和33基本一样，加一个步骤每轮如果left和right和相邻的相等就往中间移动，这样保证nums[left] <= nums[mid]的时候转折点肯定在右边，否则在左边的话说明mid到right为止全都相等，那right就会一直往左走直到不相等。
 
 #### [704. Binary Search](https://leetcode.com/problems/binary-search/description/), [Solution](BinarySearch/Binary_Search.py)
 简单。可以把相等情况放在第一个判断，这样可以不用每次都运行到最底端，而且可以避免中间out of range。
@@ -797,6 +803,9 @@ recursion + memorization。根据拿不拿root分类。加上点边界条件就�
 
 #### [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/), [Solution](DP/Longest_Palindromic_Subsequence.py)
 dp，每次比较i，j和i + 1， j - 1加上头尾是否相等、i + 1， j、i， j - 1之间的最大值。
+
+#### [518. Coin Change II](https://leetcode.com/problems/coin-change-ii/description/), [Solution](DP/Coin_Change_II.py)
+每个coin有两种可能，用到或者不用到。所以对coin的index和amount做dp，每次考虑用到或者不用到这个coin的情况。
 
 #### [630. Course Schedule III](https://leetcode.com/problems/course-schedule-iii/description/), [Solution](DP/Course_Schedule_III.py)
 先按结束时间排序，然后依次处理。维护到当前位置的上的最多的课，每个课的时长，和总时长。新的课来了之后，如果在当前时间直接上不超过lastDay，就直接放进heap里；如果超过了，duration大于之前的所有课的最大时长的话，不能放，否则无法维护是上的最多的课；如果小于之前的最大时长，则直接替换，可以维护是上的最多的课。因为是按结束时间排序，所以可以直接放进去替换。因为用了heap，所以总时长和之前上的课的时长也可以快速维护。
