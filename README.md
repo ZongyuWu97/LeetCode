@@ -753,6 +753,9 @@ bfs + heap。依次把没去过的点放到heap里面，注意四周的点的到
 
 ## DP
 
+#### [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/description/), [Solution](DP/Unique_Paths_II.py)
+简单dp，根据当前位置是否有障碍物决定返回上方和左方的和或是直接0.
+
 #### [72. Edit Distance](https://leetcode.com/problems/edit-distance/), [Solution](DP/Edit_Distance.py)
 明明是DP不是DFS啊。如果作change，看看当前位置的character是否一样。如果作delete，在dp[i-1][j]上加1。如果作insert，在dp[i][j-1]上加1。取三个里面最小的。
 
@@ -857,6 +860,9 @@ DP+bitmask。几个操作1 << n是bit往左移n位。a & b，a ^ b。用整数�
 
 #### [2444 Count Subarrays With Fixed Bounds](https://leetcode.com/contest/weekly-contest-315/problems/count-subarrays-with-fixed-bounds/), [Solution](DP/Count_Subarrays_With_Fixed_Bounds.py)
 先过一遍nums，记录每个坐标前最近的等于minK，等于maxK，超出范围的值的坐标，记为prev[0], prev[1], prev[2]。然后dp。dp[i] = dp[i-1]，如果nums[i]没超出范围，那么dp[i]再加上prev[0], prev[1]里更小的那个到prev[2]的距离。如果是负的就不加。
+
+#### [2369. Check if There is a Valid Partition For The Array](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/description/), [Solution](DP/Check_if_There_is_a_Valid_Partition_For_The_Array.py)
+基础dp，dp[i]取决于i之前的两个或三个数字是否满足条件以及更之前的dp是否valid。
 
 #### [2472. Maximum Number of Non-overlapping Palindrome Substrings](https://leetcode.com/problems/maximum-number-of-non-overlapping-palindrome-substrings/description/), [Solution](DP/Maximum_Number_of_Non-overlapping_Palindrome_Substrings.py)
 dp检查到i下标之前的子串，里面长度大于k的回文串的最大长度。注意这里对以i-1结尾的子串，只用检查长度为k和长度k-1的就行，更前面的不用检查。
