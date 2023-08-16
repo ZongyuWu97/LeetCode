@@ -238,6 +238,9 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/description/), [Solution](LinkedList/Add_Two_Numbers.py)
 创建一个新链表，如果l1或l2后面还有就继续延长这个链表
 
+#### [86. Partition List](https://leetcode.com/problems/partition-list/description/), [Solution](LinkedList/Partition_List.py)
+把比x小的和大于等于x的元素分别放到两个list里然后再现重新生成一个linkedlist。
+
 #### [146. LRU Cache](https://leetcode.com/problems/lru-cache/description/), [Solution](LinkedList/LRU_Cache.py)
 用双链表做。保存head和tail，然后自己写一个addNode和deleteNode函数。另外用一个dict保存key和对应node的指针。get的时候删掉对应node并再次加到头部；put的时候如果已经在里面就删掉，然后如果dict还是满的就说明put的是新元素，删掉tail前的node，然后再把新node的加到头部。
 
@@ -602,7 +605,7 @@ mini max问题用二分法。这里每次检测mid这个最大difference可不�
 记录之前每一个数的下标，以及left。每一步如果以前记录过且在window内，则更新left到记录过的下标+1，否则不用管。然后把当前元素的下标也记录进去。最后更新res到当前下标 - left + 1.
 
 #### [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/description/), [Solution](SlidingWindow/Sliding_Window_Maximum.py)
-要想到maintain一个deque，储存当前window里从最大元素开始往右依次减小的下标。这样第一个下标始终是当前window里最大元素的下标。用一个clean函数来维护，clean是O(1)的。首先从左边去掉不在window里的下标，然后从右边开始去掉小于当前元素的下标。因为维护前是从大到小，所以维护后也是从大到小。然后用这个deque遍历nums就行了。
+要想到maintain一个deque，储存当前window里从最大元素开始往右依次减小的下标。这样第一个下标始终是当前window里最大元素的下标。因为加进去一个数之后window里面这个数之前的元素就都没用了，所以window是单调的。用一个clean函数来维护，clean是O(1)的。首先从左边去掉不在window里的下标，然后从右边开始去掉小于当前元素的下标。因为维护前是从大到小，所以维护后也是从大到小。然后用这个deque遍历nums就行了。
 
 #### [1100. Find K-Length Substrings With No Repeated Characters](https://leetcode.com/problems/find-k-length-substrings-with-no-repeated-characters/description/), [Solution](SlidingWindow/Find_K-Length_Substrings_With_No_Repeated_Characters.py)
 用一个set储存当前window里的元素方便快速查找，用一个deque按顺序储存当前window的元素和下标。每一步，如果window已经满了，丢掉最前面的，更新window大小；如果新元素已经在window里，丢掉到重复元素位置并根据最后丢掉的元素的下标更新window大小；最后把新的元素放进来，如果window是满的就substring数加一。
