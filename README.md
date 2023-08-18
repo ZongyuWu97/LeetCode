@@ -736,6 +736,9 @@ dp，对每个子列[i:j]检查[i:j - 1]或[i + 1:j]是否满足当前条件且�
 #### [317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/description/), [Solution](BFS/Shortest_Distance_from_All_Buildings.py)
 可以从每个空地开始bfs到每个building，或者从building开始bfs到空地。从building开始还可以每一步只bfs之前能bfs到的那些空格，可以更快。从空地开始的会超市。
 
+#### [542. 01 Matrix](https://leetcode.com/problems/01-matrix/description/), [Solution](BFS/01_Matrix.py)
+先把所有0的距离置为0，然后从0开始出发bfs，把剩下的所有距离安上。
+
 #### [662. Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/description/), [Solution](BFS/Maximum_Width_of_Binary_Tree.py)
 bfs，每一层计算每个点的index，这一层过完之后更新最大index差，即宽度。
 
