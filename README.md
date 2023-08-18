@@ -11,6 +11,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#LinkedList>Linked List</a></li> 
   <li> <a href=#Tree>Tree</a></li> 
   <li> <a href=#Trie>Trie</a></li> 
+  <li> <a href=#Graph>Graph</a></li>   
   <li> <a href=#Heap>Heap</a></li> 
   <li> <a href=#Stack>Stack</a></li> 
   <li> <a href=#UnionFind>UnionFind</a></li> 
@@ -304,6 +305,17 @@ bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves�
 #### [1268. Search Suggestions System](https://leetcode.com/problems/search-suggestions-system/description/), [Solution](Trie/Search_Suggestions_System.py)
 用Trie记录product，并在每一层用suggestion记录三个词，然后对word每个字母到每一层的时候直接访问对应的suggestion。还可以用sort + binary search。
 
+
+
+---
+
+
+<div id='Graph'></div>
+
+## Graph
+
+#### [1615. Maximal Network Rank](https://leetcode.com/problems/maximal-network-rank/description/), [Solution](Graph/Maximal_Network_Rank.py)
+简单，统计一下每个node的度然后暴力就行了。注意相连的node的network rank要减一。
 
 
 
