@@ -56,6 +56,9 @@ O(n^2): dp, Dijkstra
 #### [7. Reverse Integer](https://leetcode.com/problems/reverse-integer/description/), [Solution](String/Reverse_Integer.py)
 先转成str然后reverse再拼起来。用到rjust来限制不会超出64位。用到 * (1 - 2 * (x < 0))来判断正负。
 
+#### [459. Repeated Substring Pattern](https://leetcode.com/problems/repeated-substring-pattern/description/), [Solution](String/Repeated_Substring_Pattern.py)
+直接对每个长度可以被s长度整除的substring复制到和s一样长然后比较是否相等。
+
 #### [2268. Minimum Number of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/description/), [Solution](String/Minimum_Number_of_Keypresses.py)
 直接过一遍str，让频率高的放在第一个，9个button放完了就放第二个，依次。每放一个字母就count += number of ch in str * 字母在button里的位置。
 
@@ -191,14 +194,11 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [1. Two Sum](https://leetcode.com/problems/two-sum/description/), [Solution](Hashmap/Two_Sum.py)
 用hashmap储存与当前值的和为target的值，以及当前值的index。继续查找每一个值，如果在hashmap里就输出储存的index和当前的index。
 
-
 #### [15. 3Sum](https://leetcode.com/problems/3sum/description/), [Solution](Hashmap/3Sum.py)
 跟2sum基本一样，先排序，然后对每一个值把他当成2sum里的k，然后对之后的做2sum，依次重复n次。
 
-
 #### [18. 4Sum](https://leetcode.com/problems/4sum/description/), [Solution](Hashmap/4Sum.py)
 和3sum基本一样。另外这里面两个外部循环都有if i == 0 or nums[i - 1] != nums[i]，是用来避免重复计算的。
-
 
 #### [170. Two Sum III - Data structure design](https://leetcode.com/problems/two-sum-iii-data-structure-design/description/), [Solution](Hashmap/Two_Sum_III_-_Data_structure_design.py)
 跟Two Sum一样，不过把hashmap的值的index换成了count，因为只要找到是否有就行了不要下标。然后用count可以避免重复访问同一个元素。
@@ -209,10 +209,8 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/), [Solution](Hashmap/Subarray_Sum_Equals_K.py)
 用一个hashmap记录到每个下标为止的子串合对应的子串数。对每个新下标，count加上合为 当前子串合 - k 的子串数。
 
-
 #### [1679. Max Number of K-Sum Pairs](https://leetcode.com/problems/max-number-of-k-sum-pairs/description/), [Solution](Hashmap/Max_Number_of_K-Sum_Pairs.py)
 跟2sum基本一样。不过用count来记录，然后每碰到一个匹配的就count--，res++
-
 
 #### [2488. Count Subarrays With Median K](https://leetcode.com/problems/count-subarrays-with-median-k/description/), [Solution](Hashmap/Count_Subarrays_With_Median_K.py)
 得到k的下标，计算到k右边每个下标为止大于小于k的数的个数并保存在hashmap里；然后从k往左边一样计算，根据hashmap里的个数，加起来等于0或1的个数，就是从这个下标开始满足条件的subarray个数。
@@ -228,6 +226,9 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 #### [2671. Frequency Tracker](https://leetcode.com/problems/frequency-tracker/description/), [Solution](Hashmap/Frequency_Tracker.py)
 两个hashmap，分别记录每个数的频率和每个频率对应的数。每次增减都更新这两个hashmap。
+
+#### [2829. Determine the Minimum Sum of a k-avoiding Array](https://leetcode.com/problems/determine-the-minimum-sum-of-a-k-avoiding-array/description/), [Solution](HashMap/Determine_the_Minimum_Sum_of_a_k-avoiding_Array.py)
+简单，基本就是2sum。
 
 
 
@@ -313,6 +314,9 @@ bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves�
 <div id='Graph'></div>
 
 ## Graph
+
+#### [1489. Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree](https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/description/), [Solution](Graph/Find_Critical_and_Pseudo-Critical_Edges_in_Minimum_Spanning_Tree.py)
+先排序，然后用Kruscal找出一个最小生成树并记录这个树的最小权。然后对每个边考虑不带这个边和强制带这个边，再用Kruscal看是否能组成等于最小权的最小生成树，来判断这个边是否是critical或seudo critical的。把union find写成一个类，方便后面每次Kruscal里方便调用。
 
 #### [1615. Maximal Network Rank](https://leetcode.com/problems/maximal-network-rank/description/), [Solution](Graph/Maximal_Network_Rank.py)
 简单，统计一下每个node的度然后暴力就行了。注意相连的node的network rank要减一。
@@ -637,6 +641,8 @@ mini max问题用二分法。这里每次检测mid这个最大difference可不�
 #### [2799. Count Complete Subarrays in an Array](https://leetcode.com/problems/count-complete-subarrays-in-an-array/description/), [Solution](SlidingWindow/Count_Complete_Subarrays_in_an_Array.py)
 统计以每个下标作为左边界的所有complete subarray。窗口往右滑，如果当前窗口是一个complete subarray那么从当前窗口往右的所有subarray都是complete的。然后窗口左边右移一位，如果当前窗口不complete了就右移右边界直到complete，如果直接complete就直接统计。
 
+#### [2831. Find the Longest Equal Subarray](https://leetcode.com/problems/find-the-longest-equal-subarray/description/), [Solution](SlidingWindow/Find_the_Longest_Equal_Subarray.py)
+先预处理，得到每个数以及包含这个数的所有区间，然后对每个数的区间用sliding window，依次加入下一个区间直到count超过k，然后就把window头部的区间pop出去。
 
 
 ---
@@ -899,6 +905,9 @@ dp，dp[i][j]表示第i个wall用paid来做的情况下，完成j个wall的最�
 
 #### [2750. Ways to Split Array Into Good Subarrays](https://leetcode.com/problems/ways-to-split-array-into-good-subarrays/description/), [Solution](DP/Ways_to_Split_Array_Into_Good_Subarrays.py)
 dp题有思路就好做。dp[i]如果是0就没有新的split方法，直接和前一个一样；如果是1那就可以有新的从前一个一后面的那个0开始一直到这个1前面的那个0那么多种方法数，这些加起来。比如10000后面来一个1，那么就有00001，0001,001,01,1这些新的split。
+
+#### [2830. Maximize the Profit as the Salesman](https://leetcode.com/problems/maximize-the-profit-as-the-salesman/description/), [Solution](DP/Maximize_the_Profit_as_the_Salesman.py)
+周赛的时候没思路，其实不难，按照结束的house分个类，然后对每个结束的house做dp。先初始化成dp[i - 1]因为可以完全不选以i结尾的offer。然后对每个以i结尾的offer，看dp[start] + gold和dp[i]的大小。
 
 #### [Snowflake String Pattern](https://www.geeksforgeeks.org/number-of-distinct-words-of-size-n-with-at-most-k-contiguous-vowels/), [Solution](DP/String_Pattern)
 dp[i][j]表示长度为i的string，最后j位是元音，的组合数。对每个i，dp[i][0]由i - 1的行和初始化。之后根据j和i的相对大小来判断状态转移方程。可以只保留一行作为dp储存，因为只用到了上一行的dp。

@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2369. Check if There is a Valid Partition For The Array'
+    name = '2830. Maximize the Profit as the Salesman'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
