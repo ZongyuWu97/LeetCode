@@ -334,6 +334,9 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 #### [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/), [Solution](Heap/Find_Median_from_Data_Stream.py)
 建一个最大堆和一个最小堆，保存他们的大小，每次有新的数进来就让他进最小或最大堆，保持最大堆和最小堆个数相等或者多1。
 
+#### [767. Reorganize String](https://leetcode.com/problems/reorganize-string/description/), [Solution](Heap/Reorganize_String.py)
+先算出每个字母的出现次数，然后依次把出现次数最多或第二多的append到末尾。用heap来看出现最多的字母。
+
 #### [2386. Find the K-Sum of an Array](https://leetcode.com/problems/find-the-k-sum-of-an-array/description/), [Solution](Heap/Find_the_K-Sum_of_an_Array.py)
 先得到所有正数的和，这是可能得最大和。然后开始去掉和里的正数，或者加上剩下的负数，这两个都等价于从最大和里减去nums里的绝对值。因为是从最大和往下，所以把nums按绝对值排序之后依次减去每个值，并且每一步考虑加上nextSum - absNum[idx + 1]和nextSum + absNum[idx] - absNum[idx + 1]两种情况，即是否减去下标idx的值。每一步的结果都放到一个最大堆里，下一步再从最大堆里取，保证了是从maxSum依次往下递减。absNum排序过，也是用来保证maxSum依次递减。
 
@@ -780,6 +783,9 @@ bfs + heap。依次把没去过的点放到heap里面，注意四周的点的到
 #### [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/description/), [Solution](DP/Unique_Paths_II.py)
 简单dp，根据当前位置是否有障碍物决定返回上方和左方的和或是直接0.
 
+#### [62. Unique Paths](https://leetcode.com/problems/unique-paths/description/), [Solution](DP/Unique_Paths.py)
+简单dp。
+
 #### [72. Edit Distance](https://leetcode.com/problems/edit-distance/), [Solution](DP/Edit_Distance.py)
 明明是DP不是DFS啊。如果作change，看看当前位置的character是否一样。如果作delete，在dp[i-1][j]上加1。如果作insert，在dp[i][j-1]上加1。取三个里面最小的。
 
@@ -900,6 +906,9 @@ dp[i][j]表示在nums[:i]中和为j的子集数。j从0到k - 1，dp[-1][j]就�
 #### [2684. Maximum Number of Moves in a Grid](https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/), [Solution](DP/Maximum_Number_of_Moves_in_a_Grid.py)
 基本dp，从后往前dp。每次看前一列的上下三行。
 
+#### [2707. Extra Characters in a String](https://leetcode.com/problems/extra-characters-in-a-string/description/), [Solution](DP/Extra_Characters_in_a_String.py)
+从每一个下标开始dp。先初始化成dp(start + 1) + 1就是不用当前字母，当前字母就是extra字母了。然后recursion对后面每一个下标看从当前到后面在不在dictionary里，然后更新res。
+
 #### [2742. Painting the Walls](https://leetcode.com/problems/painting-the-walls/description/), [Solution](DP/Painting_the_Walls.py)
 dp，dp[i][j]表示第i个wall用paid来做的情况下，完成j个wall的最低cost。可以只用一维来记录。每个dp[j] = min(dp[j], dp[max(j - time[i] - 1, 0)] + cost[i])，这里等号右边的dp[j]表示上一步的结果。取这个和使用第i个paid的情况下，也就是用cost[i]。用了cost[i]会占用time[i]的时间，所以可以完成当前的wall以及另外time[i]个用free完成的wall。去掉这么多wall，剩下的最低cost再加上cost[i]，和上一步的取更低的那一个，更新下一步。
 
@@ -948,6 +957,9 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 
 #### [2193. Minimum Number of Moves to Make Palindrome](https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/description/), [Solution](Greedy/Minimum_Number_of_Moves_to_Make_Palindrome.py)
 只用看从末尾开始，把每个对应的字母从原始位置移动到开头的消耗就行。
+
+#### [2366. Minimum Replacements to Sort the Array](https://leetcode.com/problems/minimum-replacements-to-sort-the-array/description/), [Solution](Greedy/Minimum_Replacements_to_Sort_the_Array.py)
+从后往前，依次把每一个比后面大的元素分拆。如果当前的整除后一个就分拆成所有都和后一个一样大，或者不能整除就分成比整除向下取整多一个，就是尽量少的分拆但是每一个都比后面的小。
 
 #### [2573. Find the String with LCP](https://leetcode.com/problems/find-the-string-with-lcp/description/), [Solution](Greedy/Find_the_String_with_LCP.py)
 greedy的根据lcp依次填满res列表，如果用到的字符数超过26就返回''，如果遇到已经填过的就跳过。然后再循环一次检查生成的res是否符合lcp。一个个位置对应检查太慢了，所以用lcp[i][j]和lcp[i + 1][j + 1]之间的关系来检查。如果res[i] == res[j]那么lcp[i][j] = lcp[i + 1][j + 1] + 1。最后根据res拼接出答案。

@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2830. Maximize the Profit as the Salesman'
+    name = '2366. Minimum Replacements to Sort the Array'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
