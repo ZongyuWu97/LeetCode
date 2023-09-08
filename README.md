@@ -243,11 +243,21 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [86. Partition List](https://leetcode.com/problems/partition-list/description/), [Solution](LinkedList/Partition_List.py)
 把比x小的和大于等于x的元素分别放到两个list里然后再现重新生成一个linkedlist。
 
+#### [138. Copy List with Random Pointer](https://leetcode.com/problems/copy-list-with-random-pointer/description/), [Solution](LinkedList/Copy_List_with_Random_Pointer.py)
+我用的简单的先复制再建立联系，可以用recursive的方法直接在复制的时候就建立联系。
+
+#### [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/description/), [Solution](LinkedList/Linked_List_Cycle.py)
+遍历链表，把见过的放进set，之后如果碰到之前放进set过的就是cycle，否则不是。
+
 #### [146. LRU Cache](https://leetcode.com/problems/lru-cache/description/), [Solution](LinkedList/LRU_Cache.py)
 用双链表做。保存head和tail，然后自己写一个addNode和deleteNode函数。另外用一个dict保存key和对应node的指针。get的时候删掉对应node并再次加到头部；put的时候如果已经在里面就删掉，然后如果dict还是满的就说明put的是新元素，删掉tail前的node，然后再把新node的加到头部。
 
 #### [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/description/), [Solution](LinkedList/Add_Two_Numbers_II.py)
 过两遍linkedlist乘10相加，然后加起来再除10取余从尾到头建个新linkedlist。
+
+#### [725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/description/), [Solution](LinkedList/Split_Linked_List_in_Parts.py)
+根据剩余总数和剩余组数，如果能整除下一组就有正好整除那么多个node，不能的话就是整除向上取整那么多个。
+
 
 
 ---
@@ -866,6 +876,9 @@ dp用一个helper function分别返回A先empty的概率和同时empty的概率�
 
 #### [1235. Maximum Profit in Job Scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/description/), [Solution](DP/Maximum_Profit_in_Job_Scheduling.py)
 直接dp，用recursion+lru_cache可以直接过，用memorization的话就必须用二分搜索。dp(i) = dp(i+1)或者对第i个工作结束时间之后的所有工作j，profit[i]+dp(j)中最大的那个。
+
+#### [1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/description/), [Solution](DP/Minimum_Number_of_Taps_to_Open_to_Water_a_Garden.py)
+dp[i]表示从0到i需要的最少tap数。然后遍历每个tap考虑用到这个tap的情况下，用这个tap覆盖范围内的dp[j]来更新这个tap的最远覆盖点处的dp。就是每个dp[j] + 1里面最小的那个。
 
 #### [1335. Minimum Difficulty of a Job Schedule](https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule/description/), [Solution](DP/Minimum_Difficulty_of_a_Job_Schedule.py)
 直接dp，dp(i, d)表示从第i个工作开始，还剩下d天。dp(i, d)等于在当天安排从i到j-1的工作，然后剩下的d-1天做j之后的工作，即dp(j, d-1)，对所有j > i里面最小的那一个。用lru_cache减少时间。

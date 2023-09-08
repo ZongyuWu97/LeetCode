@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2366. Minimum Replacements to Sort the Array'
+    name = '725. Split Linked List in Parts'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
