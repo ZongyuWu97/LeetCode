@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '725. Split Linked List in Parts'
+    name = '1647. Minimum Deletions to Make Character Frequencies Unique'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':

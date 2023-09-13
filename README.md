@@ -209,6 +209,12 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [560. Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/description/), [Solution](Hashmap/Subarray_Sum_Equals_K.py)
 用一个hashmap记录到每个下标为止的子串合对应的子串数。对每个新下标，count加上合为 当前子串合 - k 的子串数。
 
+#### [1282. Group the People Given the Group Size They Belong To](https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/description/), [Solution](HashMap/Group_the_People_Given_the_Group_Size_They_Belong_To.py)
+先过一遍group，找出每个size都有哪些人，然后对每个size里的那些人按size大小分组。
+
+#### [1647. Minimum Deletions to Make Character Frequencies Unique](https://leetcode.com/problems/minimum-deletions-to-make-character-frequencies-unique/description/), [Solution](HashMap/Minimum_Deletions_to_Make_Character_Frequencies_Unique.py)
+用到了Counter和SortedSet。先过一遍Counter统计每个字母出现了多少次，然后过一遍Counter统计每个出现频率的字母有多少个。然后把出现频率放到sortedSet里，从大到小，把每个出现频率的字母减少字母个数减一个，然后如果出现频率大于一（说明可以减少该字母）且该出现频率对应的字母数也大于一（说明确实有字母被减少了），那就在该频率减一的频率上加上该频率对应的字母数减一（因为有一个字母没有被减少）。
+
 #### [1679. Max Number of K-Sum Pairs](https://leetcode.com/problems/max-number-of-k-sum-pairs/description/), [Solution](Hashmap/Max_Number_of_K-Sum_Pairs.py)
 跟2sum基本一样。不过用count来记录，然后每碰到一个匹配的就count--，res++
 
@@ -471,6 +477,13 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 #### [50. Pow(x, n)](https://leetcode.com/problems/pow(x,-n)/description/), [Solution](Math/Pow(x,_n).py)
 暴力会超时，所以根据n的二进制表示来考虑结果里有哪些x的二次power。可以用bitmask或者recursion。从小到大可能会超出float范围，所以可以限制将超出范围的时候返回0（因为答案不会超出范围，中间的power超出范围就说明是负幂就是除）。也可以从大到小做，不会超出范围。
 
+#### [1359. Count All Valid Pickup and Delivery Options](https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/), [Solution](Math/Count_All_Valid_Pickup_and_Delivery_Options.py)
+就是插空，每多一对就在之前的所有里面的空隙之间插入。
+
+#### [2850. Minimum Moves to Spread Stones Over Grid](https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/description/), [Solution](Math/Minimum_Moves_to_Spread_Stones_Over_Grid.py)
+首先看哪些位置大于1，哪些位置等于0，然后放进list。大于1的放进去x - 1次，x是具体数值，表示这个位置要被分配x - 1次。然后计算这两个list里面每两个点之间的曼哈顿距离，这里用了scipy.spatial.distance.cdist这个函数。然后就是一个找矩阵最小分配cost问题，用的算法是[Hungatian](https://en.wikipedia.org/wiki/Hungarian_algorithm)算法。直接用了scipy.optimize.linear_sum_assignment这个函数。
+
+
 
 ---
 
@@ -607,6 +620,9 @@ mini max问题用二分法。这里每次检测mid这个最大difference可不�
 
 #### [2718. Sum of Matrix After Queries](https://leetcode.com/problems/sum-of-matrix-after-queries/description/), [Solution](BinarySearch/Sum_of_Matrix_After_Queries.py)
 先想到用list来储存每一列每一行最后更新的数和更新顺序，然后每一列二分找这一列里在当前列顺序之前更新的行数，然后这些行被列覆盖，剩下的保持行的数。
+
+#### [2817. Minimum Absolute Difference Between Elements With Constraint](https://leetcode.com/problems/minimum-absolute-difference-between-elements-with-constraint/description/), [Solution](BinarySearch/Minimum_Absolute_Difference_Between_Elements_With_Constraint.py)
+从第x位开始，每一步把他之前的第x个元素放到sortedlist里。这样可以保证轮到每个元素的时候，他x位之前的数都在sortedlist里。然后每一步再sortedlist里二分找离当前元素最近的元素。因为加元素的方式，保证了里面所有元素都离当前元素至少x位。然后比较二分出来的位置上的元素和当前元素的差，并更新当前的最小差。这里用了sortedcontainers，而且sortedcontainers里的结构可以直接call bisect_left函数。
 
 #### [Snowflake Perfect Pairs](https://leetcode.com/discuss/interview-question/1781247/TuSimple-or-OA-or-Perfect-Pairs)
 条件2总是满足的，而条件1等价于|x| <= |y|, |y| <= 2|x|。所以先取绝对值，排序，然后从前往后对每个下标i，找到i < j, nums[j] <= 2nums[i]的最大的j。从i + 1到j都是满足和i的perfect pair。
