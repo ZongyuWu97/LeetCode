@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '1647. Minimum Deletions to Make Character Frequencies Unique'
+    name = '56. Merge Intervals'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':

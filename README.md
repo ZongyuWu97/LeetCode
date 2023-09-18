@@ -81,6 +81,9 @@ O(n^2): dp, Dijkstra
 
 ## List
 
+#### [56. Merge Intervals](https://leetcode.com/problems/merge-intervals/description/), [Solution](List/Merge_Intervals.py)
+先按区间起点排序，然后依次检查，如果当前的起点在前一个区间内就更新终点为两个区间里终点大的那个。
+
 #### [163. Missing Ranges](https://leetcode.com/problems/missing-ranges/description/), [Solution](List/Missing_Ranges.py)
 直接过一遍nums，如果和前一个相差大于一则ans.append一个数或一个区间。注意corner case，比如nums = []，以及lower和upper处的情况。
 
@@ -246,6 +249,9 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [2. Add Two Numbers](https://leetcode.com/problems/add-two-numbers/description/), [Solution](LinkedList/Add_Two_Numbers.py)
 创建一个新链表，如果l1或l2后面还有就继续延长这个链表
 
+#### [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/description/), [Solution](LinkedList/Merge_k_Sorted_Lists.py)
+merge sort的方法做，分成两部分然后merge两部分分别的结果。
+
 #### [86. Partition List](https://leetcode.com/problems/partition-list/description/), [Solution](LinkedList/Partition_List.py)
 把比x小的和大于等于x的元素分别放到两个list里然后再现重新生成一个linkedlist。
 
@@ -264,6 +270,9 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 #### [725. Split Linked List in Parts](https://leetcode.com/problems/split-linked-list-in-parts/description/), [Solution](LinkedList/Split_Linked_List_in_Parts.py)
 根据剩余总数和剩余组数，如果能整除下一组就有正好整除那么多个node，不能的话就是整除向上取整那么多个。
 
+#### [2046. Sort Linked List Already Sorted Using Absolute Values](https://leetcode.com/problems/sort-linked-list-already-sorted-using-absolute-values/description/), [Solution](LinkedList/Sort_Linked_List_Already_Sorted_Using_Absolute_Values.py)
+先过一遍按正负分到两个list里，然后再按顺序连起来。
+
 
 
 ---
@@ -275,6 +284,9 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 #### [95. Unique Binary Search Trees II](https://leetcode.com/problems/unique-binary-search-trees-ii/description/), [Solution](Tree/Unique_Binary_Search_Trees_II.py)
 写一个helper生成两个数之间的所有二叉树，然后以每个数为root，递归他的左右子树，然后组合起来以这个数为root的树。
+
+#### [124. Binary Tree Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/), [Solution](Tree/Binary_Tree_Maximum_Path_Sum.py)
+写一个helper算从每个node开始的子树下的max path sum和以这个node为终点的最大path sum。然后返回helper[0]就行了。
 
 #### [235. Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Search_Tree.py)
 跟下面一个基本一样，不过利用了BST的结构，直接判断当前节点的值，如果在p，q之间就是找到了，小于更小的或者大于更大的就去另一边找。
@@ -331,6 +343,9 @@ bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves�
 
 ## Graph
 
+#### [815. Bus Routes](https://leetcode.com/problems/bus-routes/description/), [Solution](Graph/Bus_Routes.py)
+先预处理一遍，每个bus route当成一个node，建立node之间的边，然后再bfs。预处理的部分可以优化。
+
 #### [1489. Find Critical and Pseudo-Critical Edges in Minimum Spanning Tree](https://leetcode.com/problems/find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree/description/), [Solution](Graph/Find_Critical_and_Pseudo-Critical_Edges_in_Minimum_Spanning_Tree.py)
 先排序，然后用Kruscal找出一个最小生成树并记录这个树的最小权。然后对每个边考虑不带这个边和强制带这个边，再用Kruscal看是否能组成等于最小权的最小生成树，来判断这个边是否是critical或seudo critical的。把union find写成一个类，方便后面每次Kruscal里方便调用。
 
@@ -347,6 +362,8 @@ bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves�
 
 #### [253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/description/), [Solution](Heap/Meeting_Rooms_II.py)
 Use a heap to keep the end time of each room. Process meetings by their start time. If the start time is earlier than the earliest endtime, then it means more room is needed. Otherwise just allocate the already finished room to the current meeting.
+只用保存每个meeting room的结束时间就行了，如果新的meeting在某个结束后才开始就直接替换那个结束时间，即把新的meeting安排在旧的meeting后面。
+
 #### [295. Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream/), [Solution](Heap/Find_Median_from_Data_Stream.py)
 建一个最大堆和一个最小堆，保存他们的大小，每次有新的数进来就让他进最小或最大堆，保持最大堆和最小堆个数相等或者多1。
 
@@ -477,6 +494,9 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 #### [50. Pow(x, n)](https://leetcode.com/problems/pow(x,-n)/description/), [Solution](Math/Pow(x,_n).py)
 暴力会超时，所以根据n的二进制表示来考虑结果里有哪些x的二次power。可以用bitmask或者recursion。从小到大可能会超出float范围，所以可以限制将超出范围的时候返回0（因为答案不会超出范围，中间的power超出范围就说明是负幂就是除）。也可以从大到小做，不会超出范围。
 
+#### [400. Nth Digit](https://leetcode.com/problems/nth-digit/description/), [Solution](Math/Nth_Digit.py)
+先找到这个数有多少位，然后找出具体是哪个数，然后取余找到具体是这个数的哪一位。
+
 #### [1359. Count All Valid Pickup and Delivery Options](https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/), [Solution](Math/Count_All_Valid_Pickup_and_Delivery_Options.py)
 就是插空，每多一对就在之前的所有里面的空隙之间插入。
 
@@ -531,7 +551,7 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 用一个dict记录每个人的访问顺序，然后用Counter记录每个人访问过的网站的所有combination，然后用max，key=lambda x:pattern[x]取出pattern里面最大且字典序最小的元素那个
 
 #### [1356. Sort Integers by The Number of 1 Bits](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/), [Solution](Sort/Sort_Integers_by_The_Number_of_1_Bits.py)
-直接做。可以一行解决其实。注意python有bin函数，直接返回一个数的二进制表达。另外count函数直接返回一个数里某个数的个数。
+直接做。可以一行解决其实。注意python有bin函数，直接返回一个数的二进制表达。另外count函数直接返回一个数里某个数的个数。  
 
 
 #### [1710. Maximum Units on a Truck](https://leetcode.com/problems/maximum-units-on-a-truck/description/), [Solution](List/Maximum_Units_on_a_Truck.py)
@@ -552,6 +572,9 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 ## Prefix Sum
 
 
+#### [238. Product of Array Except Self](https://leetcode.com/problems/product-of-array-except-self/description/), [Solution](PrefixSum/Product_of_Array_Except_Self.py)
+实际是prefix suffix product。先从头往后，记录prefix product。然后从后往前，在之前对应的prefix product上再乘上suffix product。
+
 #### [370. Range Addition](https://leetcode.com/problems/range-addition/description/), [Solution](PrefixSum/Range_Addition.py)
 先用cache记录每个query开始的位置和结束的下一个位置，然后过一遍，期间每个位置的currSum加上对应的cache。
 
@@ -561,6 +584,9 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 
 #### [1094. Car Pooling](https://leetcode.com/problems/car-pooling/description/), [Solution](PrefixSum/Car_Pooling.py)
 同370，不过这次用的是dict来当cache。上面一个其实也可以，不过因为上面本来就要返回一个list所以直接用了list。
+
+#### [2234. Maximum Total Beauty of the Gardens](https://leetcode.com/problems/maximum-total-beauty-of-the-gardens/description/), [Solution](PrefixSum/Maximum_Total_Beauty_of_the_Gardens.py)
+先排序，然后从没到target的开始从后往前，看把后j个补到target需要多少。然后用new减去这个，就是剩下来可以用在前面补partial的。先算一个prefix sum计算把前i个补到和第i个一样多需要多少cost。然后用剩下来的再cost里二分查找，找到最多可以补到多少。然后算partial和full分别的分数。
 
 #### [2281. Sum of Total Strength of Wizards](https://leetcode.com/problems/sum-of-total-strength-of-wizards/description/), [Solution](PrefixSum/Sum_of_Total_Strength_of_Wizards.py)
 先算出每个元素右边第一个比他小的下标，左边第一个小于等于他的下标，然后对每个元素，计算所有以他为最小元素的数组的和。这里要用两次prefix sum，并且最后算的时候数组和是这样 racc * ln - lacc * rn 的形式。自己想大概是想不出来的，只能看碰到的话记不记得了。
@@ -648,6 +674,9 @@ mini max问题用二分法。这里每次检测mid这个最大difference可不�
 
 #### [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/), [Solution](SlidingWindow/Longest_Substring_Without_Repeating_Characters.py)
 记录之前每一个数的下标，以及left。每一步如果以前记录过且在window内，则更新left到记录过的下标+1，否则不用管。然后把当前元素的下标也记录进去。最后更新res到当前下标 - left + 1.
+
+#### [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/description/), [Solution](SlidingWindow/Minimum_Size_Subarray_Sum.py)
+window记录里面的和，大于等于target之后开始缩小window并更新最小window大小。
 
 #### [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/description/), [Solution](SlidingWindow/Sliding_Window_Maximum.py)
 要想到maintain一个deque，储存当前window里从最大元素开始往右依次减小的下标。这样第一个下标始终是当前window里最大元素的下标。因为加进去一个数之后window里面这个数之前的元素就都没用了，所以window是单调的。用一个clean函数来维护，clean是O(1)的。首先从左边去掉不在window里的下标，然后从右边开始去掉小于当前元素的下标。因为维护前是从大到小，所以维护后也是从大到小。然后用这个deque遍历nums就行了。
@@ -780,6 +809,9 @@ dp，对每个子列[i:j]检查[i:j - 1]或[i + 1:j]是否满足当前条件且�
 #### [127. Word Ladder](https://leetcode.com/problems/word-ladder/description/), [Solution](BFS/Word_Ladder.py)
 因为只要找到endWord就行，所以可以直接bfs+visited，不管中间是否有路径重叠。注意用一个interWord保存中间态，预处理wordList找到所有中间态，然后每一步转换成中间态之后再查找这个中间态可以到达哪些词。
 
+#### [286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/description/), [Solution](BFS/Walls_and_Gates.py)
+基本bfs，从每个gate出发bfs并记录经过的格子。
+
 #### [317. Shortest Distance from All Buildings](https://leetcode.com/problems/shortest-distance-from-all-buildings/description/), [Solution](BFS/Shortest_Distance_from_All_Buildings.py)
 可以从每个空地开始bfs到每个building，或者从building开始bfs到空地。从building开始还可以每一步只bfs之前能bfs到的那些空格，可以更快。从空地开始的会超市。
 
@@ -791,6 +823,9 @@ bfs，每一层计算每个点的index，这一层过完之后更新最大index�
 
 #### [1020. Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/description/), [Solution](BFS/Number_of_Enclaves.py)
 和昨天的一样，不过可以从边界开始bfs，然后统计没有被bfs到的1的个数。
+
+#### [1293. Shortest Path in a Grid with Obstacles Elimination](https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/description/), [Solution](BFS/Shortest_Path_in_a_Grid_with_Obstacles_Elimination.py)
+bfs，queue里每一步记录state包含当前位置和还能去掉几个obstacle。用set记录这个state保证不重复。
 
 #### [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/), [Solution](BFS/Reorder_Routes_to_Make_All_Paths_Lead_to_the_City_Zero.py)
 简单bfs。先记录所有单向边并同时保存双向边。然后从0出发bfs延双向边走，每走一步判断当前对应的单向边是否指向0，不指向的话就count + 1。
@@ -829,6 +864,9 @@ bfs + heap。依次把没去过的点放到heap里面，注意四周的点的到
 
 #### [123. Best Time to Buy and Sell Stock III](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/description/), [Solution](DP/Best_Time_to_Buy_and_Sell_Stock_III.py)
 dp[k][i]是最多进行k次交易，最后一次最多在prices[i]卖出，的最高总收益。所以如果最后一次不在prices[i]卖出，就等于dp[k][i - 1]；如果卖出，就等于prices[i] - prices[j] + dp[k][j - 1] for j = 0, ..., i。因为只有j在变，所以等价于求min of prices[j] - dp[k][j - 1]。因为这里只有j在变，所以直接用min(currMin, prices[i] - dp[k][i - 1])就行了，因为比i小的已经在前面算过了，这里只要算当前值会不会更小就行。
+
+#### [152. Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/description/), [Solution](DP/Maximum_Product_Subarray.py)
+每一步记录当前为止的最小值和最大值，并更新当前最大值。
 
 #### [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/description/), [Solution](DP/Best_Time_to_Buy_and_Sell_Stock_IV.py)
 和123一模一样，就是推广到最多进行k次交易。另外注意这里允许在同一天先买进再卖出。
@@ -900,7 +938,7 @@ dp[i]表示从0到i需要的最少tap数。然后遍历每个tap考虑用到这�
 直接dp，dp(i, d)表示从第i个工作开始，还剩下d天。dp(i, d)等于在当天安排从i到j-1的工作，然后剩下的d-1天做j之后的工作，即dp(j, d-1)，对所有j > i里面最小的那一个。用lru_cache减少时间。
 
 #### [1444. Number of Ways of Cutting a Pizza](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/description/), [Solution](DP/Number_of_Ways_of_Cutting_a_Pizza.py)
-3d的DP。能想到3d的话就还好。看起来dp还是专门留一行空的出来比较好，这样就不用初始化了。
+3d的DP。能想到3d的话就还好。看起来dp还是专门留一行空的出来比较好，这样就不用初始化了。先预处理，统计每个位置i，j右下方的苹果数。然后从i，j出发，按行和按列切，如果被切下来的部分和剩下的部分都有苹果就更新res。
 
 #### [1639. Number of Ways to Form a Target String Given a Dictionary](https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/description/), [Solution](DP/Number_of_Ways_to_Form_a_Target_String_Given_a_Dictionary.py)
 先找出每个下标上每个字母出现的次数，然后dp。dp(t, n)对应用word[:n]拼出target[:t]的方法数。
@@ -968,6 +1006,9 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 <div id='Greedy'></div>
 
 ## Greedy
+
+#### [45. Jump Game II](https://leetcode.com/problems/jump-game-ii/description/), [Solution](Greedy/Jump_Game_II.py)
+其实也算bfs吧，从每个点记录所有能跳到的点，直到碰到终点。
 
 #### [280. Wiggle Sort](https://leetcode.com/problems/wiggle-sort/description/), [Solution](Greedy/Wiggle_Sort.py)
 首先可以直接排个序，然后每隔一位交换相邻数。或者可以每一位上根据奇偶看跟下一位的大小关系来决定是否和下一位交换。
