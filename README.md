@@ -330,6 +330,8 @@ bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves�
 #### [212. Word Search II](https://leetcode.com/problems/word-search-ii/description/), [Solution](Trie/Word_Search_II.py)
 先用一个trie记录所有word，然后从board的每个位置开始dfs。如果在trie里找到了，就去掉这个词。如果某个叶节点到底了而且已经找到过了，就去掉这个叶节点。
 
+#### [588. Design In-Memory File System](https://leetcode.com/problems/design-in-memory-file-system/description/), [Solution](Trie/Design_In-Memory_File_System.py)
+Trie里有三个东西，isFile看这个是file还是directory，children保存当前目录下所有file和directory，content就是content。查找path的时候直接往下一路走就行了，因为childer是一个defaultdict，如果不存在会自动新建一个。
 
 #### [1268. Search Suggestions System](https://leetcode.com/problems/search-suggestions-system/description/), [Solution](Trie/Search_Suggestions_System.py)
 用Trie记录product，并在每一层用suggestion记录三个词，然后对word每个字母到每一层的时候直接访问对应的suggestion。还可以用sort + binary search。
@@ -352,6 +354,8 @@ bfs找到deepest leaves，并记录每个node的parent。从最底层的leaves�
 #### [1615. Maximal Network Rank](https://leetcode.com/problems/maximal-network-rank/description/), [Solution](Graph/Maximal_Network_Rank.py)
 简单，统计一下每个node的度然后暴力就行了。注意相连的node的network rank要减一。
 
+#### [2115. Find All Possible Recipes from Given Supplies](https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/description/), [Solution](Graph/Find_All_Possible_Recipes_from_Given_Supplies.py)
+拓扑排序，排序路上经过的入度为0的点就是可以的recipe。
 
 
 ---
@@ -919,8 +923,14 @@ dp[i][j]表示从s第i个到第j个的substring的最少print数。每有一个�
 #### [741. Cherry Pickup](https://leetcode.com/problems/cherry-pickup/description/), [Solution](DP/Cherry_Pickup.py)
 第二次不用从n-1, n-1往回走了，直接从0, 0往右下出发两个路径，然后三维dp，dp[r1][c1][r2]，然后让两个点在同一反对角线上，这样c2 = r1 + c1 - r2。
 
+#### [799. Champagne Tower](https://leetcode.com/problems/champagne-tower/description/), [Solution](DP/Champagne_Tower.py)
+其实是模拟，记录每个杯子里流过的总量，超过1就往下面倒(总量 - 1) / 2。
+
 #### [808. Soup Servings](https://leetcode.com/problems/soup-servings/description/), [Solution](DP/Soup_Servings.py)
 dp用一个helper function分别返回A先empty的概率和同时empty的概率。注意n过大时因为serve的方式不对称所以A先empty的概率接近1。所以n过大时直接返回1就行了。
+
+#### [920. Number of Music Playlists](https://leetcode.com/problems/number-of-music-playlists/description/), [Solution](DP/Number_of_Music_Playlists.py)
+dp题最重要要有思路。dp[i][j]表示要放i首歌，有j个unique歌曲的方法数。如果第i个歌是新的，那么dp[i][j] = dp[i - 1][j - 1] * (n - j + 1)，其中n - j + 1表示除了已经有的j - 1首歌之外，剩下的n - (j - 1)首歌。如果第i个歌已经放过了，那么dp[i][j] += dp[i - 1][j] * (j - k)，表示已经放过的里面后k首不能选，因为要放k首其他歌之后才能重新放。
 
 #### [983. Minimum Cost For Tickets](https://leetcode.com/problems/minimum-cost-for-tickets/description/), [Solution](DP/Minimum_Cost_For_Tickets.py)
 基本dp，根据在第i天用1/7/30pass来分类，取里面的最小的。另外注意bisect.bisect_left和bisect.bisect，第一个是使找a[:i] < x，a[i:] >= x的下标i，第二个是a[:i] <= x，a[i:] > x的下标i。
@@ -1019,8 +1029,14 @@ dp[i][j]使用到s[i]为止的rl，到达位置j的不同方法数。每一步�
 #### [946. Validate Stack Sequences](https://leetcode.com/problems/validate-stack-sequences/description/), [Solution](Greedy/Validate_Stack_Sequences.py)
 依次push，只要stack末尾和pop匹配上就pop，直到不匹配，然后push下一个。最后检测stack是否为空。
 
+#### [1029. Two City Scheduling](https://leetcode.com/problems/two-city-scheduling/description/), [Solution](Greedy/Two_City_Scheduling.py)
+因为每个人都必须被分到一个city去，所以算一下每个人的costA - costB再排序，前n个人就去a，剩下的去b。
+
 #### [1402. Reducing Dishes](https://leetcode.com/problems/reducing-dishes/description/), [Solution](Greedy/Reducing_Dishes.py)
 排序。0和正数肯定要选，这之后每加一个负数，相当于增加前面所有正数的和，并减去到目前为止加进来的所有负数以及当前这个负数。所以从绝对值小到大开始对负数求和，直到减去的量大于等于正数的增量为止。记录下标，并计算从这个下标开始取的结果。
+
+#### [1631. Path With Minimum Effort](https://leetcode.com/problems/path-with-minimum-effort/description/), [Solution](Greedy/Path_With_Minimum_Effort.py)
+用了类似Dijrastra的思路，每一步把相邻没访问过的加到heap里，然后取当前所有heap里effort最小的那个。注意保存到状态包括effort，不止位置，因为同一个位置可能从不同方向访问，effort不一样。
 
 #### [2141. Maximum Running Time of N Computers](https://leetcode.com/problems/maximum-running-time-of-n-computers/description/), [Solution](Greedy/Maximum_Running_Time_of_N_Computers.py)
 先排序，然后把最大的n个电池分配出去。把剩下的加起来，然后对使用中的那n个电池从小到大，依次用剩余的电池把第0到第i个电池的容量补到第i + 1个那么多。这样电脑就可以运行i+1那么长时间。如果一直到最后还有剩余或者中间停住不能补到下一个，就把剩余的所有电量平均分配到所有电池或者前i个电池上。
