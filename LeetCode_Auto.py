@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2115. Find All Possible Recipes from Given Supplies'
+    name = '418. Sentence Screen Fitting'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':

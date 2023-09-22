@@ -899,6 +899,9 @@ recursion + memorization。根据拿不拿root分类。加上点边界条件就�
 #### [403. Frog Jump](https://leetcode.com/problems/frog-jump/description/), [Solution](DP/Frog_Jump.py)
 不是最优解，差不多是brute force+cache。可以用DP。用一个字典储存key:value, key是每个位置，value是能到这个位置的jump的长度的集合。最后如果最后一个位置在字典里，就说明可以跳到这里，否则不可以。
 
+#### [418. Sentence Screen Fitting](https://leetcode.com/problems/sentence-screen-fitting/description/), [Solution](DP/Sentence_Screen_Fitting.py)
+dp从第i个word开始，一行能放下几次sentence。同时返回下一行的开始index。一次都放不完就是0。这样没影响，因为一行能放下多次的话可以正确记录，一行一次都放不完的话后面总有可以放完，在后面再行数+1。
+
 #### [494. Target Sum](https://leetcode.com/problems/target-sum/description/), [Solution](DP/Target_Sum.py)
 用的recursive dp，加一个字典memorization。还可以优化从传数组变成传下标。
 
