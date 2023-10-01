@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '418. Sentence Screen Fitting'
+    name = '856. Score of Parentheses'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':

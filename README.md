@@ -424,6 +424,9 @@ stack记录正括号，对每个反括号用字典取正括号看是不是在sta
 #### [769. Max Chunks To Make Sorted](https://leetcode.com/problems/max-chunks-to-make-sorted/description/), [Solution](Stack/Max_Chunks_To_Make_Sorted.py)
 保存一个递增stack，里面每个数就是一个chunk的最大元素。每次把大于当前元素的都pop出来。当前元素前面比当前大的元素都必须和当前元素在同一个chunk里。
 
+#### [856. Score of Parentheses](https://leetcode.com/problems/score-of-parentheses/description/), [Solution](Stack/Score_of_Parentheses.py)
+也可以用divide conquer做。不过这里用stack。记录当前frame的score，如果是(就是0，是)就把当前frame*2再加到更前一个上面。
+
 #### [901. Online Stock Span](https://leetcode.com/problems/online-stock-span/description/), [Solution](Stack/Online_Stock_Span.py)
 保存每个price和他前面小于等于他的price的个数。每次把stack末尾小于等于当前price的pop出来就行。
 

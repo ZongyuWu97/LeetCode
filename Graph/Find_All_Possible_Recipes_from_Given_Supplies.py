@@ -1,26 +1,25 @@
 class Solution:
     def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
-        menu = list(zip(recipes, ingredients))
         graph = defaultdict(list)
-        indegrees = {r: 0 for r in recipes}
-        for r, ing in menu:
-            for i in ing:
-                graph[i].append(r) # parent is ing required to make child recipe 
-                if i not in supplies:
-                    indegrees[r] += 1 #if not present the child is dependent
+        indegree = defaultdict(int)
+        for recipe, ingredient in list(zip(recipes, ingredients)):
+            for i in ingredient:
+                graph[i].append(recipe)
+                indegree[recipe] += 1
+        for s in supplies:
+            indegree[s] = 0
         
-        q = deque()
-        possibleRecipe = []
-        for r, v in indegrees.items():
-            if v == 0:
-                q.append(r)
-                possibleRecipe.append(r)
-        
+        q = deque([node for node in indegree if indegree[node] == 0])
+        recipes = set(recipes)
+        res = []
         while q:
-            currRecipe = q.popleft()
-            for neiRecipe in graph[currRecipe]:
-                indegrees[neiRecipe] -= 1
-                if indegrees[neiRecipe] == 0:
-                    possibleRecipe.append(neiRecipe) # the parent was possible to made so now the child can be made too
-                    q.append(neiRecipe)
-        return(possibleRecipe)
+            curr = q.popleft()
+            if curr in recipes:
+                res.append(curr)
+            for recipe in graph[curr]:
+                indegree[recipe] -= 1
+                if indegree[recipe] == 0:
+                    q.append(recipe)
+
+        return res
+
