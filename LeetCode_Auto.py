@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '856. Score of Parentheses'
+    name = '2659. Make Array Empty'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
