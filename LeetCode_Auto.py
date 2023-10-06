@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2659. Make Array Empty'
+    name = '2158. Amount of New Area Painted Each Day'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':

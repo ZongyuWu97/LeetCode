@@ -43,6 +43,11 @@ My notes and solution for leetcode problems.
 
 [collections](https://docs.python.org/3/library/collections.html#counter-objects),
 [heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html), [bisect](https://docs.python.org/3/library/bisect.html)
+[sortedcontainers](https://pypi.org/project/sortedcontainers/),
+
+#### 数据结构
+
+[segment tree](https://csacademy.com/lesson/segment_trees)
 
 #### 算法-时间复杂度
 
@@ -380,6 +385,10 @@ bfs 找到 deepest leaves，并记录每个 node 的 parent。从最底层的 le
 
 和基本情况差不多，不过这次不是检测是否只有两个，而是检测是否所有 node 都被在当前子树下找到了。
 
+#### [2096. Step-By-Step Directions From a Binary Tree Node to Another](https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/), [Solution](Tree/Step-By-Step_Directions_From_a_Binary_Tree_Node_to_Another.py)
+
+做个辅助函数，在树里找到对应元素并记录路径。只有找到对应元素才会返回 True，否则都返回的是空 list，所以只有找到了才会记录 path。并且是倒着记录的。然后把 start 和 dest 相同的 prefix 去掉，这里就是从 LCA 开始的路径了，到 start 的都替换成 U，再加上到 dest 的路径就行了。
+
 #### [2471. Minimum Number of Operations to Sort a Binary Tree by Level](https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/), [Solution](Tree/Minimum_Number_of_Operations_to_Sort_a_Binary_Tree_by_Level.py)
 
 用两个 queue 按层 bfs 遍历树，然后对每层求 min swap。重点是 min swap。注意 iterative traversal 的时候就用普通 stack 就行，然后先后顺序反过来。
@@ -453,6 +462,10 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 先算出每个字母的出现次数，然后依次把出现次数最多或第二多的 append 到末尾。用 heap 来看出现最多的字母。
 
+#### [2158. Amount of New Area Painted Each Day](https://leetcode.com/problems/amount-of-new-area-painted-each-day/description/), [Solution](Heap/Amount_of_New_Area_Painted_Each_Day.py)
+
+实际是用 sortedlist 做的。还可以用 segment tree 做。先记录所有 query 的 start 和 end 以及对应 query 的 index，还有类型用来区分这是 start 还是 end。比如(start, index, type)。sortedlist 是想象所有区间叠在一起，然后按 index 先后区分区间里数轴的距离。一根垂直于数轴的竖线扫过去，碰到 start 就把对应区间的 index 放入 sortedlist，遇到 end 就把对应区间的 index remove。然后每一步把 res 里对应 sortedlist 里最小的 index 那一个增加。如果是按数轴上一个个点移动的竖线就每次加一，因为是一步步移动的。如果是按记录下来的每个 query 来移动，就可以每次加上 pos 对应 start/end，减去 last_pos 就是前一个 query 的 pos。
+
 #### [2386. Find the K-Sum of an Array](https://leetcode.com/problems/find-the-k-sum-of-an-array/description/), [Solution](Heap/Find_the_K-Sum_of_an_Array.py)
 
 先得到所有正数的和，这是可能得最大和。然后开始去掉和里的正数，或者加上剩下的负数，这两个都等价于从最大和里减去 nums 里的绝对值。因为是从最大和往下，所以把 nums 按绝对值排序之后依次减去每个值，并且每一步考虑加上 nextSum - absNum[idx + 1]和 nextSum + absNum[idx] - absNum[idx + 1]两种情况，即是否减去下标 idx 的值。每一步的结果都放到一个最大堆里，下一步再从最大堆里取，保证了是从 maxSum 依次往下递减。absNum 排序过，也是用来保证 maxSum 依次递减。
@@ -490,6 +503,10 @@ stack 记录正括号，对每个反括号用字典取正括号看是不是在 s
 #### [316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/description/), [Solution](Stack/Remove_Duplicate_Letters.py)
 
 让 stack 里保存到当前位置为止的最小 substring。如果当前元素不在里面就放进来。每次新元素进来，把前面 stack 里比这个大的且后面还有的 pop 出去。
+
+#### [394. Decode String](https://leetcode.com/problems/decode-string/description/), [Solution](Stack/Decode_String.py)
+
+用两个 stack 分别保存括号外面的数字和字母。碰到\[就把当前的数字和字母加到 stack 里，然后碰到\]的时候就把当前字母乘上数字 stack 里最后一个的倍数，再在前面加上字母 stack 的最后一个。
 
 #### [496. Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/description/), [Solution](Stack/Next_Greater_Element_I.py)
 
@@ -687,8 +704,8 @@ stack 记录正括号，对每个反括号用字典取正括号看是不是在 s
 直接找到第一个最小元素和最后一个最大元素，然后算把他们放到正确位置的 swap 数。
 
 #### [2659. Make Array Empty](https://leetcode.com/problems/make-array-empty/description/), [Solution](Sort/Make_Array_Empty.py)
-考虑分别pop掉每一组递增序列。记录原始位置然后排序。从小到大，如果原始位置比前一个小就说明当前元素在原数组里属于一组新的数。res加上剩下的所有元素，因为要把剩下的都rotate一遍才能pop掉当前组的所有元素。而且也当前组的最后一个元素也肯定是在末尾，所以要完全rotate一遍。因为如果末尾元素大于当前组最大元素，那就属于当前组。如果小于那就已经在前面的迭代里被pop掉了。
 
+考虑分别 pop 掉每一组递增序列。记录原始位置然后排序。从小到大，如果原始位置比前一个小就说明当前元素在原数组里属于一组新的数。res 加上剩下的所有元素，因为要把剩下的都 rotate 一遍才能 pop 掉当前组的所有元素。而且也当前组的最后一个元素也肯定是在末尾，所以要完全 rotate 一遍。因为如果末尾元素大于当前组最大元素，那就属于当前组。如果小于那就已经在前面的迭代里被 pop 掉了。
 
 ---
 
