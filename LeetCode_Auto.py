@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '2158. Amount of New Area Painted Each Day'
+    name = '666. Path Sum IV'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':

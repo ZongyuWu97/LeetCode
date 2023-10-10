@@ -373,6 +373,10 @@ merge sort 的方法做，分成两部分然后 merge 两部分分别的结果�
 
 直接分别取 left boundary, leaves, and right boundary。
 
+#### [666. Path Sum IV](https://leetcode.com/problems/path-sum-iv/description/), [Solution](Tree/Path_Sum_IV.py)
+
+用每个 num 前两位表示一个 node，然后建 dict 储存值。dfs 根据 node 数值关系遍历，到每个 node 就在当前和上加上当前 node 的 value。然后到 leave 的时候就在 self.ans 上加上当前和。
+
 #### [894. All Possible Full Binary Trees](https://leetcode.com/problems/all-possible-full-binary-trees/description/), [Solution](Tree/All_Possible_Full_Binary_Trees.py)
 
 recursion 做，对 n 个 node 的树递归左右子树从 0 到 n - 1。同时用一个字典记录 n 个 node 的树的所有组合方式，之后递归到的时候就不用重复计算。
