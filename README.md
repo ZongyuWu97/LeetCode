@@ -377,6 +377,10 @@ merge sort 的方法做，分成两部分然后 merge 两部分分别的结果�
 
 用每个 num 前两位表示一个 node，然后建 dict 储存值。dfs 根据 node 数值关系遍历，到每个 node 就在当前和上加上当前 node 的 value。然后到 leave 的时候就在 self.ans 上加上当前和。
 
+#### [834. Sum of Distances in Tree](https://leetcode.com/problems/sum-of-distances-in-tree/description/), [Solution](Tree/Sum_of_Distances_in_Tree.py)
+
+两个 dfs。先 post order，从下往上，更新每个 node 所在子树的节点数和子树中到该 node 的所有距离和。依次往上更新。这之后 root 的就已经是 root 到所有其他 node 的距离和了。然后 pre order，用 parent node 的 ans 去更新 child 的 ans。
+
 #### [894. All Possible Full Binary Trees](https://leetcode.com/problems/all-possible-full-binary-trees/description/), [Solution](Tree/All_Possible_Full_Binary_Trees.py)
 
 recursion 做，对 n 个 node 的树递归左右子树从 0 到 n - 1。同时用一个字典记录 n 个 node 的树的所有组合方式，之后递归到的时候就不用重复计算。
@@ -504,6 +508,14 @@ stack 记录正括号，对每个反括号用字典取正括号看是不是在 s
 
 对每一行，保存到当前位置为止的连续 1 的个数。然后叠起来，从列来看，每一列就是一个 histgram，就转化成了上一题 84。所以预处理出 n 个 hist 之后，只用再对每一列做一次 largest rectangle 就可以了。
 
+#### [224. Basic Calculator](https://leetcode.com/problems/basic-calculator/description/), [Solution](Stack/Basic_Calculator.py)
+
+operand 保存当前的数字，res 保存当前计算结果，sign 保存当前符号。碰到数字就更新 operand，碰到加减号就根据 operand 和之前的 sign 运算更新 res，然后更新 operand 和下一个 sign。碰到(就放到 stack 里，碰到)就更新 res 来结束当前括号内的运算然后从 stack 里 pop 出前面的 sign 和 res。
+
+#### [227. Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/description/), [Solution](Stack/Basic_Calculator_II.py)
+
+碰到数字就更新当前数字，碰到符号表示当前数字结束，根据前一个符号进行操作。前一个符号是加减号就根据符号正负 append 到 stack 里，并更新下一个符号为当前符号。前一个是乘除就直接对 stack 最后的和当前数字进行运算，然后再 append 回去。最后对 stack 求和。
+
 #### [316. Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/description/), [Solution](Stack/Remove_Duplicate_Letters.py)
 
 让 stack 里保存到当前位置为止的最小 substring。如果当前元素不在里面就放进来。每次新元素进来，把前面 stack 里比这个大的且后面还有的 pop 出去。
@@ -535,6 +547,10 @@ stack 记录正括号，对每个反括号用字典取正括号看是不是在 s
 #### [769. Max Chunks To Make Sorted](https://leetcode.com/problems/max-chunks-to-make-sorted/description/), [Solution](Stack/Max_Chunks_To_Make_Sorted.py)
 
 保存一个递增 stack，里面每个数就是一个 chunk 的最大元素。每次把大于当前元素的都 pop 出来。当前元素前面比当前大的元素都必须和当前元素在同一个 chunk 里。
+
+#### [772. Basic Calculator III](https://leetcode.com/problems/basic-calculator-iii/description/), [Solution](Stack/Basic_Calculator_III.py)
+
+和 227 差不多，不过碰到(的时候重置 previous operator 到+，开始新的一个 term。因为前面肯定有其他符号，所以不用处理 curr。然后碰到)的时候就说明一个 term 算完了，把 stack 一直 pop 并加到 curr 直到碰到一个 operator。更新 previous operator。最后再把 stack 里剩下的所有 term 求和。最开始可以在 s 后面加一个@或者其他任意不会碰到的字符，这样不用单独处理碰到尾部的情况。
 
 #### [856. Score of Parentheses](https://leetcode.com/problems/score-of-parentheses/description/), [Solution](Stack/Score_of_Parentheses.py)
 
@@ -635,6 +651,10 @@ stack 记录正括号，对每个反括号用字典取正括号看是不是在 s
 
 先找到这个数有多少位，然后找出具体是哪个数，然后取余找到具体是这个数的哪一位。
 
+#### [670. Maximum Swap](https://leetcode.com/problems/maximum-swap/description/), [Solution](Math/Maximum_Swap.py)
+
+找到 increasing point 后的最大 digit，跟他前面第一个比他小的 digit 交换。
+
 #### [1359. Count All Valid Pickup and Delivery Options](https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/), [Solution](Math/Count_All_Valid_Pickup_and_Delivery_Options.py)
 
 就是插空，每多一对就在之前的所有里面的空隙之间插入。
@@ -681,7 +701,7 @@ stack 记录正括号，对每个反括号用字典取正括号看是不是在 s
 
 #### [719. Find K-th Smallest Pair Distance](https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/), [Solution](Sort/Find_K-th_Smallest_Pair_Distance.py)
 
-比较复杂，对 pair distance 用 binary search，用一个 possible 表示是否有 k 或更多个 pair 的 distance 小于等于 v。用 prefix sum 来简化对 possible 的计算。直接抄的，之后重写一遍。
+比较复杂，对 pair distance 用 binary search，用一个 possible 表示是否有 k 或更多个 pair 的 distance 小于等于 v。用 prefix sum 来简化对 possible 的计算。直接抄的，之后重写一遍。用 multiplicity 保存 number of nums[j] == nums[i] (j < i)。再用 prefix 保存 nums 里 number of values <= v。然后在 0 和 nums[-1] - nums[0]之间二分找。二分每一步用 possible 判断是否有 k or more pairs with distance <= guess。这里遍历 nums，对每个数 x 和其下标 i，每次加上 prefix[min(x + guess, W)] - prefix[x] + multiplicity[i]。其中 prefix[min(x + guess, W)] - prefix[x]是 nums 里大于 x 小于等于 min(x + guess, W)的数的个数。multiplicity[i]是等于 x 但在 x 前面的数的个数。这些 pair 的差都小于 k，全部加起来看是否大于等于 k。x 和他前面且小于他的 pair 在其他迭代里已经计算过了。
 
 #### [937. Reorder Data in Log Files](https://leetcode.com/problems/reorder-data-in-log-files/description/), [Solution](Sort/Reorder_Data_in_Log_Files.py)
 
@@ -694,6 +714,10 @@ stack 记录正括号，对每个反括号用字典取正括号看是不是在 s
 #### [1356. Sort Integers by The Number of 1 Bits](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/), [Solution](Sort/Sort_Integers_by_The_Number_of_1_Bits.py)
 
 直接做。可以一行解决其实。注意 python 有 bin 函数，直接返回一个数的二进制表达。另外 count 函数直接返回一个数里某个数的个数。
+
+#### [1366. Rank Teams by Votes](https://leetcode.com/problems/rank-teams-by-votes/description/), [Solution](Sort/Rank_Teams_by_Votes.py)
+
+过一遍所有 vote，用 list 记录每个 team 的票数和 team 字母本身。然后随便找一个 vote 排序，根据 record.get()作为 key。这里 key 就是一个函数，函数参数就是每个被排序的 element。记录的时候用负数别用正数，因为是 rank 要票数多的且字母小的优先。
 
 #### [1710. Maximum Units on a Truck](https://leetcode.com/problems/maximum-units-on-a-truck/description/), [Solution](List/Maximum_Units_on_a_Truck.py)
 
@@ -857,6 +881,10 @@ window 记录里面的和，大于等于 target 之后开始缩小 window 并更
 
 要想到 maintain 一个 deque，储存当前 window 里从最大元素开始往右依次减小的下标。这样第一个下标始终是当前 window 里最大元素的下标。因为加进去一个数之后 window 里面这个数之前的元素就都没用了，所以 window 是单调的。用一个 clean 函数来维护，clean 是 O(1)的。首先从左边去掉不在 window 里的下标，然后从右边开始去掉小于当前元素的下标。因为维护前是从大到小，所以维护后也是从大到小。然后用这个 deque 遍历 nums 就行了。
 
+#### [395. Longest Substring with At Least K Repeating Characters](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/), [Solution](SlidingWindow/Longest_Substring_with_At_Least_K_Repeating_Characters.py)
+
+遍历所有 unique char 个数的 substring。根据当前 window 里 unique 字母个数决定是 r 右移或 l 右移。移动之后如果当前 window 的 unique 字母个数和当前遍历的个数和当前 window 里至少出现 k 次的字母数都一样就说明该 substring 满足条件，更新 ans。
+
 #### [1100. Find K-Length Substrings With No Repeated Characters](https://leetcode.com/problems/find-k-length-substrings-with-no-repeated-characters/description/), [Solution](SlidingWindow/Find_K-Length_Substrings_With_No_Repeated_Characters.py)
 
 用一个 set 储存当前 window 里的元素方便快速查找，用一个 deque 按顺序储存当前 window 的元素和下标。每一步，如果 window 已经满了，丢掉最前面的，更新 window 大小；如果新元素已经在 window 里，丢掉到重复元素位置并根据最后丢掉的元素的下标更新 window 大小；最后把新的元素放进来，如果 window 是满的就 substring 数加一。
@@ -915,13 +943,13 @@ BST 的 inorder 遍历会得到一个 nondecreasing 的序列。所以用一个 
 
 从 root 开始 DFS，可以用一个 self 全局变量记录。另外其实可以不用 memo，因为每条路只计算了一次。
 
+#### [1861. Rotating the Box](https://leetcode.com/problems/rotating-the-box/description/), [Solution](TwoPointer/Rotating_the_Box.py)
+
+先移到右边再 rotate。移动操作就是一个 two pointer。right 表示下一个放物品的位置，左指针移动到物品了就放到 right 那里然后 right 左移。如果碰到障碍物了下一个可以放物品的地方就在障碍物左边。
+
 #### [2576. Find the Maximum Number of Marked Indices](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/), [Solution](TwoPointer/Find_the_Maximum_Number_of_Marked_Indices.py)
 
 先排序。因为最多有 n//2 对，所以 j 从(n + 1) // 2 开始。之后 i 从 0 开始，满足条件就 i++，否则不变。最后 i \* 2 就行。
-
-#### [2597. The Number of Beautiful Subsets](https://leetcode.com/problems/the-number-of-beautiful-subsets/description/), [Solution](DP/The_Number_of_Beautiful_Subsets.py)
-
-按除 k 的余数分类，然后在每个子集里讨论。每个子集里如果和前一个恰好差 k 就不能取，就是 house robber 问题。中间每一步乘的是 v - 1，因为考虑的是取当前元素的情况，所以减去全部不取的那个情况。同样，最后返回 res - 1 也是这样。
 
 ---
 
@@ -992,6 +1020,10 @@ T($k*2^N$), O(N)
 
 用两次 dfs，第一次以 0 为 root，算出每个节点的最大和；第二次从 0 开始，往下 dfs 的时候传一个 parent_contribution，即在每个节点的 parent 方向的最大路径和。为了计算 parent_contribution，在每个节点算出包含他自己的 parent_contribution 在内的前两大的路径和。这样在所有子节点上，如果碰到了最大路径的节点，就把第二大的作为 parent_contribution 传入。
 
+#### [2597. The Number of Beautiful Subsets](https://leetcode.com/problems/the-number-of-beautiful-subsets/description/), [Solution](DP/The_Number_of_Beautiful_Subsets.py)
+
+按除 k 的余数分类，然后在每个子集里讨论。每个子集里如果和前一个恰好差 k 就不能取，就是 house robber 问题。中间每一步乘的是 v - 1，因为考虑的是取当前元素的情况，所以减去全部不取的那个情况。同样，最后返回 res - 1 也是这样。
+
 #### [2811. Check if it is Possible to Split Array](https://leetcode.com/problems/check-if-it-is-possible-to-split-array/description/), [Solution](DP/Check_if_it_is_Possible_to_Split_Array.py)
 
 dp，对每个子列[i:j]检查[i:j - 1]或[i + 1:j]是否满足当前条件且本身可以被 split。
@@ -1037,6 +1069,10 @@ bfs，每一层计算每个点的 index，这一层过完之后更新最大 inde
 #### [1293. Shortest Path in a Grid with Obstacles Elimination](https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/description/), [Solution](BFS/Shortest_Path_in_a_Grid_with_Obstacles_Elimination.py)
 
 bfs，queue 里每一步记录 state 包含当前位置和还能去掉几个 obstacle。用 set 记录这个 state 保证不重复。
+
+#### [1345. Jump Game IV](https://leetcode.com/problems/jump-game-iv/description/), [Solution](BFS/Jump_Game_IV.py)
+
+bfs，每一步往前后一格和所有一样数字的 index 走。之前先预处理一下，记录数字和对应的所有 index。index 走了之后记得清空记录，这样之后就不会重复访问了。
 
 #### [1466. Reorder Routes to Make All Paths Lead to the City Zero](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/), [Solution](BFS/Reorder_Routes_to_Make_All_Paths_Lead_to_the_City_Zero.py)
 
@@ -1293,6 +1329,10 @@ dp[i][j]使用到 s[i]为止的 rl，到达位置 j 的不同方法数。每一�
 #### [435. Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/description/), [Solution](Greedy/Non-overlapping_Intervals.py)
 
 先按结束时间排序，然后依次检测，如果下一个的开始时间大于等于前一个的结束时间，就不去掉，否则去掉这一个。这样相当于在两个重叠的里面保留了结束时间更早的那个，这样就给后面的留了更多空间。
+
+#### [621. Task Scheduler](https://leetcode.com/problems/task-scheduler/description/), [Solution](Greedy/Task_Scheduler.py)
+
+先把频率最高的 task 排出来，中间放 idle 的。然后剩下的 task 依次往每个间隔里放，然后 idle 减小。如果 task 种类数超过 n 也不要紧，因为 task 必须放完，idle 只要不减到 0 以下就行了。如果其他 task 频率和最大的一样记得有一个 idle 不用减，因为频率一样的话就说明排到最后一个 task 后面去了，那里没安排 idle。
 
 #### [946. Validate Stack Sequences](https://leetcode.com/problems/validate-stack-sequences/description/), [Solution](Greedy/Validate_Stack_Sequences.py)
 
