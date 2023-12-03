@@ -482,6 +482,14 @@ Use a heap to keep the end time of each room. Process meetings by their start ti
 
 用两个 min heap，一个保存可以用的房间，一个保存使用中的房间，以结束时间为关健字。每一步先把结束时间小于当前开始时间的都挪到可用房间，如果当前有可用房间则直接用，没有的话则推迟当前 meeting 到下一个可以用的房间为止。
 
+#### [2519. Count the Number of K-Big Indices](https://leetcode.com/problems/count-the-number-of-k-big-indices/description/), [Solution](Heap/Count_the_Number_of_K-Big_Indices.py)
+
+用 heap 记录每个位置左边和右边最小的 k 个数，然后用 list 记录里面最大的那个数。然后对每个位置 i，如果他比前 i - 1 个里面最小的 k 个大，也比后 i + 1 个里面最小的 k 个大，就满足条件。
+
+#### [2534. Time Taken to Cross the Door](https://leetcode.com/problems/time-taken-to-cross-the-door/description/), [Solution](Heap/Time_Taken_to_Cross_the_Door.py)
+
+模拟，以 arrival time 来划分时间段。每次把下一个时间点到达的人都加到 in 和 exit 的 heap 里去，然后从这个时间点再到更下一个 arrival time 之间根据 rule 通过门。
+
 #### [2662. Minimum Cost of a Path With Special Roads](https://leetcode.com/problems/minimum-cost-of-a-path-with-special-roads/description/), [Solution](Heap/Minimum_Cost_of_a_Path_With_Special_Roads.py)
 
 Dijrastra 的想法，因为所有 special road 的终点从任何起点都是可达的，所以里面每一步都要更新到所有重点的距离。每次取出最小距离，然后更新先到这个点，然后走到其他 road 的起点，然后再走 special road 到相应终点的距离。最后 res 返回先到每一个终点，再正常走到 target 的距离，这些的最小距离。
@@ -658,6 +666,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 #### [1359. Count All Valid Pickup and Delivery Options](https://leetcode.com/problems/count-all-valid-pickup-and-delivery-options/description/), [Solution](Math/Count_All_Valid_Pickup_and_Delivery_Options.py)
 
 就是插空，每多一对就在之前的所有里面的空隙之间插入。
+
+#### [2849. Determine if a Cell Is Reachable at a Given Time](https://leetcode.com/problems/determine-if-a-cell-is-reachable-at-a-given-time/description/), [Solution](Math/Determine_if_a_Cell_Is_Reachable_at_a_Given_Time.py)
+
+因为可以往 8 个方向走，所以用 2 或 3 步就可以走回原地。所以如果起点终点相同就看是否步数大于等于 2，如果不同就看曼哈顿距离是否小于步数要求就行了。只要小于步数要求，中间总是可以通过绕回原地来用掉多余的步数。
 
 #### [2850. Minimum Moves to Spread Stones Over Grid](https://leetcode.com/problems/minimum-moves-to-spread-stones-over-grid/description/), [Solution](Math/Minimum_Moves_to_Spread_Stones_Over_Grid.py)
 
@@ -889,6 +901,10 @@ window 记录里面的和，大于等于 target 之后开始缩小 window 并更
 
 用一个 set 储存当前 window 里的元素方便快速查找，用一个 deque 按顺序储存当前 window 的元素和下标。每一步，如果 window 已经满了，丢掉最前面的，更新 window 大小；如果新元素已经在 window 里，丢掉到重复元素位置并根据最后丢掉的元素的下标更新 window 大小；最后把新的元素放进来，如果 window 是满的就 substring 数加一。
 
+#### [1151. Minimum Swaps to Group All 1's Together](https://leetcode.com/problems/minimum-swaps-to-group-all-1's-together/description/), [Solution](SlidingWindow/Minimum_Swaps_to_Group_All_1's_Together.py)
+
+因为可以交换任意两个位置，所以对一个 subarray，把所有 1 集中到这里的 swap 数就是里面 0 的个数。然后用 sliding window 统计每个 window 里 0 的个数就行了。
+
 #### [1696. Jump Game VI](https://leetcode.com/problems/jump-game-vi/description/), [Solution](SlidingWindow/Jump_Game_VI.py)
 
 和 239 一样，用一个 mono deque 记录每个下标位置的最大 score，每一步更新并保持 window 单调下降，且 window 里 score 最大的在第一个。
@@ -946,6 +962,10 @@ BST 的 inorder 遍历会得到一个 nondecreasing 的序列。所以用一个 
 #### [1861. Rotating the Box](https://leetcode.com/problems/rotating-the-box/description/), [Solution](TwoPointer/Rotating_the_Box.py)
 
 先移到右边再 rotate。移动操作就是一个 two pointer。right 表示下一个放物品的位置，左指针移动到物品了就放到 right 那里然后 right 左移。如果碰到障碍物了下一个可以放物品的地方就在障碍物左边。
+
+#### [2422. Merge Operations to Turn Array Into a Palindrome](https://leetcode.com/problems/merge-operations-to-turn-array-into-a-palindrome/description/), [Solution](TwoPointer/Merge_Operations_to_Turn_Array_Into_a_Palindrome.py)
+
+记录左右边的当前和。哪边小就往中间移动并加上移动到的值，count += 1。如果相等就同时往中间移动，重置两个 sum。
 
 #### [2576. Find the Maximum Number of Marked Indices](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/), [Solution](TwoPointer/Find_the_Maximum_Number_of_Marked_Indices.py)
 

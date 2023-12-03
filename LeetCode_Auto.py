@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '772. Basic Calculator III'
+    name = '2422. Merge Operations to Turn Array Into a Palindrome'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
