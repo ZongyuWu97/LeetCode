@@ -585,6 +585,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 
 和 907 基本一样，不过这次要对每个元素，同时找出以他为最大值的数组数和以他为最小值的数组数。每次这两个相减就行了。
 
+#### [2297. Jump Game VIII](https://leetcode.com/problems/jump-game-viii/description/), [Solution](Stack/Jump_Game_VIII.py)
+
+条件翻译过来就是可以跳到下一个大于等于当前元素或者小于当前元素的位置。用两个 monostack 记录每个元素下一个大于等于或小于的下标。每到一个新位置，pop 出 monostack 里小于或大于等于新位置的元素的下标，然后用 list 记录被 pop 出的位置的下一个大于等于或小于为当前位置。最后 dp，从头开始，看每个位置的下一个大于等于或小于的元素的下标，然后更新相应位置的 dp。
+
 #### [2390. Removing Stars From a String](https://leetcode.com/problems/removing-stars-from-a-string/description/), [Solution](Stack/Removing_Stars_From_a_String.py)
 
 直接一个 stack 往前走，碰到\*就 pop 就行了。
@@ -963,6 +967,10 @@ BST 的 inorder 遍历会得到一个 nondecreasing 的序列。所以用一个 
 
 先移到右边再 rotate。移动操作就是一个 two pointer。right 表示下一个放物品的位置，左指针移动到物品了就放到 right 那里然后 right 左移。如果碰到障碍物了下一个可以放物品的地方就在障碍物左边。
 
+#### [2330. Valid Palindrome IV](https://leetcode.com/problems/valid-palindrome-iv/description/), [Solution](TwoPointer/Valid_Palindrome_IV.py)
+
+简单，因为可以直接变成任意字母，不是 swap，就直接记录从两边往中间不是 palindrome 的 pair 个数就行了。
+
 #### [2422. Merge Operations to Turn Array Into a Palindrome](https://leetcode.com/problems/merge-operations-to-turn-array-into-a-palindrome/description/), [Solution](TwoPointer/Merge_Operations_to_Turn_Array_Into_a_Palindrome.py)
 
 记录左右边的当前和。哪边小就往中间移动并加上移动到的值，count += 1。如果相等就同时往中间移动，重置两个 sum。
@@ -1065,6 +1073,10 @@ dp，对每个子列[i:j]检查[i:j - 1]或[i + 1:j]是否满足当前条件且�
 #### [127. Word Ladder](https://leetcode.com/problems/word-ladder/description/), [Solution](BFS/Word_Ladder.py)
 
 因为只要找到 endWord 就行，所以可以直接 bfs+visited，不管中间是否有路径重叠。注意用一个 interWord 保存中间态，预处理 wordList 找到所有中间态，然后每一步转换成中间态之后再查找这个中间态可以到达哪些词。
+
+#### [200. Number of Islands](https://leetcode.com/problems/number-of-islands/description/), [Solution](BFS/Number_of_Islands.py)
+
+简单 bfs，每遍历一个 island 就把这个 island 变成 0.记得加到 q 里的时候就变，不然可能会有很多重复加进去的。虽然最后 O(n)时间差不多，但是实际可能会超时。
 
 #### [286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/description/), [Solution](BFS/Walls_and_Gates.py)
 
@@ -1232,6 +1244,10 @@ dp 题最重要要有思路。dp[i][j]表示要放 i 首歌，有 j 个 unique �
 
 基本 dp，根据在第 i 天用 1/7/30pass 来分类，取里面的最小的。另外注意 bisect.bisect_left 和 bisect.bisect，第一个是使找 a[:i] < x，a[i:] >= x 的下标 i，第二个是 a[:i] <= x，a[i:] > x 的下标 i。
 
+#### [1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/description/), [Solution](DP/Longest_Common_Subsequence.py)
+
+简单 dp。text1[:i]和 text2[:j]的解依赖于 text1[:i - 1], text2[:j - 1]的关系。
+
 #### [1216. Valid Palindrome III](https://leetcode.com/problems/valid-palindrome-iii/description/), [Solution](DP/Valid_Palindrome_III.py)
 
 直接 dp，能不能变成 palindrome 取决于变成 palindrome 的最小次数是否小于 k。dfs(i, j)如果 s 的 i 和 j 相等，则等于 dfs(i+1, j-1)。否则说明 i 或者 j 之间要去掉一个，就等于 1+min(dfs(i+1, j), dfs(i, j-1))。
@@ -1377,6 +1393,10 @@ dp[i][j]使用到 s[i]为止的 rl，到达位置 j 的不同方法数。每一�
 #### [2193. Minimum Number of Moves to Make Palindrome](https://leetcode.com/problems/minimum-number-of-moves-to-make-palindrome/description/), [Solution](Greedy/Minimum_Number_of_Moves_to_Make_Palindrome.py)
 
 只用看从末尾开始，把每个对应的字母从原始位置移动到开头的消耗就行。
+
+#### [2323. Find Minimum Time to Finish All Jobs II](https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs-ii/description/), [Solution](Greedy/Find_Minimum_Time_to_Finish_All_Jobs_II.py)
+
+最慢的人做需要时间最少的工作。
 
 #### [2366. Minimum Replacements to Sort the Array](https://leetcode.com/problems/minimum-replacements-to-sort-the-array/description/), [Solution](Greedy/Minimum_Replacements_to_Sort_the_Array.py)
 
@@ -1547,6 +1567,10 @@ easy，直接 select。
 #### [1965. Employees With Missing Information](https://leetcode.com/problems/employees-with-missing-information/description/), [Solution](SQL/Employees_With_Missing_Information.py)
 
 left join 之后用 where 筛选里面没有的 employee_id。
+
+#### [2408. Design SQL](https://leetcode.com/problems/design-sql/description/), [Solution](SQL/Design_SQL.py)
+
+奇怪的问题。delete 什么都不用做其实。直接用 list 记录就行了。
 
 ---
 
