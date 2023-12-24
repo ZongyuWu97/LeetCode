@@ -389,6 +389,10 @@ recursion 做，对 n 个 node 的树递归左右子树从 0 到 n - 1。同时�
 
 bfs 找到 deepest leaves，并记录每个 node 的 parent。从最底层的 leaves 开始，回溯 parent，直到只剩某一层一个 parent。
 
+#### [1650. Lowest Common Ancestor of a Binary Tree III](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iii/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Tree_III.py)
+
+已经把 parent 给出来了，直接把到 parent 的 path 打出来，然后找到 path 上最后一个相同的 node。
+
 #### [1676. Lowest Common Ancestor of a Binary Tree IV](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iv/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Tree_IV.py)
 
 和基本情况差不多，不过这次不是检测是否只有两个，而是检测是否所有 node 都被在当前子树下找到了。
@@ -975,6 +979,14 @@ BST 的 inorder 遍历会得到一个 nondecreasing 的序列。所以用一个 
 
 记录左右边的当前和。哪边小就往中间移动并加上移动到的值，count += 1。如果相等就同时往中间移动，重置两个 sum。
 
+#### [2461. Maximum Sum of Distinct Subarrays With Length K](https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/), [Solution](TwoPointer/Maximum_Sum_of_Distinct_Subarrays_With_Length_K.py)
+
+每次右边加进来一个新数，如果 window 长度超过 k 或者 window 内有重复数就左边收缩直到满足条件。之后如果 window 长度正好是 k 就更新结果。
+
+#### [2486. Append Characters to String to Make Subsequence](https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/description/), [Solution](TwoPointer/Append_Characters_to_String_to_Make_Subsequence.py)
+
+一个 pointer 在 t 上，s 里从左到右，每 match 一个 t 的 pointer 就右移。最后看 pointer 到结尾还差多少。
+
 #### [2576. Find the Maximum Number of Marked Indices](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/), [Solution](TwoPointer/Find_the_Maximum_Number_of_Marked_Indices.py)
 
 先排序。因为最多有 n//2 对，所以 j 从(n + 1) // 2 开始。之后 i 从 0 开始，满足条件就 i++，否则不变。最后 i \* 2 就行。
@@ -1274,7 +1286,7 @@ dp[i]表示从 0 到 i 需要的最少 tap 数。然后遍历每个 tap 考虑�
 
 #### [2222. Number of Ways to Select Buildings](https://leetcode.com/problems/number-of-ways-to-select-buildings/description/), [Solution](DP/Number_of_Ways_to_Select_Buildings.py)
 
-dp[k][j]为在 s[:i + 1]中选择长度为 k 的挑选方法数。同时分别保存其中以'0'和'1'结尾的方法数。dp[k + 1[j]考虑是否以 s[j]结尾，不结尾直接用前一个，结尾再加上 dp[k][j - 1]里面结尾元素和 s[j]不同的方法数。
+dp[k][j]为在 s[:i + 1]中选择长度为 k 的挑选方法数。同时分别保存其中以'0'和'1'结尾的方法数。dp[k + 1][j]考虑是否以 s[j]结尾，不结尾直接用前一个，结尾再加上 dp[k][j - 1]里面结尾元素和 s[j]不同的方法数。更新。直接用字典记录 dp，记录每个组合的个数，每到一个新元素更新对应组合的方法数。
 
 #### [2272. Substring With Largest Variance](https://leetcode.com/problems/substring-with-largest-variance/description/), [Solution](DP/Substring_With_Largest_Variance.py)
 
@@ -1307,6 +1319,10 @@ dp[i][j]表示在 nums[:i]中和为 j 的子集数。j 从 0 到 k - 1，dp[-1][
 #### [2547. Minimum Cost to Split an Array](https://leetcode.com/problems/minimum-cost-to-split-an-array/description/), [Solution](DP/Minimum_Cost_to_Split_an_Array.py)
 
 切木条的变种，区别是切木条里面相应长度木条的价格都给出来了，这里要先算一下每个 nums[i:j]的 cost 并记录。
+
+#### [2638. Count the Number of K-Free Subsets](https://leetcode.com/problems/count-the-number-of-k-free-subsets/description/), [Solution](DP/Count_the_Number_of_K-Free_Subsets.py)
+
+有点意思。先按除 k 的余数分组，不同组之间可以互相重合所以最终答案是所有组的乘积。每组里面排序，然后从小到大 dp，考虑是否选择第 i 个元素。如果选择，那么看他跟前一个元素的差是不是 k 决定取 dp[i - 2]或 dp[i - 2]。如果不选择，就去 dp[i - 1]。
 
 #### [2684. Maximum Number of Moves in a Grid](https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/), [Solution](DP/Maximum_Number_of_Moves_in_a_Grid.py)
 
