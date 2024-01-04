@@ -42,7 +42,7 @@ My notes and solution for leetcode problems.
 #### Python 包
 
 [collections](https://docs.python.org/3/library/collections.html#counter-objects),
-[heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html), [bisect](https://docs.python.org/3/library/bisect.html)
+[heapq](https://docs.python.org/3/library/heapq.html), [itertools](https://docs.python.org/3/library/itertools.html), [bisect](https://docs.python.org/3/library/bisect.html),
 [sortedcontainers](https://pypi.org/project/sortedcontainers/),
 
 #### 数据结构
@@ -508,6 +508,10 @@ Dijrastra 的想法，因为所有 special road 的终点从任何起点都是�
 
 stack 记录正括号，对每个反括号用字典取正括号看是不是在 stack 末尾，且 stack 不空。最后检查 stack 是否空。
 
+#### [42. Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/description/), [Solution](Stack/Trapping_Rain_Water.py)
+
+用 monostack 做的。brute force 就是看每个 index 左边和右边最高的，这个 index 处可以 trap 的就确定了。然后可以先记录每个 index 左边和右边最高的，相当于一维 dp。stack 不太一样，算的是从当前 index 往左，横着填充。找到前一个比他小的，然后再找更左边的一个，当前和更左边的就组成了 bound，就可以横着填充。如果更左边的依然比当前小，就继续往左边看并填充。
+
 #### [71. Simplify Path](https://leetcode.com/problems/simplify-path/description/), [Solution](Stack/Simplify_Path.py)
 
 按/分割，然后根据.和..决定 pop 还是不管还是加入 stack，最后用/连接。
@@ -575,6 +579,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 #### [907. Sum of Subarray Minimums](https://leetcode.com/problems/sum-of-subarray-minimums/description/), [Solution](Stack/Sum_of_Subarray_Minimums.py)
 
 过两遍数组，找到每个元素右边第一个比他小的元素的下标，以及左边第一个小于等于他的元素的下标。在这两个之间，所有数组都以他为最小值。所以再过一遍数组，求这两个下标之间，包含这个元素的总数组数就行了。
+
+#### [1019. Next Greater Node In Linked List](https://leetcode.com/problems/next-greater-node-in-linked-list/description/), [Solution](Stack/Next_Greater_Node_In_Linked_List.py)
+
+先过一遍 linked list，然后用单调栈来在每个数依次把单调栈里比他小的 pop 出去。
 
 #### [1996. The Number of Weak Characters in the Game](https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/description/), [Solution](Stack/The_Number_of_Weak_Characters_in_the_Game.py)
 
@@ -729,7 +737,7 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 
 #### [1152. Analyze User Website Visit Pattern](https://leetcode.com/problems/analyze-user-website-visit-pattern/description/), [Solution](Sort/Analyze_User_Website_Visit_Pattern.py)
 
-用一个 dict 记录每个人的访问顺序，然后用 Counter 记录每个人访问过的网站的所有 combination，然后用 max，key=lambda x:pattern[x]取出 pattern 里面最大且字典序最小的元素那个
+用一个 dict 记录每个人的访问顺序，然后用 Counter 记录每个人访问过的网站的所有 combination，然后用 max，key=lambda x:pattern[x]取出 pattern 里面最大且字典序最小的元素那个。注意 Counter 可以用 update 方法来更新。itertools 有 combinations 可以求 list 的所有组合。这里对所有组合用了 set，因为同一个用户可能在不同时间有相同 pattern，只看做一次 pattern。
 
 #### [1356. Sort Integers by The Number of 1 Bits](https://leetcode.com/problems/sort-integers-by-the-number-of-1-bits/description/), [Solution](Sort/Sort_Integers_by_The_Number_of_1_Bits.py)
 
@@ -742,6 +750,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 #### [1710. Maximum Units on a Truck](https://leetcode.com/problems/maximum-units-on-a-truck/description/), [Solution](List/Maximum_Units_on_a_Truck.py)
 
 简单的单位容量背包问题，直接按价值从大到小放就行了。
+
+#### [1833. Maximum Ice Cream Bars](https://leetcode.com/problems/maximum-ice-cream-bars/description/), [Solution](Sort/Maximum_Ice_Cream_Bars.py)
+
+要求用 counting sort，直接 count 然后 greedy，从小到大如果当前价格的总价格不超多 coin 就 coin 减去当前总价，否则看剩下的 coin 最多能买多少个当前价格的。
 
 #### [2055. Plates Between Candles](https://leetcode.com/problems/plates-between-candles/description/), [Solution](Sort/Plates_Between_Candles.py)
 
@@ -789,6 +801,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 
 对每一行做一次 prefix sum。另外也可以用 2dcache 来做，在每个矩形的左上角、右下角外+1，右上角外、左下角外-1 不过还没看懂，之后有兴趣可以看看[这里](https://leetcode.com/problems/increment-submatrices-by-one/solutions/3052675/python3-sweep-line-range-addition-with-visualization-clean-concise/)。
 
+#### [2602. Minimum Operations to Make All Array Elements Equal](https://leetcode.com/problems/minimum-operations-to-make-all-array-elements-equal/description/), [Solution](PrefixSum/Minimum_Operations_to_Make_All_Array_Elements_Equal.py)
+
+先给 nums 排个序然后算前缀后缀和。每个 query 找到当前 query 在 nums 里的位置然后根据前缀后缀和以及当前位置算出需要的增减数。记得 bisect_left 找到的下标左边的严格小于查找的数，下标及下标右边大于等于查找的数。
+
 #### [2615. Sum of Distances](https://leetcode.com/problems/sum-of-distances/description/), [Solution](PrefixSum/Sum_of_Distances.py)
 
 用 dict 存数和对应的下标。距离里面把每个绝对值号拆开，然后就可以有公式了。对每个数，先算一个 prefix sum，然后每个下标里面套公式和 prefix sum 就行了。
@@ -802,6 +818,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 <div id='BinarySearch'></div>
 
 ## Binary Search
+
+#### [4. Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays/description/), [Solution](BinarySearch/Median_of_Two_Sorted_Arrays.py)
+
+主要难度在时间复杂度。把数量少的那个叫 A，然后通过不断调整 partitionA 和 partitionB 使正好 A 中 partitionA 左边加 B 中 partitionB 左边的元素正好是 A 和 B merge 之后的左半边，即满足条件 maxLeftA <= minRightB and maxLeftB <= minRightA。
 
 #### [33. Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/description/), [Solution](BinarySearch/Search_in_Rotated_Sorted_Array.py)
 
@@ -967,6 +987,10 @@ BST 的 inorder 遍历会得到一个 nondecreasing 的序列。所以用一个 
 
 从 root 开始 DFS，可以用一个 self 全局变量记录。另外其实可以不用 memo，因为每条路只计算了一次。
 
+#### [1567. Maximum Length of Subarray With Positive Product](https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/description/), [Solution](TwoPointer/Maximum_Length_of_Subarray_With_Positive_Product.py)
+
+不是最快的，还可以用一维 dp 做。分别记录以 nums[i]结尾的负数和正数长度。这里用的双指针，实际是三指针，记录当前 window 左右边界和当前 window 第一个负数的位置。根据新数的正负选择用左边界还是第一个负数来计算。其实应该也是 O(n)但是不知道为什么比其他的慢。
+
 #### [1861. Rotating the Box](https://leetcode.com/problems/rotating-the-box/description/), [Solution](TwoPointer/Rotating_the_Box.py)
 
 先移到右边再 rotate。移动操作就是一个 two pointer。right 表示下一个放物品的位置，左指针移动到物品了就放到 right 那里然后 right 左移。如果碰到障碍物了下一个可以放物品的地方就在障碍物左边。
@@ -990,6 +1014,14 @@ BST 的 inorder 遍历会得到一个 nondecreasing 的序列。所以用一个 
 #### [2576. Find the Maximum Number of Marked Indices](https://leetcode.com/problems/find-the-maximum-number-of-marked-indices/description/), [Solution](TwoPointer/Find_the_Maximum_Number_of_Marked_Indices.py)
 
 先排序。因为最多有 n//2 对，所以 j 从(n + 1) // 2 开始。之后 i 从 0 开始，满足条件就 i++，否则不变。最后 i \* 2 就行。
+
+#### [2781. Length of the Longest Valid Substring](https://leetcode.com/problems/length-of-the-longest-valid-substring/description/), [Solution](TwoPointer/Length_of_the_Longest_Valid_Substring.py)
+
+因为每个 forbidden 的 work 最多长 10，所以可以对每个 right，看他往前数的 10 个 substring 在不在 forbidden 里面，在的话就 left 右移，否则不变。每步结束后更新 res。其中检测是否在 forbidden 里可以用 set 做也可以用 trie 做。
+
+#### [2825. Make String a Subsequence Using Cyclic Increments](https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/description/), [Solution](TwoPointer/Make_String_a_Subsequence_Using_Cyclic_Increments.py)
+
+str1 和 str2 分别放一个 pointer。str1 的 pointer 依次往前，每匹配到一个满足条件的就把 str2 的前进。如果 str2 的到顶了就可以，如果 str1 到顶了 str2 还没到顶，就说明不行。
 
 ---
 
@@ -1090,6 +1122,10 @@ dp，对每个子列[i:j]检查[i:j - 1]或[i + 1:j]是否满足当前条件且�
 
 简单 bfs，每遍历一个 island 就把这个 island 变成 0.记得加到 q 里的时候就变，不然可能会有很多重复加进去的。虽然最后 O(n)时间差不多，但是实际可能会超时。
 
+#### [269. Alien Dictionary](https://leetcode.com/problems/alien-dictionary/description/), [Solution](BFS/Alien_Dictionary.py)
+
+先找出 node 之间的 edge 关系，然后拓扑排序。找关系直接找每两个相邻 word 之间第一个不同的 letter 就行，不要想太复杂。注意特殊情况，如果相邻 word，后一个正好是前一个的前缀，说明不可能。另外拓扑排序之后如果 output 长度小于 indegree 长度，说明排序完成后还有的 node 入度不为 0，说明有圈，一样不可能。
+
 #### [286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/description/), [Solution](BFS/Walls_and_Gates.py)
 
 基本 bfs，从每个 gate 出发 bfs 并记录经过的格子。
@@ -1109,6 +1145,10 @@ bfs，每一层计算每个点的 index，这一层过完之后更新最大 inde
 #### [1020. Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/description/), [Solution](BFS/Number_of_Enclaves.py)
 
 和昨天的一样，不过可以从边界开始 bfs，然后统计没有被 bfs 到的 1 的个数。
+
+#### [1091. Shortest Path in Binary Matrix](https://leetcode.com/problems/shortest-path-in-binary-matrix/description/), [Solution](BFS/Shortest_Path_in_Binary_Matrix.py)
+
+简单 bfs。记得 queue 里面本来就是按长度顺序排列的，所以不需要用 heap 另外排序。
 
 #### [1293. Shortest Path in a Grid with Obstacles Elimination](https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/description/), [Solution](BFS/Shortest_Path_in_a_Grid_with_Obstacles_Elimination.py)
 
@@ -1276,6 +1316,10 @@ dp[i]表示从 0 到 i 需要的最少 tap 数。然后遍历每个 tap 考虑�
 
 直接 dp，dp(i, d)表示从第 i 个工作开始，还剩下 d 天。dp(i, d)等于在当天安排从 i 到 j-1 的工作，然后剩下的 d-1 天做 j 之后的工作，即 dp(j, d-1)，对所有 j > i 里面最小的那一个。用 lru_cache 减少时间。
 
+#### [1420. Build Array Where You Can Find The Maximum Exactly K Comparisons](https://leetcode.com/problems/build-array-where-you-can-find-the-maximum-exactly-k-comparisons/description/), [Solution](DP/Build_Array_Where_You_Can_Find_The_Maximum_Exactly_K_Comparisons.py)
+
+三维 dp 做的。dp[i][max_so_far][remain]表示已经放了 i 个数，到目前为止的最大值，和剩下需要放的新 max 个数。base case 就是已经放了 n 个数，和剩下的小于 0 的情况。考虑下一个数是新的 max or not。还可以对每个 max，做二维 dp，最后求和。过程中用 prefix 简化计算。
+
 #### [1444. Number of Ways of Cutting a Pizza](https://leetcode.com/problems/number-of-ways-of-cutting-a-pizza/description/), [Solution](DP/Number_of_Ways_of_Cutting_a_Pizza.py)
 
 3d 的 DP。能想到 3d 的话就还好。看起来 dp 还是专门留一行空的出来比较好，这样就不用初始化了。先预处理，统计每个位置 i，j 右下方的苹果数。然后从 i，j 出发，按行和按列切，如果被切下来的部分和剩下的部分都有苹果就更新 res。
@@ -1303,6 +1347,10 @@ DP+bitmask。几个操作 1 << n 是 bit 往左移 n 位。a & b，a ^ b。用�
 #### [2444 Count Subarrays With Fixed Bounds](https://leetcode.com/contest/weekly-contest-315/problems/count-subarrays-with-fixed-bounds/), [Solution](DP/Count_Subarrays_With_Fixed_Bounds.py)
 
 先过一遍 nums，记录每个坐标前最近的等于 minK，等于 maxK，超出范围的值的坐标，记为 prev[0], prev[1], prev[2]。然后 dp。dp[i] = dp[i-1]，如果 nums[i]没超出范围，那么 dp[i]再加上 prev[0], prev[1]里更小的那个到 prev[2]的距离。如果是负的就不加。
+
+#### [2355. Maximum Number of Books You Can Take](https://leetcode.com/problems/maximum-number-of-books-you-can-take/description/), [Solution](DP/Maximum_Number_of_Books_You_Can_Take.py)
+
+用 monostack。对每一个新 i，pop 出 stack 里不满足条件的那些 index，stack 里剩下的就是有台阶的那些 index。然后对这些台阶算在每两个台阶之间取书的书数。
 
 #### [2369. Check if There is a Valid Partition For The Array](https://leetcode.com/problems/check-if-there-is-a-valid-partition-for-the-array/description/), [Solution](DP/Check_if_There_is_a_Valid_Partition_For_The_Array.py)
 
@@ -1401,6 +1449,10 @@ dp[i][j]使用到 s[i]为止的 rl，到达位置 j 的不同方法数。每一�
 #### [1631. Path With Minimum Effort](https://leetcode.com/problems/path-with-minimum-effort/description/), [Solution](Greedy/Path_With_Minimum_Effort.py)
 
 用了类似 Dijrastra 的思路，每一步把相邻没访问过的加到 heap 里，然后取当前所有 heap 里 effort 最小的那个。注意保存到状态包括 effort，不止位置，因为同一个位置可能从不同方向访问，effort 不一样。
+
+#### [1846. Maximum Element After Decreasing and Rearranging](https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/description/), [Solution](Greedy/Maximum_Element_After_Decreasing_and_Rearranging.py)
+
+简单，排序之后依次看每个元素是否满足要求，不满足就减小，直到最后一个。
 
 #### [2141. Maximum Running Time of N Computers](https://leetcode.com/problems/maximum-running-time-of-n-computers/description/), [Solution](Greedy/Maximum_Running_Time_of_N_Computers.py)
 

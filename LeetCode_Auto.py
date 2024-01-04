@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '1650. Lowest Common Ancestor of a Binary Tree III'
+    name = '1846. Maximum Element After Decreasing and Rearranging'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
