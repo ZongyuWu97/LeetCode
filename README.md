@@ -683,6 +683,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 
 就是插空，每多一对就在之前的所有里面的空隙之间插入。
 
+#### [2183. Count Array Pairs Divisible by K](https://leetcode.com/problems/count-array-pairs-divisible-by-k/description/), [Solution](Math/Count_Array_Pairs_Divisible_by_K.py)
+
+类似 two sum。对每个数，找到他和 k 的最大公约数。然后 k 除公约数，得到需要另一个数来补充的部分。再对每一个数看是否被 k 的所有除数整除。能被某个除数整除就说明这个数满足这个补充部分。
+
 #### [2849. Determine if a Cell Is Reachable at a Given Time](https://leetcode.com/problems/determine-if-a-cell-is-reachable-at-a-given-time/description/), [Solution](Math/Determine_if_a_Cell_Is_Reachable_at_a_Given_Time.py)
 
 因为可以往 8 个方向走，所以用 2 或 3 步就可以走回原地。所以如果起点终点相同就看是否步数大于等于 2，如果不同就看曼哈顿距离是否小于步数要求就行了。只要小于步数要求，中间总是可以通过绕回原地来用掉多余的步数。
@@ -1295,6 +1299,10 @@ dp 题最重要要有思路。dp[i][j]表示要放 i 首歌，有 j 个 unique �
 #### [983. Minimum Cost For Tickets](https://leetcode.com/problems/minimum-cost-for-tickets/description/), [Solution](DP/Minimum_Cost_For_Tickets.py)
 
 基本 dp，根据在第 i 天用 1/7/30pass 来分类，取里面的最小的。另外注意 bisect.bisect_left 和 bisect.bisect，第一个是使找 a[:i] < x，a[i:] >= x 的下标 i，第二个是 a[:i] <= x，a[i:] > x 的下标 i。
+
+#### [1125. Smallest Sufficient Team](https://leetcode.com/problems/smallest-sufficient-team/description/), [Solution](DP/Smallest_Sufficient_Team.py)
+
+用 bitmask+dp。三个 bitmask，分别表示 people_mask 当前 team 里有哪些人，skills_mask 有哪些 skill，skills_mask_of_person 一个人有哪些 skill。然后对 skills_mask 做 dp，对每一个人 i，看除了 i 的 skill 还需要哪些 skill。这个剩下的 skill 就是子问题。然后取所有 i 里 team 人数最少的一个。注意.bit_count()可以看一个数的二进制里 1 的个数。
 
 #### [1143. Longest Common Subsequence](https://leetcode.com/problems/longest-common-subsequence/description/), [Solution](DP/Longest_Common_Subsequence.py)
 

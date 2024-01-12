@@ -17,7 +17,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = '1846. Maximum Element After Decreasing and Rearranging'
+    name = '1125. Smallest Sufficient Team'
     printLeetCodeFormat(name)
 
 if __name__ == '__main__':
