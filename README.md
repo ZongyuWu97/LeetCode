@@ -115,6 +115,10 @@ O(n^2): dp, Dijkstra
 
 直接过一遍，检查每个 meeting 的开始时间是否早于前一个的结束时间。
 
+#### [408. Valid Word Abbreviation](https://leetcode.com/problems/valid-word-abbreviation/description/), [Solution](List/Valid_Word_Abbreviation.py)
+
+依次检测 abbreviation，看到数字就加到 num 里，看到字母就检测。最后看是否检测到 word 的尾部了。
+
 #### [453. Minimum Moves to Equal Array Elements](https://leetcode.com/problems/minimum-moves-to-equal-array-elements/description/), [Solution](List/Minimum_Moves_to_Equal_Array_Elements.py)
 
 其实很简单。要想到增加 n-1 个数等价于减少 1 个数。然后算每个数跟最小值的差就行了。
@@ -333,7 +337,7 @@ merge sort 的方法做，分成两部分然后 merge 两部分分别的结果�
 
 #### [146. LRU Cache](https://leetcode.com/problems/lru-cache/description/), [Solution](LinkedList/LRU_Cache.py)
 
-用双链表做。保存 head 和 tail，然后自己写一个 addNode 和 deleteNode 函数。另外用一个 dict 保存 key 和对应 node 的指针。get 的时候删掉对应 node 并再次加到头部；put 的时候如果已经在里面就删掉，然后如果 dict 还是满的就说明 put 的是新元素，删掉 tail 前的 node，然后再把新 node 的加到头部。
+用双链表做。保存 head 和 tail，然后自己写一个 addNode 和 removeNode 函数。另外用一个 dict 保存 key 和对应 node 的指针。get 的时候删掉对应 node 并再次加到头部；put 的时候如果已经在里面就删掉，然后如果 dict 还是满的就说明 put 的是新元素，删掉 tail 前的 node，然后再把新 node 的加到头部。
 
 #### [445. Add Two Numbers II](https://leetcode.com/problems/add-two-numbers-ii/description/), [Solution](LinkedList/Add_Two_Numbers_II.py)
 
@@ -785,6 +789,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 
 先用 cache 记录每个 query 开始的位置和结束的下一个位置，然后过一遍，期间每个位置的 currSum 加上对应的 cache。
 
+#### [1074. Number of Submatrices That Sum to Target](https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/description/), [Solution](PrefixSum/Number_of_Submatrices_That_Sum_to_Target.py)
+
+先过一遍 matrix，算出到每个 i j 为止的 submatrix 和。然后对任意两行，对 memo[x2][y1] - memo[x1 - 1][y1]用 y1 做 prefix sum。就和 2 sum 一样，每列先看当前 sum 减 target 在不在 hashmap 里，然后加对应的个数。最后放到 hashmap。
+
 #### [1109. Corporate Flight Bookings](https://leetcode.com/problems/corporate-flight-bookings/description/), [Solution](PrefixSum/Corporate_Flight_Bookings.py)
 
 同 370。一模一样只能说。
@@ -1027,6 +1035,10 @@ BST 的 inorder 遍历会得到一个 nondecreasing 的序列。所以用一个 
 
 str1 和 str2 分别放一个 pointer。str1 的 pointer 依次往前，每匹配到一个满足条件的就把 str2 的前进。如果 str2 的到顶了就可以，如果 str1 到顶了 str2 还没到顶，就说明不行。
 
+#### [TikTok Subsequence of three](https://www.1point3acres.com/bbs/thread-1045078-1-1.html), [Solution](TwoPointer/Subsequence_of_three.py)
+
+先排序，然后从左往右，对每个 index 做双指针。根据左指针右移和右指针左移，median 和 mean 的相对变化，来决定下一步移动哪个指针。
+
 ---
 
 <div id='DFS'></div>
@@ -1184,6 +1196,10 @@ bfs + heap。依次把没去过的点放到 heap 里面，注意四周的点的�
 
 简单 dp。
 
+#### [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/description/), [Solution](DP/Climbing_Stairs.py)
+
+简单 dp。
+
 #### [72. Edit Distance](https://leetcode.com/problems/edit-distance/), [Solution](DP/Edit_Distance.py)
 
 明明是 DP 不是 DFS 啊。如果作 change，看看当前位置的 character 是否一样。如果作 delete，在 dp[i-1][j]上加 1。如果作 insert，在 dp[i][j-1]上加 1。取三个里面最小的。
@@ -1252,9 +1268,17 @@ recursion + memorization。根据拿不拿 root 分类。加上点边界条件�
 
 dp 从第 i 个 word 开始，一行能放下几次 sentence。同时返回下一行的开始 index。一次都放不完就是 0。这样没影响，因为一行能放下多次的话可以正确记录，一行一次都放不完的话后面总有可以放完，在后面再行数+1。
 
+#### [465. Optimal Account Balancing](https://leetcode.com/problems/optimal-account-balancing/description/), [Solution](DP/Optimal_Account_Balancing.py)
+
+dfs 找每个 bitmask 最多可以被分成多少个和为 0 的 subgroup。在当前 bitmask 里依次去掉每个 1，然后取最大的那个。如果当前和为 0 就说明还有一个多的 subgroup。
+
 #### [494. Target Sum](https://leetcode.com/problems/target-sum/description/), [Solution](DP/Target_Sum.py)
 
 用的 recursive dp，加一个字典 memorization。还可以优化从传数组变成传下标。
+
+#### [514. Freedom Trail](https://leetcode.com/problems/freedom-trail/description/), [Solution](DP/Freedom_Trail.py)
+
+dp(i, j)表示组成到 i-th 下标为止的 key 的 substring，轮盘最终停在 ring 下标 j 的位置。dp 里面取 i - 1 元素在 ring 上的位置和 j 的差中最小的那个，就是这一步的最优方法。最后根据 key 的最后一个元素在 ring 里的位置来 dp，取这些位置里 dp 结果最小的那个。
 
 #### [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/description/), [Solution](DP/Longest_Palindromic_Subsequence.py)
 
@@ -1315,6 +1339,10 @@ dp 题最重要要有思路。dp[i][j]表示要放 i 首歌，有 j 个 unique �
 #### [1235. Maximum Profit in Job Scheduling](https://leetcode.com/problems/maximum-profit-in-job-scheduling/description/), [Solution](DP/Maximum_Profit_in_Job_Scheduling.py)
 
 直接 dp，用 recursion+lru_cache 可以直接过，用 memorization 的话就必须用二分搜索。dp(i) = dp(i+1)或者对第 i 个工作结束时间之后的所有工作 j，profit[i]+dp(j)中最大的那个。
+
+#### [1289. Minimum Falling Path Sum II](https://leetcode.com/problems/minimum-falling-path-sum-ii/description/), [Solution](DP/Minimum_Falling_Path_Sum_II.py)
+
+dp[i][j]表示在 i，j 位置结束的最小 path sum。每一步在每个 j 处，dp[i][j]等于前一行除了第 j 列的最小 sum 加上 grid[i][j]。算 dp 的每一行的时候可以先处理一遍前一行，得到最小值及次小值，和他们的列下标。然后 dp 的每一列下标和上一行最小值的下标不一样的话就直接取上一行最小值，否则取次小值。
 
 #### [1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/description/), [Solution](DP/Minimum_Number_of_Taps_to_Open_to_Water_a_Garden.py)
 

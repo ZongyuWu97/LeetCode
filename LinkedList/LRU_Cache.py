@@ -1,16 +1,17 @@
+class Node:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+
+
 class LRUCache:
-    class Node:
-        def __init__(self, key, val) -> None:
-            self.key = key
-            self.val = val
-            self.prev = None
-            self.next = None
 
     def __init__(self, capacity: int):
-        self.cap = capacity
         self.dict = {}
-        self.head = self.Node(-1, -1)
-        self.tail = self.Node(-1, -1)
+        self.capacity = capacity
+        self.head, self.tail = Node(-1, -1), Node(-1, -1)
         self.head.next = self.tail
         self.tail.prev = self.head
 
@@ -20,8 +21,8 @@ class LRUCache:
         node.prev, node.next = self.head, tmp
         tmp.prev = node
         self.dict[node.key] = node
-    
-    def deleteNode(self, node):
+
+    def removeNode(self, node):
         node.prev.next = node.next
         node.next.prev = node.prev
         del self.dict[node.key]
@@ -31,21 +32,18 @@ class LRUCache:
             return -1
         node = self.dict[key]
         res = node.val
-        self.addNode(self.Node(node.key, node.val))
-        self.deleteNode(node)
-        self.dict[key] = self.head.next
+        self.removeNode(node)
+        self.addNode(Node(node.key, node.val))
         return res
 
     def put(self, key: int, value: int) -> None:
         if key in self.dict:
-            self.deleteNode(self.dict[key])
-        if len(self.dict) == self.cap:
-            self.deleteNode(self.tail.prev)
+            self.removeNode(self.dict[key])
+        if len(self.dict) == self.capacity:
+            self.removeNode(self.tail.prev)
 
-        self.addNode(self.Node(key, value))
-        self.dict[key] = self.head.next
-            
-
+        node = Node(key, value)
+        self.addNode(node)
 
 
 # Your LRUCache object will be instantiated and called as such:
