@@ -20,7 +20,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = "1915. Number of Wonderful Substrings"
+    name = "76. Minimum Window Substring"
     printLeetCodeFormat(name)
 
 

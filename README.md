@@ -73,6 +73,10 @@ O(n^2): dp, Dijkstra
 
 直接对每个长度可以被 s 长度整除的 substring 复制到和 s 一样长然后比较是否相等。
 
+#### [2000. Reverse Prefix of Word](https://leetcode.com/problems/reverse-prefix-of-word/description/), [Solution](String/Reverse_Prefix_of_Word.py)
+
+easy.
+
 #### [2268. Minimum Number of Keypresses](https://leetcode.com/problems/minimum-number-of-keypresses/description/), [Solution](String/Minimum_Number_of_Keypresses.py)
 
 直接过一遍 str，让频率高的放在第一个，9 个 button 放完了就放第二个，依次。每放一个字母就 count += number of ch in str \* 字母在 button 里的位置。
@@ -932,6 +936,10 @@ mini max 问题用二分法。这里每次检测 mid 这个最大 difference 可
 #### [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/), [Solution](SlidingWindow/Longest_Substring_Without_Repeating_Characters.py)
 
 记录之前每一个数的下标，以及 left。每一步如果以前记录过且在 window 内，则更新 left 到记录过的下标+1，否则不用管。然后把当前元素的下标也记录进去。最后更新 res 到当前下标 - left + 1.
+
+#### [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/description/), [Solution](SlidingWindow/Minimum_Window_Substring.py)
+
+用一个 Counter 记录 t 里面每个字母出现次数，然后保存一个 window，记录当前 window 内字母出现次数。如果某个字母出现次数满足了 Counter，enough 加 1.enough 表示当前 window 内已满足条件的字母数。如果 enough 等于 Counter 内字母数就说明完全满足要求，就把 window 左边界收缩直到 enough 减 1.这时更新 res 和 minimum length。
 
 #### [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/description/), [Solution](SlidingWindow/Minimum_Size_Subarray_Sum.py)
 
