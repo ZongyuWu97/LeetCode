@@ -413,6 +413,10 @@ bfs 找到 deepest leaves，并记录每个 node 的 parent。从最底层的 le
 
 在每个点让他的左右子路径相等。res 加上左右子路径的差，然后更新这个点的 cost 到本来的 cost 加上子路径的 cost。
 
+#### [Snowflake Task Master](Tree/Task_Master.py)
+
+拓扑排序，能被排的就是可以直接做的。然后找到剩下的点里面的所有圈，每个 cycle 可以做 cycle 点数 - 1 个。
+
 ---
 
 <div id='Trie'></div>
@@ -1428,7 +1432,7 @@ dp 题有思路就好做。dp[i]如果是 0 就没有新的 split 方法，直�
 
 周赛的时候没思路，其实不难，按照结束的 house 分个类，然后对每个结束的 house 做 dp。先初始化成 dp[i - 1]因为可以完全不选以 i 结尾的 offer。然后对每个以 i 结尾的 offer，看 dp[start] + gold 和 dp[i]的大小。
 
-#### [Snowflake String Pattern](https://www.geeksforgeeks.org/number-of-distinct-words-of-size-n-with-at-most-k-contiguous-vowels/), [Solution](DP/String_Pattern)
+#### [Snowflake String Pattern](https://www.geeksforgeeks.org/number-of-distinct-words-of-size-n-with-at-most-k-contiguous-vowels/), [Solution](DP/String_Pattern.py)
 
 dp[i][j]表示长度为 i 的 string，最后 j 位是元音，的组合数。对每个 i，dp[i][0]由 i - 1 的行和初始化。之后根据 j 和 i 的相对大小来判断状态转移方程。可以只保留一行作为 dp 储存，因为只用到了上一行的 dp。
 
