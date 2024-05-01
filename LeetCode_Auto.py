@@ -20,7 +20,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = "1289. Minimum Falling Path Sum II"
+    name = "1915. Number of Wonderful Substrings"
     printLeetCodeFormat(name)
 
 

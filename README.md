@@ -805,6 +805,10 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 
 同 370，不过这次用的是 dict 来当 cache。上面一个其实也可以，不过因为上面本来就要返回一个 list 所以直接用了 list。
 
+#### [1915. Number of Wonderful Substrings](https://leetcode.com/problems/number-of-wonderful-substrings/description/), [Solution](PrefixSum/Number_of_Wonderful_Substrings.py)
+
+类似 two sum，在每个下标处查之前和当前 substring 奇偶一样或者只差一个的 substring 的频率。每一步 xor 来处理 bitmask，用 bitmask 来记录 substring 的奇偶频率。
+
 #### [2234. Maximum Total Beauty of the Gardens](https://leetcode.com/problems/maximum-total-beauty-of-the-gardens/description/), [Solution](PrefixSum/Maximum_Total_Beauty_of_the_Gardens.py)
 
 先排序，然后从没到 target 的开始从后往前，看把后 j 个补到 target 需要多少。然后用 new 减去这个，就是剩下来可以用在前面补 partial 的。先算一个 prefix sum 计算把前 i 个补到和第 i 个一样多需要多少 cost。然后用剩下来的再 cost 里二分查找，找到最多可以补到多少。然后算 partial 和 full 分别的分数。
