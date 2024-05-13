@@ -183,6 +183,10 @@ easy，一个指针过一遍，比较当前元素和之前最小元素，更新�
 
 直接过一遍，用 set 记录，看到已经存在的就 res += 1 并重置 set。
 
+#### [2441. Largest Positive Integer That Exists With Its Negative](https://leetcode.com/problems/largest-positive-integer-that-exists-with-its-negative/description/), [Solution](List/Largest_Positive_Integer_That_Exists_With_Its_Negative.py)
+
+easy
+
 #### [2546. Apply Bitwise Operations to Make Strings Equal](https://leetcode.com/problems/apply-bitwise-operations-to-make-strings-equal/description/), [Solution](List/Apply_Bitwise_Operations_to_Make_Strings_Equal.py)
 
 要发现不同组合的规则。(0, 0) -> (0, 0)，(1, 0) -> (1, 1)，(0, 1) -> (1, 1)，(1, 1) -> (1, 0)。所以只有 0 的情况无法改变，只要有 1 个 1，就可以修改成任何情况。所以只要检查 s 和 target 是否同时全为 0 或者同时都含有 1 就行了。
