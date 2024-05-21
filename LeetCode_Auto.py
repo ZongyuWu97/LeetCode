@@ -20,7 +20,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = "2441. Largest Positive Integer That Exists With Its Negative"
+    name = "78. Subsets"
     printLeetCodeFormat(name)
 
 

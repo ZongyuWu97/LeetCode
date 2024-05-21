@@ -1003,6 +1003,10 @@ window 记录里面的和，大于等于 target 之后开始缩小 window 并更
 
 Two Sum 可以用 two pointer 做也可以用 hashmap 做，用 two pointer 的缺点是要先排序，优点是空间 O(1)。这里既然已经排过序了，就可以直接用 two pointer。
 
+#### [281. Zigzag Iterator](https://leetcode.com/problems/zigzag-iterator/description/), [Solution](TwoPointer/Zigzag_Iterator.py)
+
+初始化两个 vector，然后用 turn 记录当前轮到谁，再轮流输出。
+
 #### [653. Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/description/), [Solution](TwoPointer/Two_Sum_IV_-_Input_is_a_BST.py)
 
 BST 的 inorder 遍历会得到一个 nondecreasing 的序列。所以用一个 inorder+twopointer 就行了。
@@ -1073,6 +1077,10 @@ str1 和 str2 分别放一个 pointer。str1 的 pointer 依次往前，每匹�
 
 简单。下一个长度的 combination 由上一个长度加上所有可能得没用到的数组成。也可以用 recursion。
 
+#### [78. Subsets](https://leetcode.com/problems/subsets/description/), [Solution](DFS/Subsets.py)
+
+简单，记得 res 里先放一个空集，因为之后不会遍历到；另外把 res 作为参数传到函数里就可以直接修改外部变量了。
+
 #### [79. Word Search](https://leetcode.com/problems/word-search/description/), [Solution](DFS/Word_Search.py)
 
 从 board 的每个位置开始 dfs+backtrack 搜索 word。注意先 pre check 是否 board 里包含了 word 里的所有字母，不然会超时。
@@ -1123,6 +1131,10 @@ T($k*2^N$), O(N)
 #### [1048. Longest String Chain](https://leetcode.com/problems/longest-string-chain/description/), [Solution](DFS/Longest_String_Chain.py)
 
 从长到短倒着 dfs。这样可以不用每个字母每个位置都插入再尝试。
+
+#### [1863. Sum of All Subset XOR Totals](https://leetcode.com/problems/sum-of-all-subset-xor-totals/description/), [Solution](DFS/Sum_of_All_Subset_XOR_Totals.py)
+
+基础 dfs，记得 base case 一次只处理一项，不要把多种情况的 base case 合在一起处理。
 
 #### [2538. Difference Between Maximum and Minimum Price Sum](https://leetcode.com/problems/difference-between-maximum-and-minimum-price-sum/description/), [Solution](DFS/Difference_Between_Maximum_and_Minimum_Price_Sum.py)
 
