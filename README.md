@@ -73,6 +73,10 @@ O(n^2): dp, Dijkstra
 
 直接对每个长度可以被 s 长度整除的 substring 复制到和 s 一样长然后比较是否相等。
 
+#### [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/description/), [Solution](String/Palindromic_Substrings.py)
+
+简单，检测到回文串就加一就行了。
+
 #### [2000. Reverse Prefix of Word](https://leetcode.com/problems/reverse-prefix-of-word/description/), [Solution](String/Reverse_Prefix_of_Word.py)
 
 easy.
@@ -106,6 +110,10 @@ easy.
 #### [56. Merge Intervals](https://leetcode.com/problems/merge-intervals/description/), [Solution](List/Merge_Intervals.py)
 
 先按区间起点排序，然后依次检查，如果当前的起点在前一个区间内就更新终点为两个区间里终点大的那个。
+
+#### [128. Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/description/), [Solution](List/Longest_Consecutive_Sequence.py)
+
+list 的基本操作，先取集合去重然后排序，从小到大依次检测，和前一个相同就当前 sequence 加一并更新 res，不同就重置当前 sequence。
 
 #### [163. Missing Ranges](https://leetcode.com/problems/missing-ranges/description/), [Solution](List/Missing_Ranges.py)
 
@@ -380,6 +388,10 @@ merge sort 的方法做，分成两部分然后 merge 两部分分别的结果�
 #### [236. Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/), [Solution](Tree/Lowest_Common_Ancestor_of_a_Binary_Tree.py)
 
 用一个 helper 判断在当前子树中是否检测到 p 或 q。在 root，helper(root.left)，helper(root.right)中如果有两个检测到了就是找到了 LCA，修改全局变量 self.ans。每一层返回 curr or 上面两个，这样就算找到了 LCA，后续返回的也是 True 就是 1，之后不会重复修改全局变量。
+
+#### [261. Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/description/), [Solution](Tree/Graph_Valid_Tree.py)
+
+dfs 一遍检测是否能遍历整个图，然后看是否是树（边数等于点数减一）。
 
 #### [545. Boundary of Binary Tree](https://leetcode.com/problems/boundary-of-binary-tree/description/), [Solution](Tree/Boundary_of_Binary_Tree.py)
 
@@ -994,6 +1006,10 @@ window 记录里面的和，大于等于 target 之后开始缩小 window 并更
 <div id='TwoPointer'></div>
 
 ## Two Pointer
+
+#### [11. Container With Most Water](https://leetcode.com/problems/container-with-most-water/description/), [Solution](TwoPointer/Container_With_Most_Water.py)
+
+双指针往中间走。每一步指针指向更小元素的那个往中间走一步。证明：假设有 l 和 r 另外两个 height 使得 area 更大，所以我们之前肯定没有同时使用过这两个 height。因为指针会移动直到相撞，所以其中一个肯定在遍历中被访问过，假设是 l 那么左指针停在 l 的时候。要么一直在这里直到右指针移动到 l。但不可能，因为这样会经过 r。要么右指针经过 r 前 l 右移了。这说明右指针还没到 r 的时候 l 比右指针低，但这导致一个更大的 area，也矛盾。所以不存在这样的 l 和 r。
 
 #### [75. Sort Colors](https://leetcode.com/problems/sort-colors/description/), [Solution](TwoPointer/Sort_Colors.py)
 
