@@ -127,6 +127,10 @@ list 的基本操作，先取集合去重然后排序，从小到大依次检测
 
 直接过一遍，检查每个 meeting 的开始时间是否早于前一个的结束时间。
 
+#### [268. Missing Number](https://leetcode.com/problems/missing-number/description/), [Solution](List/Missing_Number.py)
+
+简单。过一遍记录数字，再过一遍找到没记录的数字。
+
 #### [408. Valid Word Abbreviation](https://leetcode.com/problems/valid-word-abbreviation/description/), [Solution](List/Valid_Word_Abbreviation.py)
 
 依次检测 abbreviation，看到数字就加到 num 里，看到字母就检测。最后看是否检测到 word 的尾部了。
@@ -335,6 +339,10 @@ easy
 
 创建一个新链表，如果 l1 或 l2 后面还有就继续延长这个链表
 
+#### [19. Remove Nth Node From End of List](https://leetcode.com/problems/remove-nth-node-from-end-of-list/description/), [Solution](LinkedList/Remove_Nth_Node_From_End_of_List.py)
+
+先过一遍确定 node 个数，然后再过一遍数到需要改变的位置。
+
 #### [23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/description/), [Solution](LinkedList/Merge_k_Sorted_Lists.py)
 
 merge sort 的方法做，分成两部分然后 merge 两部分分别的结果。
@@ -350,6 +358,10 @@ merge sort 的方法做，分成两部分然后 merge 两部分分别的结果�
 #### [141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/description/), [Solution](LinkedList/Linked_List_Cycle.py)
 
 遍历链表，把见过的放进 set，之后如果碰到之前放进 set 过的就是 cycle，否则不是。
+
+#### [143. Reorder List](https://leetcode.com/problems/reorder-list/description/), [Solution](LinkedList/Reorder_List.py)
+
+遍历链表，放进 list，然后按 list 的下标依次交替改变 next 指向的元素。
 
 #### [146. LRU Cache](https://leetcode.com/problems/lru-cache/description/), [Solution](LinkedList/LRU_Cache.py)
 
@@ -875,6 +887,10 @@ bisect_left 返回下标 i，这之前的所有元素严格小于搜索的元素
 
 和 33 基本一样，加一个步骤每轮如果 left 和 right 和相邻的相等就往中间移动，这样保证 nums[left] <= nums[mid]的时候转折点肯定在右边，否则在左边的话说明 mid 到 right 为止全都相等，那 right 就会一直往左走直到不相等。
 
+#### [153. Find Minimum in Rotated Sorted Array](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/), [Solution](BinarySearch/Find_Minimum_in_Rotated_Sorted_Array.py)
+
+不太好想，主要要想好判断条件。如果第一个小于最后一个那就是没有 rotate。然后看 mid 和他前后的比较看是否已经找到。最后把 mid 跟 left 和 right 比较，判断 rotate point 在哪边。
+
 #### [704. Binary Search](https://leetcode.com/problems/binary-search/description/), [Solution](BinarySearch/Binary_Search.py)
 
 简单。可以把相等情况放在第一个判断，这样可以不用每次都运行到最底端，而且可以避免中间 out of range。
@@ -1010,6 +1026,10 @@ window 记录里面的和，大于等于 target 之后开始缩小 window 并更
 #### [11. Container With Most Water](https://leetcode.com/problems/container-with-most-water/description/), [Solution](TwoPointer/Container_With_Most_Water.py)
 
 双指针往中间走。每一步指针指向更小元素的那个往中间走一步。证明：假设有 l 和 r 另外两个 height 使得 area 更大，所以我们之前肯定没有同时使用过这两个 height。因为指针会移动直到相撞，所以其中一个肯定在遍历中被访问过，假设是 l 那么左指针停在 l 的时候。要么一直在这里直到右指针移动到 l。但不可能，因为这样会经过 r。要么右指针经过 r 前 l 右移了。这说明右指针还没到 r 的时候 l 比右指针低，但这导致一个更大的 area，也矛盾。所以不存在这样的 l 和 r。
+
+#### [15. 3Sum](https://leetcode.com/problems/3sum/description/), [Solution](TwoPointer/3Sum.py)
+
+排序，然后对每个位置设为 target，对后面的数做 2 sum。因为是 unique 组合，所以如果当前数和前一个一样就跳过。
 
 #### [75. Sort Colors](https://leetcode.com/problems/sort-colors/description/), [Solution](TwoPointer/Sort_Colors.py)
 
