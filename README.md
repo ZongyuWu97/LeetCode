@@ -19,6 +19,7 @@ My notes and solution for leetcode problems.
   <li> <a href=#Heap>Heap</a></li> 
   <li> <a href=#Stack>Stack</a></li> 
   <li> <a href=#UnionFind>UnionFind</a></li> 
+  <li> <a href=#SegmentTree>SegmentTree</a></li> 
   ----
   <li> <a href=#Math>Math</a></li> 
   <li> <a href=#Prime>Prime</a></li> 
@@ -700,6 +701,16 @@ operand 保存当前的数字，res 保存当前计算结果，sign 保存当前
 #### [2685. Count the Number of Complete Components](https://leetcode.com/problems/count-the-number-of-complete-components/description/), [Solution](UnionFind/Count_the_Number_of_Complete_Components.py)
 
 先找到连通集，然后看每个连通集是否是 complete 的。
+
+---
+
+<div id='SegmentTree'></div>
+
+## Segment Tree
+
+#### [307. Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/description/), [Solution](SegmentTree/Range_Sum_Query_-_Mutable.py)
+
+最基本的构造 segment tree。用列表构造，tree 的 root 在下标 1 的位置。bottom up 递归构造，update 和 query。query 的时候 left 和 right 往中间缩，如果 left 是右 child 或 right 是左 child 就说明其 parent 包含不属于这个区间的数据，直接把 left 或 right 的值加上去然后再往上多走一层；否则说明其 parent 完全包含在区间内，不用加，直接移动到 parent，然后下一步再次判断区间范围。要 loop 到 left = right 为止，因为最后这个区间也要加。因为最后这个区间只可能是左/右 child 其一，所以不会重复计算。
 
 ---
 

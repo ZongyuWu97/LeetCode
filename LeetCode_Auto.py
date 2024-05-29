@@ -20,7 +20,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = "153. Find Minimum in Rotated Sorted Array"
+    name = "307. Range Sum Query - Mutable"
     printLeetCodeFormat(name)
 
 
