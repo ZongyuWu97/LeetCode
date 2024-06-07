@@ -502,6 +502,10 @@ Trie 里有三个东西，isFile 看这个是 file 还是 directory，children �
 
 ## Heap
 
+#### [218. The Skyline Problem](https://leetcode.com/problems/the-skyline-problem/description/), [Solution](Heap/The_Skyline_Problem.py)
+
+记录每个 building 的左右边到 edges，然后排序依次过。每个边先把在 edges 后面同一位置的 edge 加进 heap，然后把 heap 里小于等于当前位置的右 edge 都清出去。等于的也要清，因为只记录左 edge，不清的话可能会影响后面的。然后就把 heap 里最高的记录到 res，如果和 res 里前一个 height 不一样的话。
+
 #### [253. Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/description/), [Solution](Heap/Meeting_Rooms_II.py)
 
 Use a heap to keep the end time of each room. Process meetings by their start time. If the start time is earlier than the earliest endtime, then it means more room is needed. Otherwise just allocate the already finished room to the current meeting.
@@ -1151,6 +1155,10 @@ str1 和 str2 分别放一个 pointer。str1 的 pointer 依次往前，每匹�
 #### [329. Longest Increasing Path in a Matrix](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/description/), [Solution](DFS/Longest_Increasing_Path_in_a_Matrix.py)
 
 dfs 返回从当前坐标开始的最长路径长度，用一个 path_length 来记录已计算过的格子
+
+#### [417. Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/description/), [Solution](DFS/Pacific_Atlantic_Water_Flow.py)
+
+简单 dfs，从每个边上的元素开始 dfs，遍历到的就加一。先遍历上边和左边，然后重置 visited，再遍历下边和右边。最后计数为 2 的说明从 pacific 和 atlantic 都可以遍历到。
 
 #### [472. Concatenated Words](https://leetcode.com/problems/concatenated-words/description/), [Solution](DFS/Concatenated_Words.py)
 
