@@ -7,7 +7,7 @@ def printLeetCodeFormat(name):
     name_in_web = "-".join(name_in_web)
     name_in_web = name_in_web.lower()
 
-    name_part = "#### [" + name + "]"
+    name_part = "### [" + name + "]"
     web_part = (
         "(https://leetcode.com/problems/"
         + name_in_web
@@ -20,7 +20,7 @@ def printLeetCodeFormat(name):
 
 
 def main():
-    name = "417. Pacific Atlantic Water Flow"
+    name = "2397. Maximum Rows Covered by Columns"
     printLeetCodeFormat(name)
 
 

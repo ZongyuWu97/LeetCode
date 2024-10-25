@@ -9,15 +9,9 @@ class Solution:
             elif i2 == n2:
                 return s1[i1:] == s3[i3:]
 
-            if s1[i1] == s3[i3]:
-                return helper(i1+1, i2, i3+1) or (s2[i2] == s3[i3] and helper(i1, i2+1, i3+1))
-            else:
-                return s2[i2] == s3[i3] and helper(i1, i2+1, i3+1)
-
-        if not s1:
-            return s2 == s3
-        elif not s2:
-            return s1 == s3
+            return (s1[i1] == s3[i3] and helper(i1 + 1, i2, i3 + 1)) or (
+                s2[i2] == s3[i3] and helper(i1, i2 + 1, i3 + 1)
+            )
 
         n1, n2, n3 = len(s1), len(s2), len(s3)
         if not n1 + n2 == n3:
